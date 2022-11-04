@@ -1,18 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".UI.Login.Activity.MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/top_decoration"
+        android:scaleType="centerCrop"
+        android:layout_gravity="top"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="32dp"
+        android:layout_marginTop="100dp"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_homehabits"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Iniciar sesión"
+            android:textSize="24sp"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="18dp"
+            android:hint="@string/username"
+            android:textColorHint="@color/colorDark"
+            app:boxStrokeColor="@color/colorDark"
+            app:hintTextColor="@color/colorDark"
+            app:startIconDrawable="@drawable/ic_user">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:text="@string/tutorName" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/ic_password"
+            app:endIconMode="password_toggle"
+            app:boxStrokeColor="@color/black"
+            android:layout_marginVertical="18dp"
+            android:hint="@string/password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tutorPassword"
+                android:inputType="textPassword"
+                android:background="@color/white"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ingresar"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="16dp"
+            android:layout_marginVertical="18dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/colorNeutro"
+            />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bottom_decoration"
+        android:scaleType="centerCrop"
+        android:layout_gravity="bottom"
+        />
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/crear_cuenta"
+        android:layout_gravity="bottom|center"
+        android:layout_margin="16dp"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
