@@ -6,4 +6,9 @@
     <string name="password">Contraseña</string>
     <string name="ingresar">Ingresar</string>
     <string name="crear_cuenta">Crea tu cuenta aquí</string>
+    <string name="userage">Edad</string>
+    <string name="tutorAge">42</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="iniciar_sesion">Inicia sesión aquí</string>
+    <string name="crear">Crear cuenta</string>
 </resources>
