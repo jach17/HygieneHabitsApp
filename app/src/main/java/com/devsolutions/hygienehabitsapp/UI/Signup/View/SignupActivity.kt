@@ -4,7 +4,9 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import com.devsolutions.hygienehabitsapp.UI.Login.View.MainActivity
 import com.devsolutions.hygienehabitsapp.UI.Signup.ViewModel.SignupViewModel
 import com.devsolutions.hygienehabitsapp.databinding.ActivitySignupBinding
@@ -18,6 +20,19 @@ class SignupActivity : AppCompatActivity() {
         signupViewModel = SignupViewModel()
         setContentView(binding.root)
         initListeners()
+        signupViewModel.idCreated.observe(this, Observer {
+            binding.progressBarSignup.apply {
+                visibility = View.GONE
+                
+            }
+
+            if(it!=0){
+                Toast.makeText(this, "Created account", Toast.LENGTH_SHORT).show()
+
+            }else{
+                Toast.makeText(this, "Not created account", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun initListeners() {
@@ -27,6 +42,10 @@ class SignupActivity : AppCompatActivity() {
 
     private fun crearCuenta(username: String, age: String, password: String, confirmPassword: String) {
         Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show()
+        binding.progressBarSignup.apply {
+            visibility = View.VISIBLE
+        }
+
         if(password.equals(confirmPassword)){
             println("DE aqui")
             signupViewModel.crearCuenta(username, age, password)
