@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.devsolutions.hygienehabitsapp.UI.Login.View.MainActivity
 import com.devsolutions.hygienehabitsapp.UI.Signup.ViewModel.SignupViewModel
 import com.devsolutions.hygienehabitsapp.databinding.ActivitySignupBinding
@@ -25,10 +26,15 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun crearCuenta(username: String, age: String, password: String, confirmPassword: String) {
+        Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show()
         if(password.equals(confirmPassword)){
-            println("Bueno va, vamo")
+            println("DE aqui")
             signupViewModel.crearCuenta(username, age, password)
+        }else{
+            println("De aca pue")
         }
+
+
     }
 
     private fun navigateToActivity(context: Context, destine: Class<*>) {

@@ -33,7 +33,7 @@ class TutorRepository {
 
     suspend fun crearCuenta(username: String, age: String, password: String): Int {
         //AutomatizeTokenGeneration
-        val body = AddUserDto(username, age, password, "123abc")
+        val body = AddUserDto(username, password, age, "123abc")
         val response = api.addUser(body)
         println("Response: ${response?.body()}")
         return response.body()?.message?.response?.get(0)?.insertedId!!
