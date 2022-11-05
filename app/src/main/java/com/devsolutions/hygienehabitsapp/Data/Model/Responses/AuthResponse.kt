@@ -2,11 +2,11 @@ package com.devsolutions.hygienehabitsapp.Data.Model.Responses
 
 import com.google.gson.annotations.SerializedName
 
-data class DefaultResponse (
+data class AuthResponse(
     @SerializedName("result")
     val result:String,
     @SerializedName("message")
-    val message: MessageSuccessListResponse,
+    val message: MessageSuccessAuthUserResponse,
     @SerializedName("code")
     val code:String
 )

@@ -12,12 +12,24 @@ import kotlinx.coroutines.launch
 class MainViewModel : ViewModel() {
     val tutorList = MutableLiveData<List<TutorModel>>()
     var tutorUseCase = TutorUseCase()
+    var isLogged = MutableLiveData<Boolean>()
 
 
 
     fun getAllTutors(){
         viewModelScope.launch(Dispatchers.IO) {
             tutorList.postValue(tutorUseCase.getAllTutor())
+        }
+    }
+
+    fun authUser(user: String, password: String) {
+        viewModelScope.launch (Dispatchers.IO){
+            if(tutorUseCase.authUser(user, password)){
+                isLogged.postValue(true)
+
+            }else{
+                isLogged.postValue(false)
+            }
         }
     }
 }

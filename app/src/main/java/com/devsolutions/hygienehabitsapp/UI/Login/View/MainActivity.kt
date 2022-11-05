@@ -18,11 +18,13 @@ class MainActivity : AppCompatActivity() {
         mainViewModel = MainViewModel()
         setContentView(binding.root)
         initListeners()
-        mainViewModel.getAllTutors()
 
-        mainViewModel.tutorList.observe(this, Observer {
-            println("C A M B I O ")
-            println(it)
+        mainViewModel.isLogged.observe(this, Observer {
+            if(it){
+                println("Login pq si está")
+            }else{
+                println("Sorry bro, nostas en la lista")
+            }
         })
 
 
@@ -35,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun authUser(user: String, password: String) {
-        mainViewModel.getAllTutors()
+        mainViewModel.authUser(user, password)
     }
 
     private fun navigateToActivity(context: Context, destine: Class<*>) {

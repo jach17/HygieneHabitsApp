@@ -8,4 +8,8 @@ class TutorUseCase {
     suspend fun getAllTutor():List<TutorModel>{
         return repository.getAllTutors()
     }
+
+    suspend fun authUser(user: String, password: String): Boolean {
+        return repository.authUser(user, password);
+    }
 }
