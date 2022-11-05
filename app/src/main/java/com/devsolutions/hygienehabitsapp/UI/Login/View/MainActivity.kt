@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.devsolutions.hygienehabitsapp.UI.Login.ViewModel.MainViewModel
 import com.devsolutions.hygienehabitsapp.UI.Signup.View.SignupActivity
@@ -20,11 +23,16 @@ class MainActivity : AppCompatActivity() {
         initListeners()
 
         mainViewModel.isLogged.observe(this, Observer {
+            binding.progressBarLogin.apply {
+                visibility = View.GONE
+            }
+            Toast.makeText(this, "Status: ${it}", Toast.LENGTH_SHORT).show()
             if(it){
                 println("Login pq si está")
             }else{
                 println("Sorry bro, nostas en la lista")
             }
+
         })
 
 
@@ -37,6 +45,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun authUser(user: String, password: String) {
+        Toast.makeText(this, "Verificando...", Toast.LENGTH_SHORT).show()
+        binding.progressBarLogin.apply {
+            visibility = View.VISIBLE
+        }
         mainViewModel.authUser(user, password)
     }
 
