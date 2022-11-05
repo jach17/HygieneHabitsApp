@@ -12,4 +12,8 @@ class TutorUseCase {
     suspend fun authUser(user: String, password: String): Boolean {
         return repository.authUser(user, password);
     }
+
+    suspend fun crearCuenta(username: String, age: String, password: String): Int {
+        return repository.crearCuenta(username, age, password)
+    }
 }

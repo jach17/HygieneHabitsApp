@@ -1,9 +1,12 @@
 package com.devsolutions.hygienehabitsapp.Data.Repository
 
+import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AddUserDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AuthUserDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.TutorModel
+import com.devsolutions.hygienehabitsapp.Data.Model.Responses.AddResponse
 import com.devsolutions.hygienehabitsapp.Data.Service.TutorService
 import org.json.JSONObject
+import retrofit2.Response
 
 class TutorRepository {
     private val api = TutorService()
@@ -26,5 +29,13 @@ class TutorRepository {
 
         return isRegistred?.isRegistred!!
 
+    }
+
+    suspend fun crearCuenta(username: String, age: String, password: String): Int {
+        //AutomatizeTokenGeneration
+        val body = AddUserDto(username, age, password, "123abc")
+        val response = api.addUser(body)
+        println("Response: ${response?.body()}")
+        return response.body()?.message?.response?.get(0)?.insertedId!!
     }
 }
