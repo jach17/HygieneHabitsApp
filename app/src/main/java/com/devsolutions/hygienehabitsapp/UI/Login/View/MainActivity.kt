@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import com.devsolutions.hygienehabitsapp.UI.App.HomeActivity
 import com.devsolutions.hygienehabitsapp.UI.Login.ViewModel.MainViewModel
 import com.devsolutions.hygienehabitsapp.UI.Signup.View.SignupActivity
 import com.devsolutions.hygienehabitsapp.UI.Splash.SplashFragment
@@ -26,7 +27,9 @@ class MainActivity : AppCompatActivity() {
         initListeners()
         mainViewModel.isLogged.observe(this, Observer {
             splash.dismiss()
-            Toast.makeText(this, "Status: ${it}", Toast.LENGTH_SHORT).show()
+            if(it){
+                navigateToActivity(this, HomeActivity::class.java)
+            }
         })
     }
 

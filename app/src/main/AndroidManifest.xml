@@ -16,7 +16,7 @@
         android:theme="@style/Theme.HygieneHabitsApp"
         tools:targetApi="31">
         <activity
-            android:name=".HomeActivity"
+            android:name=".UI.App.HomeActivity"
             android:exported="false" />
         <activity
             android:name=".UI.Signup.View.SignupActivity"
