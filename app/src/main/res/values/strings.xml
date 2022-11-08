@@ -11,4 +11,7 @@
     <string name="confirm_password">Confirmar contraseña</string>
     <string name="iniciar_sesion">Inicia sesión aquí</string>
     <string name="crear">Crear cuenta</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cargando">Cargando...</string>
 </resources>

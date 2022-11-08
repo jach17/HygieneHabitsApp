@@ -9,11 +9,13 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.devsolutions.hygienehabitsapp.UI.Login.View.MainActivity
 import com.devsolutions.hygienehabitsapp.UI.Signup.ViewModel.SignupViewModel
+import com.devsolutions.hygienehabitsapp.UI.Splash.SplashFragment
 import com.devsolutions.hygienehabitsapp.databinding.ActivitySignupBinding
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var binding:ActivitySignupBinding
     private lateinit var signupViewModel:SignupViewModel
+    private val splash = SplashFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
@@ -21,17 +23,14 @@ class SignupActivity : AppCompatActivity() {
         setContentView(binding.root)
         initListeners()
         signupViewModel.idCreated.observe(this, Observer {
-            binding.progressBarSignup.apply {
-                visibility = View.GONE
-                
-            }
-
+            splash.dismiss()
             if(it!=0){
-                Toast.makeText(this, "Created account", Toast.LENGTH_SHORT).show()
-
+                Toast.makeText(this, "Cuenta creada", Toast.LENGTH_SHORT).show()
             }else{
-                Toast.makeText(this, "Not created account", Toast.LENGTH_SHORT).show()
+                //Manage the error message from response
+                Toast.makeText(this, "Ocurrió un error al crear la cuenta", Toast.LENGTH_SHORT).show()
             }
+            navigateToActivity(this.applicationContext, MainActivity::class.java)
         })
     }
 
@@ -41,19 +40,10 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun crearCuenta(username: String, age: String, password: String, confirmPassword: String) {
-        Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show()
-        binding.progressBarSignup.apply {
-            visibility = View.VISIBLE
-        }
-
+        splash.show(this.supportFragmentManager, "SPLASH")
         if(password.equals(confirmPassword)){
-            println("DE aqui")
             signupViewModel.crearCuenta(username, age, password)
-        }else{
-            println("De aca pue")
         }
-
-
     }
 
     private fun navigateToActivity(context: Context, destine: Class<*>) {
