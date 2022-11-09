@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Desktop/9nosemestre/Residencia/App/HygieneHabitsApp/app/src/main/res/drawable/background_recycler.xml" value="0.12" />
+        <entry key="..\:/Desktop/9nosemestre/Residencia/App/HygieneHabitsApp/app/src/main/res/drawable/ic_arrow.xml" value="0.1295" />
         <entry key="..\:/Desktop/9nosemestre/Residencia/App/HygieneHabitsApp/app/src/main/res/layout/activity_home.xml" value="0.22" />
         <entry key="..\:/Desktop/9nosemestre/Residencia/App/HygieneHabitsApp/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Desktop/9nosemestre/Residencia/App/HygieneHabitsApp/app/src/main/res/layout/activity_signup.xml" value="0.225" />
@@ -10,6 +12,7 @@
         <entry key="..\:/Desktop/9nosemestre/Residencia/App/HygieneHabitsApp/app/src/main/res/layout/fragment_listar_sesiones.xml" value="0.21041666666666667" />
         <entry key="..\:/Desktop/9nosemestre/Residencia/App/HygieneHabitsApp/app/src/main/res/layout/fragment_mostrar_mi_infromacion.xml" value="0.22447916666666667" />
         <entry key="..\:/Desktop/9nosemestre/Residencia/App/HygieneHabitsApp/app/src/main/res/layout/fragment_splash.xml" value="0.225" />
+        <entry key="..\:/Desktop/9nosemestre/Residencia/App/HygieneHabitsApp/app/src/main/res/layout/item_nivel_card.xml" value="0.22" />
         <entry key="..\:/Desktop/9nosemestre/Residencia/App/HygieneHabitsApp/app/src/main/res/menu/menu_home_bar.xml" value="0.22447916666666667" />
       </map>
     </option>

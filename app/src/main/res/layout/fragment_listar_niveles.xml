@@ -5,10 +5,20 @@
     android:layout_height="match_parent"
     tools:context=".UI.App.Niveles.ListarNivelesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Listar niveles hehe" />
+        android:layout_margin="16dp"
+        android:padding="16dp"
+        android:background="@drawable/background_recycler"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvListarNiveles"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_nivel_card"
+            tools:itemCount="5"
+            />
+    </RelativeLayout>
 
 </FrameLayout>

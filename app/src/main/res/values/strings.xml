@@ -17,4 +17,11 @@
     <string name="niveles">Niveles</string>
     <string name="sessions">Sesiones</string>
     <string name="miinfo">Mi información</string>
+    <string name="level1">Personal hygiene</string>
+    <string name="maxsocre">Max score</string>
+    <string name="maxscoretest">4.5/5.0</string>
+    <string name="playingtime">Playing time</string>
+    <string name="playingTimeDescription">2 hrs</string>
+    <string name="progress">Progress</string>
+    <string name="progressTest">68%</string>
 </resources>
