@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.ReporteModel
@@ -12,7 +13,7 @@ import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.UI.App.Niveles.ListarNivelesAdapter
 import com.devsolutions.hygienehabitsapp.databinding.FragmentJugadoresBinding
 
-class JugadoresFragment : Fragment() {
+class JugadoresFragment : DialogFragment() {
     private lateinit var _binding:FragmentJugadoresBinding
     private val binding get() = _binding
     override fun onCreateView(

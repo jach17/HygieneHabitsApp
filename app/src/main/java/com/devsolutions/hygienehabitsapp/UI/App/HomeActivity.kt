@@ -20,7 +20,7 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initTabs()
-        //initView()
+        initView()
         //initListeners()
     }
 
@@ -30,7 +30,7 @@ class HomeActivity : AppCompatActivity() {
         adapter.addFragment(ListarNivelesFragment(), "Niveles")
         adapter.addFragment(ListarSesionesFragment(), "Sesiones")
         adapter.addFragment(MostrarMiInfromacionFragment(), "Mi informacion")
-        adapter.addFragment(JugadoresFragment(), "Jugadores")
+
 
         val viewer = binding.viewPager
         viewer.adapter = adapter
@@ -40,12 +40,11 @@ class HomeActivity : AppCompatActivity() {
         tabs.getTabAt(0)!!.setIcon(R.drawable.ic_niveles)
         tabs.getTabAt(1)!!.setIcon(R.drawable.ic_session)
         tabs.getTabAt(2)!!.setIcon(R.drawable.ic_miinfo)
-        tabs.getTabAt(3)!!.setIcon(R.drawable.ic_miinfo)
-
 
     }
 
     private fun initView() {
+
     }
 
 

@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import com.devsolutions.hygienehabitsapp.Core.SharedApp.Companion.prefs
 import com.devsolutions.hygienehabitsapp.UI.App.HomeActivity
 import com.devsolutions.hygienehabitsapp.UI.Login.ViewModel.MainViewModel
 import com.devsolutions.hygienehabitsapp.UI.Signup.View.SignupActivity
@@ -24,13 +25,29 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         mainViewModel = MainViewModel()
         setContentView(binding.root)
+        initView()
         initListeners()
+        isSessionLogged()
         mainViewModel.isLogged.observe(this, Observer {
             splash.dismiss()
             if(it){
+                prefs.isLogged = true
                 navigateToActivity(this, HomeActivity::class.java)
             }
         })
+    }
+
+    private fun initView() {
+        splash.show(this.supportFragmentManager, "SPLASH")
+    }
+
+    private fun isSessionLogged() {
+        if(prefs.isLogged==true){
+            splash.dismiss()
+            navigateToActivity(this, HomeActivity::class.java)
+        }else{
+            splash.dismiss()
+        }
     }
 
     private fun initListeners() {
