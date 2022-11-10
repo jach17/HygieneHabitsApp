@@ -22,6 +22,8 @@ class MainViewModel : ViewModel() {
         }
     }
 
+
+
     fun authUser(user: String, password: String) {
         viewModelScope.launch (Dispatchers.IO){
             if(tutorUseCase.authUser(user, password)){

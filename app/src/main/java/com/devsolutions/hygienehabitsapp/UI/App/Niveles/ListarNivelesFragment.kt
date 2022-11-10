@@ -24,9 +24,10 @@ class ListarNivelesFragment : Fragment() {
 
     fun getList():ArrayList<ReporteModel>{
         val list = arrayListOf<ReporteModel>()
-        list.add(ReporteModel("name", "as", "as", "sgdfh"))
-        list.add(ReporteModel("name", "as", "as", "sgdfh"))
-        list.add(ReporteModel("name", "as", "as", "sgdfh"))
+        list.add(ReporteModel("name", "as", "as", "sgdfh", "sdg", "red"))
+        list.add(ReporteModel("name", "as", "as", "sgdfh", "sdg", "red"))
+        list.add(ReporteModel("name", "as", "as", "sgdfh", "sdg", "red"))
+
         return list
     }
 

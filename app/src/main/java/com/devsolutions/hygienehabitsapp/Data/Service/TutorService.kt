@@ -6,14 +6,14 @@ import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AuthUserDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Responses.AddResponse
 import com.devsolutions.hygienehabitsapp.Data.Model.Responses.AuthResponse
 import com.devsolutions.hygienehabitsapp.Data.Model.Responses.DefaultResponse
-import com.devsolutions.hygienehabitsapp.Data.Network.TutorApiClient
+import com.devsolutions.hygienehabitsapp.Data.Model.Responses.ListReportsResponse
+import com.devsolutions.hygienehabitsapp.Data.Network.ApiClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.json.JSONObject
 import retrofit2.Response
 
 class TutorService {
-    private val api = RetrofitHelper.getRetrofit().create(TutorApiClient::class.java)
+    private val api = RetrofitHelper.getRetrofit().create(ApiClient::class.java)
 
     suspend fun getAllTutors():Response<DefaultResponse> {
         return withContext(Dispatchers.IO){
@@ -36,4 +36,6 @@ class TutorService {
             response
         }
     }
+
+
 }

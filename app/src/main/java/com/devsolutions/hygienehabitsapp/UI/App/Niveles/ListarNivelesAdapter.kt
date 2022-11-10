@@ -17,10 +17,10 @@ class ListarNivelesAdapter(val reportList: ArrayList<ReporteModel>, val layout:I
         val textPlayingTime = itemView.findViewById<TextView>(R.id.nivelPlayingTime)
 
         fun bind(reporteModel: ReporteModel) {
-            textLevel.text = reporteModel.nivel
-            textProgress.text = reporteModel.progress
-            textMaxScore.text = reporteModel.maxScore
-            textPlayingTime.text = reporteModel.playingtime
+            textLevel.text = reporteModel.descriptionTitle
+            textProgress.text = reporteModel.currentScoreLevel
+            textMaxScore.text = reporteModel.currentScoreLevel
+            textPlayingTime.text = reporteModel.dateEndLevel
         }
     }
 

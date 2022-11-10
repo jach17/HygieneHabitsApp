@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/colorDark"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="24dp"
+    android:layout_margin="8dp"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="64dp"
+        android:padding="22dp">
+        <TextView
+            android:id="@+id/titleNamePlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="start"
+            android:text="@string/namePlayer"/>
+
+        <TextView
+            android:id="@+id/nivelDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titleNamePlayer"
+            android:layout_marginStart="8dp"
+            android:text="Jonathan"
+            android:textColor="@color/white"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/titlePlayerAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_below="@+id/nivelDescription"
+            android:text="Edad"/>
+        <TextView
+            android:id="@+id/nivelMaxScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textStyle="italic"
+            android:layout_marginStart="8dp"
+            android:layout_below="@+id/titlePlayerAge"
+            android:text="8 AÑOS"/>
+
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/btnShowMoreJugador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow"
+        android:layout_margin="8dp"
+        android:layout_gravity="center_vertical|end"
+        />
+
+
+
+</androidx.cardview.widget.CardView>

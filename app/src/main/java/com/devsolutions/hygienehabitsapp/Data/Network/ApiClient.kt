@@ -2,22 +2,26 @@ package com.devsolutions.hygienehabitsapp.Data.Network
 
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AddUserDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AuthUserDto
-import com.devsolutions.hygienehabitsapp.Data.Model.Responses.AddResponse
-import com.devsolutions.hygienehabitsapp.Data.Model.Responses.AuthResponse
-import com.devsolutions.hygienehabitsapp.Data.Model.Responses.DefaultResponse
-import org.json.JSONObject
+import com.devsolutions.hygienehabitsapp.Data.Model.Responses.*
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
-interface TutorApiClient {
+interface ApiClient {
     @GET("list/tutors")
     suspend fun getAllTutors(): Response<DefaultResponse>
+
+    @GET("list/reports/player/{id}")
+    suspend fun getReportsFromPlayerId(@Path("id") id:Int):Response<ListReportsResponse>
 
     @POST("auth/tutor")
     suspend fun authUser(@Body authUserDto: AuthUserDto): Response<AuthResponse>
 
     @POST("add/tutor")
     suspend fun addUser(@Body addUserDto: AddUserDto):Response<AddResponse>
+
+    @GET("list/player/tutor/{id}")
+    suspend fun getPlayerByTutorId(@Path("id") id: Int):Response<ListPlayersResponse>
 }

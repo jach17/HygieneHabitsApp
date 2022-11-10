@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.UI.App.Adapter.ViewPagerAdapter
+import com.devsolutions.hygienehabitsapp.UI.App.Jugadores.JugadoresFragment
 import com.devsolutions.hygienehabitsapp.UI.App.MiInformacion.MostrarMiInfromacionFragment
 import com.devsolutions.hygienehabitsapp.UI.App.Niveles.ListarNivelesFragment
 import com.devsolutions.hygienehabitsapp.UI.App.Sesiones.ListarSesionesFragment
@@ -25,9 +26,12 @@ class HomeActivity : AppCompatActivity() {
 
     private fun initTabs() {
         val adapter = ViewPagerAdapter(supportFragmentManager)
+
         adapter.addFragment(ListarNivelesFragment(), "Niveles")
         adapter.addFragment(ListarSesionesFragment(), "Sesiones")
         adapter.addFragment(MostrarMiInfromacionFragment(), "Mi informacion")
+        adapter.addFragment(JugadoresFragment(), "Jugadores")
+
         val viewer = binding.viewPager
         viewer.adapter = adapter
         val tabs = binding.tabs
@@ -36,6 +40,8 @@ class HomeActivity : AppCompatActivity() {
         tabs.getTabAt(0)!!.setIcon(R.drawable.ic_niveles)
         tabs.getTabAt(1)!!.setIcon(R.drawable.ic_session)
         tabs.getTabAt(2)!!.setIcon(R.drawable.ic_miinfo)
+        tabs.getTabAt(3)!!.setIcon(R.drawable.ic_miinfo)
+
 
     }
 

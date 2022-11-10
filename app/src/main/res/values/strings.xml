@@ -24,4 +24,5 @@
     <string name="playingTimeDescription">2 hrs</string>
     <string name="progress">Progress</string>
     <string name="progressTest">68%</string>
+    <string name="namePlayer">Nombre</string>
 </resources>
