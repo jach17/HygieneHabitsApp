@@ -11,9 +11,9 @@ import com.devsolutions.hygienehabitsapp.R
 class ListarNivelesAdapter(val reportList: ArrayList<ReporteModel>, val layout:Int) : RecyclerView.Adapter<ListarNivelesAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val textLevel = itemView.findViewById<TextView>(R.id.nivelDescription)
+        val textLevel = itemView.findViewById<TextView>(R.id.descriptionsName)
         val textProgress = itemView.findViewById<TextView>(R.id.nivelProgress)
-        val textMaxScore = itemView.findViewById<TextView>(R.id.nivelMaxScore)
+        val textMaxScore = itemView.findViewById<TextView>(R.id.descriptionsAge)
         val textPlayingTime = itemView.findViewById<TextView>(R.id.nivelPlayingTime)
 
         fun bind(reporteModel: ReporteModel) {

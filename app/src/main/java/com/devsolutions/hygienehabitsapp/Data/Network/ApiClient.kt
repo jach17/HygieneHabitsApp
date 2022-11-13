@@ -2,6 +2,7 @@ package com.devsolutions.hygienehabitsapp.Data.Network
 
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AddUserDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AuthUserDto
+import com.devsolutions.hygienehabitsapp.Data.Model.Entities.InsertedModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Responses.*
 import retrofit2.Response
 import retrofit2.http.Body
@@ -24,4 +25,7 @@ interface ApiClient {
 
     @GET("list/player/tutor/{id}")
     suspend fun getPlayerByTutorId(@Path("id") id: Int):Response<ListPlayersResponse>
+
+    @POST("list/tutor/id")
+    suspend fun getTutorId(@Body authUserDto: AuthUserDto): Response<TutorIdResponse>
 }

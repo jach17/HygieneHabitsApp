@@ -3,34 +3,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
+    android:background="@color/colorNeutro"
     tools:context=".UI.App.Jugadores.JugadoresFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
-        android:padding="16dp"
-        android:background="@drawable/background_recycler"
-        >
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/tvTitleJugadores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Jugadores que supervisa"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvListarJugadores"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_nivel_card"
-            tools:itemCount="2"
+            android:layout_below="@+id/tvTitleJugadores"
             android:visibility="gone"
-            />
+            tools:itemCount="2"
+            tools:listitem="@layout/item_nivel_card" />
+
         <TextView
             android:id="@+id/tvJugadoresEmpty"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTitleJugadores"
+            android:layout_centerInParent="true"
             android:layout_margin="32dp"
+            android:text="Actualmente no estás supervisando a ningun jugador"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="24sp"
-            android:text="Actualmente no estás supervisando a ningun jugador"
-            android:layout_centerInParent="true"
-            />
+            android:visibility="gone" />
     </RelativeLayout>
 </FrameLayout>

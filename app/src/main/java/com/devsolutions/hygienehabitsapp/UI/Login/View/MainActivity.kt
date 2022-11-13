@@ -4,8 +4,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.devsolutions.hygienehabitsapp.Core.SharedApp.Companion.prefs
@@ -20,14 +18,20 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainViewModel: MainViewModel
     private val splash = SplashFragment()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         mainViewModel = MainViewModel()
         setContentView(binding.root)
+        initObservables()
         initView()
         initListeners()
         isSessionLogged()
+    }
+
+    private fun initObservables() {
+
         mainViewModel.isLogged.observe(this, Observer {
             splash.dismiss()
             if(it){
@@ -42,18 +46,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isSessionLogged() {
+
         if(prefs.isLogged==true){
             splash.dismiss()
             navigateToActivity(this, HomeActivity::class.java)
-        }else{
-            splash.dismiss()
         }
     }
 
     private fun initListeners() {
         binding.btnGoToSignup.setOnClickListener { navigateToActivity(applicationContext, SignupActivity::class.java) }
         binding.btnIngresar.setOnClickListener { authUser(binding.tietUsername.text.toString(), binding.tietPassword.text.toString()) }
-
     }
 
     private fun authUser(user: String, password: String) {

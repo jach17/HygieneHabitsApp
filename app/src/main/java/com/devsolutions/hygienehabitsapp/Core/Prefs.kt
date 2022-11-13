@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 
 class Prefs(val context:Context) {
     val PREFS_NAME = "my_prefs"
-    val SHARED_NAME = "shared_name"
+    val SHARED_ID = "shared_id"
     val SHARED_IS_LOGGED = "shared_is_logged"
     val prefs: SharedPreferences = context.getSharedPreferences(PREFS_NAME, 0)
 
@@ -13,7 +13,8 @@ class Prefs(val context:Context) {
         get() = prefs.getBoolean(SHARED_IS_LOGGED, false)
         set(value) = prefs.edit().putBoolean(SHARED_IS_LOGGED, value!!).apply()
 
-    var name: String?
-        get() = prefs.getString(SHARED_NAME, "")
-        set(value) = prefs.edit().putString(SHARED_NAME, value!!).apply()
+    var tutorId:Int?
+        get() = prefs.getInt(SHARED_ID, 0)
+        set(value) = prefs.edit().putInt(SHARED_ID, value!!).apply()
+
 }

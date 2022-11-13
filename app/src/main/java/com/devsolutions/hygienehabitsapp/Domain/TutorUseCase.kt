@@ -17,5 +17,9 @@ class TutorUseCase {
         return repository.crearCuenta(username, age, password)
     }
 
+    suspend fun getTutorId(user: String, password: String):Int {
+        return repository.getTutorsById(user, password)
+    }
+
 
 }

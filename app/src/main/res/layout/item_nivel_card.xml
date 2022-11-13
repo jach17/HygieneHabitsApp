@@ -23,7 +23,7 @@
             android:text="@string/niveles"/>
 
         <TextView
-            android:id="@+id/nivelDescription"
+            android:id="@+id/descriptionsName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/titleNivel"
@@ -38,10 +38,10 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:layout_below="@+id/nivelDescription"
+            android:layout_below="@+id/descriptionsName"
             android:text="@string/maxsocre"/>
         <TextView
-            android:id="@+id/nivelMaxScore"
+            android:id="@+id/descriptionsAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
@@ -75,7 +75,7 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_alignParentEnd="true"
-            android:layout_below="@+id/nivelDescription"
+            android:layout_below="@+id/descriptionsName"
             android:text="@string/playingtime"/>
         <TextView
             android:id="@+id/nivelPlayingTime"

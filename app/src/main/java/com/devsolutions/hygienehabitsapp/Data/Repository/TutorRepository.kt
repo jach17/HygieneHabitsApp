@@ -1,5 +1,6 @@
 package com.devsolutions.hygienehabitsapp.Data.Repository
 
+import com.devsolutions.hygienehabitsapp.Core.SharedApp.Companion.prefs
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AddUserDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AuthUserDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.TutorModel
@@ -37,6 +38,10 @@ class TutorRepository {
         val response = api.addUser(body)
         println("Response: ${response?.body()}")
         return response.body()?.message?.response?.get(0)?.insertedId!!
+    }
+
+    suspend fun getTutorsById(user: String, password: String): Int {
+        return 1
     }
 
 

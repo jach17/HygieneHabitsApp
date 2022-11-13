@@ -9,19 +9,25 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
 import com.devsolutions.hygienehabitsapp.R
+import com.devsolutions.hygienehabitsapp.UI.App.HomeActivityViewModel
 
-class ListarJugadoresAdapter(val listJugadores:ArrayList<JugadorModel>,val  layout:Int):RecyclerView.Adapter<ListarJugadoresAdapter.ViewHolder>() {
+class ListarJugadoresAdapter(
+    val listJugadores: ArrayList<JugadorModel>,
+    val layout: Int,
+    val homeActivityViewModel: HomeActivityViewModel
+):RecyclerView.Adapter<ListarJugadoresAdapter.ViewHolder>() {
 
     class ViewHolder(view: View):RecyclerView.ViewHolder(view) {
-        val textName:TextView = view.findViewById(R.id.titleNamePlayer)
-        val textAge:TextView = view.findViewById(R.id.titlePlayerAge)
+        val textName:TextView = view.findViewById(R.id.descriptionsName)
+        val textAge:TextView = view.findViewById(R.id.descriptionsAge)
         val btn:ImageView = view.findViewById(R.id.btnShowMoreJugador)
         val context = view.context
-        fun bind(jugador: JugadorModel) {
+        fun bind(jugador: JugadorModel, homeActivityViewModel: HomeActivityViewModel) {
             textName.text = jugador.namePlayer
             textAge.text = jugador.agePlayer
             btn.setOnClickListener{
                 Toast.makeText(context, "Clicked on id: ${jugador.idPlayer}", Toast.LENGTH_SHORT).show()
+                homeActivityViewModel.setIdPlayer(jugador.idPlayer)
             }
         }
 
@@ -33,7 +39,7 @@ class ListarJugadoresAdapter(val listJugadores:ArrayList<JugadorModel>,val  layo
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(listJugadores[position])
+        holder.bind(listJugadores[position], homeActivityViewModel)
     }
 
     override fun getItemCount(): Int {

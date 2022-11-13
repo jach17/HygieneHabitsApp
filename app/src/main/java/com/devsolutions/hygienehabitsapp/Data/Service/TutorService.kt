@@ -1,6 +1,7 @@
 package com.devsolutions.hygienehabitsapp.Data.Service
 
 import com.devsolutions.hygienehabitsapp.Core.RetrofitHelper
+import com.devsolutions.hygienehabitsapp.Core.SharedApp.Companion.prefs
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AddUserDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AuthUserDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Responses.AddResponse
@@ -24,8 +25,9 @@ class TutorService {
 
     suspend fun authUser(body:AuthUserDto): Response<AuthResponse> {
         return withContext(Dispatchers.IO){
-
             val response = api.authUser(body)
+            val id = api.getTutorId(body).body()?.message?.response
+            prefs.tutorId=id?.get(0)?.idTutor
             response
         }
     }
