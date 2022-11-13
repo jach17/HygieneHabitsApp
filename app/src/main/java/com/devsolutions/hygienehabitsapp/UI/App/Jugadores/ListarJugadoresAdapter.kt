@@ -26,7 +26,6 @@ class ListarJugadoresAdapter(
             textName.text = jugador.namePlayer
             textAge.text = jugador.agePlayer
             btn.setOnClickListener{
-                Toast.makeText(context, "Clicked on id: ${jugador.idPlayer}", Toast.LENGTH_SHORT).show()
                 homeActivityViewModel.setIdPlayer(jugador.idPlayer)
             }
         }

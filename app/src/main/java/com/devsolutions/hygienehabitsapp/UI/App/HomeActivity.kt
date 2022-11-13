@@ -2,15 +2,12 @@ package com.devsolutions.hygienehabitsapp.UI.App
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.devsolutions.hygienehabitsapp.Core.SharedApp.Companion.prefs
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
 import com.devsolutions.hygienehabitsapp.Domain.JugadorUseCase
-import com.devsolutions.hygienehabitsapp.Domain.TutorUseCase
 import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.UI.App.Adapter.ViewPagerAdapter
 import com.devsolutions.hygienehabitsapp.UI.App.Jugadores.JugadoresFragment
@@ -37,9 +34,7 @@ class HomeActivity() : AppCompatActivity() {
         setContentView(binding.root)
         splash.show(supportFragmentManager, "SPLASH")
         initObservables()
-        initTabs()
         initView()
-        //initListeners()
     }
 
     private fun initObservables() {
@@ -48,16 +43,16 @@ class HomeActivity() : AppCompatActivity() {
             if(it==null || it==0){
                 showJugadoresList()
             }else{
-                showTabs()
+                showTabs(it)
             }
         })
     }
 
-    private fun initTabs() {
+    private fun initTabs(idPlayer: Int) {
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(ListarNivelesFragment(), "Niveles")
-        adapter.addFragment(ListarSesionesFragment(), "Sesiones")
-        adapter.addFragment(MostrarMiInfromacionFragment(), "Mi informacion")
+        adapter.addFragment(ListarNivelesFragment(idPlayer), "Niveles")
+        adapter.addFragment(ListarSesionesFragment(idPlayer), "Sesiones")
+        adapter.addFragment(MostrarMiInfromacionFragment(idPlayer), "Mi informacion")
 
 
         val viewer = binding.viewPager
@@ -73,10 +68,10 @@ class HomeActivity() : AppCompatActivity() {
 
     private fun initView() {
         this.idPlayerSelected = homeActivityViewModel.getIdPlayer()
-        if(this.idPlayerSelected==0){
+        if(this.idPlayerSelected==0 || this.idPlayerSelected==null){
             showJugadoresList()
         }else{
-            showTabs()
+            showTabs(this.idPlayerSelected)
         }
     }
 
@@ -85,11 +80,9 @@ class HomeActivity() : AppCompatActivity() {
     }
 
 
-    private fun showTabs() {
+    private fun showTabs(idPlayer: Int) {
         selectJugadoresFragment.dismiss()
-    }
-    private fun initListeners() {
-
+        initTabs(idPlayer)
     }
 }
 

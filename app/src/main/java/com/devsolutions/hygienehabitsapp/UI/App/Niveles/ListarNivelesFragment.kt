@@ -5,35 +5,42 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.ReporteModel
 import com.devsolutions.hygienehabitsapp.R
+import com.devsolutions.hygienehabitsapp.UI.Splash.SplashFragment
 import com.devsolutions.hygienehabitsapp.databinding.FragmentListarNivelesBinding
 
-class ListarNivelesFragment : Fragment() {
+class ListarNivelesFragment(val idPlayer: Int) : Fragment() {
     private lateinit var _binding: FragmentListarNivelesBinding
     private val binding get() = _binding
+    private lateinit var viewModelNiveles:NivelesViewModel
+    private val splash = SplashFragment()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentListarNivelesBinding.inflate(layoutInflater, container, false)
-        initView()
+        splash.show(parentFragmentManager, "SPLASH")
+        viewModelNiveles = NivelesViewModel()
+        viewModelNiveles.getReportsFromPlayerId(idPlayer)
+        viewModelNiveles.listReports.observe(this.viewLifecycleOwner, Observer {
+            splash.dismiss()
+            if(it.isNotEmpty()){
+                initRecycler(it)
+            }else{
+                Toast.makeText(requireContext(), "Lista de reportes vacia", Toast.LENGTH_SHORT).show()
+            }
+        })
         return binding.root
     }
 
-    fun getList():ArrayList<ReporteModel>{
-        val list = arrayListOf<ReporteModel>()
-        list.add(ReporteModel("name", "as", "as", "sgdfh", "sdg", "red"))
-        list.add(ReporteModel("name", "as", "as", "sgdfh", "sdg", "red"))
-        list.add(ReporteModel("name", "as", "as", "sgdfh", "sdg", "red"))
 
-        return list
-    }
-
-    private fun initView() {
+    private fun initRecycler(arrayList: ArrayList<ReporteModel>) {
         binding.rvListarNiveles.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.rvListarNiveles.adapter = ListarNivelesAdapter(getList(), R.layout.item_nivel_card)
+        binding.rvListarNiveles.adapter = ListarNivelesAdapter(arrayList, R.layout.item_nivel_card)
 
     }
 
