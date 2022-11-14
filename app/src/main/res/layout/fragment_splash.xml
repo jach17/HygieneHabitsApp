@@ -24,6 +24,11 @@
             android:layout_gravity="center"
             style="@style/basic_middle_text"
             />
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            />
 
     </LinearLayout>
 </FrameLayout>

@@ -87,7 +87,6 @@ class HomeActivity() : AppCompatActivity() {
     private fun initTabs(idPlayer: Int) {
 
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        Toast.makeText(this, "Going to use ${idPlayer}", Toast.LENGTH_SHORT).show()
         adapter.addFragment(ListarNivelesFragment(homeActivityViewModel), "Niveles")
         adapter.addFragment(ListarSesionesFragment(idPlayer), "Sesiones")
         adapter.addFragment(MostrarMiInfromacionFragment(idPlayer), "Mi informacion")

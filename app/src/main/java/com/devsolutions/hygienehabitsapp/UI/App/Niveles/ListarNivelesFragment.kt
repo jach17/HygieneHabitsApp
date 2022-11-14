@@ -25,7 +25,6 @@ class ListarNivelesFragment(val homeViewModel:HomeActivityViewModel) : Fragment(
     ): View? {
         _binding = FragmentListarNivelesBinding.inflate(layoutInflater, container, false)
         splash.show(parentFragmentManager, "SPLASH")
-        Toast.makeText(requireContext(), "Using ${homeViewModel.getIdPlayer()}", Toast.LENGTH_SHORT).show()
         viewModelNiveles = NivelesViewModel()
         viewModelNiveles.getReportsFromPlayerId(homeViewModel.getIdPlayer())
         viewModelNiveles.listReports.observe(this.viewLifecycleOwner, Observer {
