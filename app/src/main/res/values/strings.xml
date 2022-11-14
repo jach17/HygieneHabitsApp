@@ -25,4 +25,6 @@
     <string name="progress">Progress</string>
     <string name="progressTest">68%</string>
     <string name="namePlayer">Nombre</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="habits_home">Habits Home</string>
 </resources>

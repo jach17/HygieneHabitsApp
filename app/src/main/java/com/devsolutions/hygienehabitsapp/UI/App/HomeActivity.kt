@@ -1,12 +1,19 @@
 package com.devsolutions.hygienehabitsapp.UI.App
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import android.view.View
+import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.annotation.MenuRes
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.devsolutions.hygienehabitsapp.Core.SharedApp.Companion.prefs
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
 import com.devsolutions.hygienehabitsapp.Domain.JugadorUseCase
 import com.devsolutions.hygienehabitsapp.R
@@ -15,6 +22,7 @@ import com.devsolutions.hygienehabitsapp.UI.App.Jugadores.JugadoresFragment
 import com.devsolutions.hygienehabitsapp.UI.App.MiInformacion.MostrarMiInfromacionFragment
 import com.devsolutions.hygienehabitsapp.UI.App.Niveles.ListarNivelesFragment
 import com.devsolutions.hygienehabitsapp.UI.App.Sesiones.ListarSesionesFragment
+import com.devsolutions.hygienehabitsapp.UI.Login.View.MainActivity
 import com.devsolutions.hygienehabitsapp.UI.Splash.SplashFragment
 import com.devsolutions.hygienehabitsapp.databinding.ActivityHomeBinding
 import kotlinx.coroutines.Dispatchers
@@ -34,23 +42,48 @@ class HomeActivity() : AppCompatActivity() {
         selectJugadoresFragment = JugadoresFragment(homeActivityViewModel)
         setContentView(binding.root)
         splash.show(supportFragmentManager, "SPLASH")
+
         initView(homeActivityViewModel.getIdPlayer())
         initObservables()
         initListeners()
     }
 
-    private fun initListeners() {
-        binding.btnMostrarJugador.setOnClickListener{
-            /*
-            //Funciona por el momento pero no quiero estar recargando la actividad
-            val mIntent = intent
-            finish()
-            startActivity(mIntent)
+    private fun initMenu(view: View) {
+        showMenu(view, R.menu.menu)
+    }
 
-             */
-            homeActivityViewModel.setIdPlayer(0)
+    private fun showMenu(v: View, @MenuRes menuRes: Int) {
+        val popup = PopupMenu(applicationContext, v)
+        popup.menuInflater.inflate(menuRes, popup.menu)
 
+        popup.setOnMenuItemClickListener(::manageItemClick)
+        popup.setOnDismissListener {
+            // Respond to popup being dismissed.
         }
+        // Show the popup menu.
+        popup.show()
+    }
+
+    private fun manageItemClick(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+            R.id.menu_logout -> {
+                prefs.isLogged = false
+                navigateToActivity(this, MainActivity::class.java)
+                finish()
+                true
+            }
+            else -> false
+        }
+    }
+    private fun navigateToActivity(context: Context, destine: Class<*>) {
+        val intent = Intent(context, destine)
+        startActivity(intent)
+    }
+    private fun initListeners() {
+        binding.btnMostrarJugador.setOnClickListener {
+            homeActivityViewModel.setIdPlayer(0)
+        }
+        binding.btnShowMenu.setOnClickListener { initMenu(it) }
     }
 
     private fun initObservables() {
@@ -133,7 +166,6 @@ class HomeActivityViewModel : ViewModel() {
     fun getIdPlayer(): Int {
         return idPlayerSelected.value ?: 0
     }
-
 
 
 }

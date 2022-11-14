@@ -46,10 +46,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isSessionLogged() {
-
-        if(prefs.isLogged==true){
-            splash.dismiss()
+        splash.dismiss()
+        if(prefs.isLogged!!){
             navigateToActivity(this, HomeActivity::class.java)
+            finish()
         }
     }
 
