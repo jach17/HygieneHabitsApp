@@ -8,55 +8,68 @@
 
 
     <TextView
-        android:id="@+id/toolbar"
+        android:id="@+id/titleAppToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:background="@color/colorNeutro"
-        android:text="Habits Hygiene"
-        android:padding="8dp"
-        android:textStyle="bold"
-        android:textSize="24sp"
-        android:textColor="@color/white"
+        android:paddingVertical="16dp"
+        android:text="Habits Home"
         android:textAlignment="center"
-        android:minHeight="?attr/actionBarSize"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <LinearLayout
         android:id="@+id/tvPlayerSelected"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tvPlayerSelectedName"
-        android:text="Progreso del jugador"
-        android:padding="8dp"
-        android:textSize="20sp"
-        />
-    <TextView
-        android:id="@+id/tvPlayerSelectedName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintStart_toEndOf="@id/tvPlayerSelected"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:padding="8dp"
-        android:textSize="20sp"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabsAppToolbar">
+
+        <TextView
+            android:id="@+id/tvPlayerSelectedName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="4dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="Jony"
+
+            />
+
+        <TextView
+            android:id="@+id/btnMostrarJugador"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="4dp"
+            android:text="Mostrar jugador"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+
+    </LinearLayout>
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
+        android:id="@+id/tabsAppToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
-        app:itemTextColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_below="@id/titleAppToolbar"
+        app:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvPlayerSelected"
-       >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleAppToolbar">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
@@ -64,10 +77,24 @@
             android:layout_height="wrap_content"
             app:tabBackground="@color/colorNeutro"
             app:tabGravity="fill"
-            app:tabInlineLabel="true"
             app:tabMode="fixed"
-            app:tabTextAppearance="@style/custom_tab_style"
-            app:tabTextColor="@color/colorLigth">
+            app:tabTextColor="@color/white">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Niveles" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sesiones" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mi información" />
+
 
         </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -79,7 +106,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appBarLayout">
+        app:layout_constraintTop_toBottomOf="@id/tvPlayerSelected">
 
     </androidx.viewpager.widget.ViewPager>
 

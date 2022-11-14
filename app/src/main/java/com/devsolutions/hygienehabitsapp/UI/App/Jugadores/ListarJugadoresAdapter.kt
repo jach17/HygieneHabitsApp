@@ -3,9 +3,8 @@ package com.devsolutions.hygienehabitsapp.UI.App.Jugadores
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
 import com.devsolutions.hygienehabitsapp.R
@@ -20,12 +19,12 @@ class ListarJugadoresAdapter(
     class ViewHolder(view: View):RecyclerView.ViewHolder(view) {
         val textName:TextView = view.findViewById(R.id.descriptionsName)
         val textAge:TextView = view.findViewById(R.id.descriptionsAge)
-        val btn:ImageView = view.findViewById(R.id.btnShowMoreJugador)
+        val btnCard:CardView = view.findViewById(R.id.cardPlayer)
         val context = view.context
         fun bind(jugador: JugadorModel, homeActivityViewModel: HomeActivityViewModel) {
             textName.text = jugador.namePlayer
             textAge.text = jugador.agePlayer
-            btn.setOnClickListener{
+            btnCard.setOnClickListener{
                 homeActivityViewModel.setIdPlayer(jugador.idPlayer)
             }
         }

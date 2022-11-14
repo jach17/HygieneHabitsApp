@@ -10,10 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.ReporteModel
 import com.devsolutions.hygienehabitsapp.R
+import com.devsolutions.hygienehabitsapp.UI.App.HomeActivityViewModel
 import com.devsolutions.hygienehabitsapp.UI.Splash.SplashFragment
 import com.devsolutions.hygienehabitsapp.databinding.FragmentListarNivelesBinding
 
-class ListarNivelesFragment(val idPlayer: Int) : Fragment() {
+class ListarNivelesFragment(val homeViewModel:HomeActivityViewModel) : Fragment() {
     private lateinit var _binding: FragmentListarNivelesBinding
     private val binding get() = _binding
     private lateinit var viewModelNiveles:NivelesViewModel
@@ -24,8 +25,9 @@ class ListarNivelesFragment(val idPlayer: Int) : Fragment() {
     ): View? {
         _binding = FragmentListarNivelesBinding.inflate(layoutInflater, container, false)
         splash.show(parentFragmentManager, "SPLASH")
+        Toast.makeText(requireContext(), "Using ${homeViewModel.getIdPlayer()}", Toast.LENGTH_SHORT).show()
         viewModelNiveles = NivelesViewModel()
-        viewModelNiveles.getReportsFromPlayerId(idPlayer)
+        viewModelNiveles.getReportsFromPlayerId(homeViewModel.getIdPlayer())
         viewModelNiveles.listReports.observe(this.viewLifecycleOwner, Observer {
             splash.dismiss()
             if(it.isNotEmpty()){

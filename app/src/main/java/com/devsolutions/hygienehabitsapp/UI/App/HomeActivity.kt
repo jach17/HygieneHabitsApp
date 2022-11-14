@@ -25,7 +25,7 @@ class HomeActivity() : AppCompatActivity() {
     private lateinit var homeActivityViewModel: HomeActivityViewModel
     private val splash = SplashFragment()
     private lateinit var selectJugadoresFragment: JugadoresFragment
-    private var idPlayerSelected = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +36,21 @@ class HomeActivity() : AppCompatActivity() {
         splash.show(supportFragmentManager, "SPLASH")
         initView(homeActivityViewModel.getIdPlayer())
         initObservables()
+        initListeners()
+    }
+
+    private fun initListeners() {
+        binding.btnMostrarJugador.setOnClickListener{
+            /*
+            //Funciona por el momento pero no quiero estar recargando la actividad
+            val mIntent = intent
+            finish()
+            startActivity(mIntent)
+
+             */
+            homeActivityViewModel.setIdPlayer(0)
+
+        }
     }
 
     private fun initObservables() {
@@ -52,7 +67,6 @@ class HomeActivity() : AppCompatActivity() {
 
 
     private fun initView(idPlayer: Int) {
-        Toast.makeText(this, "Player id: $idPlayer", Toast.LENGTH_SHORT).show()
         if (idPlayer == 0) {
             showJugadoresList()
         } else {
@@ -71,17 +85,22 @@ class HomeActivity() : AppCompatActivity() {
     }
 
     private fun initTabs(idPlayer: Int) {
+
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(ListarNivelesFragment(idPlayer), "Niveles")
+        Toast.makeText(this, "Going to use ${idPlayer}", Toast.LENGTH_SHORT).show()
+        adapter.addFragment(ListarNivelesFragment(homeActivityViewModel), "Niveles")
         adapter.addFragment(ListarSesionesFragment(idPlayer), "Sesiones")
         adapter.addFragment(MostrarMiInfromacionFragment(idPlayer), "Mi informacion")
         val viewer = binding.viewPager
         viewer.adapter = adapter
+
         val tabs = binding.tabs
         tabs.setupWithViewPager(viewer)
-        tabs.getTabAt(0)!!.setIcon(R.drawable.ic_niveles)
-        tabs.getTabAt(1)!!.setIcon(R.drawable.ic_session)
-        tabs.getTabAt(2)!!.setIcon(R.drawable.ic_miinfo)
+
+        tabs.getTabAt(0)!!.text = "Niveles"
+        tabs.getTabAt(1)!!.text = "Sesiones"
+        tabs.getTabAt(2)!!.text = "Mi información"
+
     }
 }
 
@@ -115,6 +134,7 @@ class HomeActivityViewModel : ViewModel() {
     fun getIdPlayer(): Int {
         return idPlayerSelected.value ?: 0
     }
+
 
 
 }
