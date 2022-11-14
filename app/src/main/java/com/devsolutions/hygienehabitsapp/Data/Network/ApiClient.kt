@@ -28,4 +28,7 @@ interface ApiClient {
 
     @POST("list/tutor/id")
     suspend fun getTutorId(@Body authUserDto: AuthUserDto): Response<TutorIdResponse>
+
+    @GET("list/player/{id}")
+    suspend fun getPlayersById(@Path("id")id: Int): Response<ListPlayersResponse>
 }

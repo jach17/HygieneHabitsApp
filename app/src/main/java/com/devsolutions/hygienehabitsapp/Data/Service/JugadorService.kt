@@ -24,4 +24,11 @@ class JugadorService {
             response
         }
     }
+
+    suspend fun getPlayersById(id: Int): Response<ListPlayersResponse> {
+        return withContext(Dispatchers.IO){
+            val response = api.getPlayersById(id)
+            response
+        }
+    }
 }

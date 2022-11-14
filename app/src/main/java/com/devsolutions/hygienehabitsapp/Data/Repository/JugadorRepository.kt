@@ -18,4 +18,10 @@ class JugadorRepository {
         val list = response.body()?.message?.response
         return list!!
     }
+
+    suspend fun getPlayersById(id: Int): ArrayList<JugadorModel> {
+        val response = api.getPlayersById(id)
+        val player = response.body()?.message?.response
+        return player!!
+    }
 }

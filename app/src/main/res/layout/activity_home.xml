@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,18 +7,45 @@
     tools:context=".UI.App.HomeActivity">
 
 
-    <androidx.appcompat.widget.Toolbar
+    <TextView
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:background="@color/colorNeutro"
+        android:text="Habits Hygiene"
+        android:padding="8dp"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:textAlignment="center"
         android:minHeight="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/app_name"
-        app:titleTextColor="@color/white" />
+        />
+
+    <TextView
+        android:id="@+id/tvPlayerSelected"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvPlayerSelectedName"
+        android:text="Progreso del jugador"
+        android:padding="8dp"
+        android:textSize="20sp"
+        />
+    <TextView
+        android:id="@+id/tvPlayerSelectedName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toEndOf="@id/tvPlayerSelected"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="8dp"
+        android:textSize="20sp"
+        />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -27,21 +53,22 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
         app:itemTextColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        >
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPlayerSelected"
+       >
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextAppearance="@style/custom_tab_style"
             app:tabBackground="@color/colorNeutro"
             app:tabGravity="fill"
             app:tabInlineLabel="true"
             app:tabMode="fixed"
-            app:tabTextColor="@color/colorLigth"
-            >
+            app:tabTextAppearance="@style/custom_tab_style"
+            app:tabTextColor="@color/colorLigth">
+
         </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -52,12 +79,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
-        >
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout">
 
     </androidx.viewpager.widget.ViewPager>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
