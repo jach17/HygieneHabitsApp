@@ -39,5 +39,12 @@ class TutorService {
         }
     }
 
+    suspend fun getTutorById(id:Int): Response<DefaultResponse> {
+        return withContext(Dispatchers.IO){
+            val response = api.getTutorById(id)
+            response
+        }
+    }
+
 
 }

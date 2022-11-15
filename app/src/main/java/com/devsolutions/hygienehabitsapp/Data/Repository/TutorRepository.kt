@@ -39,6 +39,14 @@ class TutorRepository {
         return insertedId
     }
 
+    suspend fun getTutorById(tutorId: Int): TutorModel {
+        val res = api.getTutorById(tutorId)
+        var tutorsList = arrayListOf<TutorModel>()
+        if(res.body()?.result==Component.RESULT_OK){
+            tutorsList = res.body()?.message?.response!!
+        }
+        return tutorsList[0]
+    }
 
 
 }

@@ -14,6 +14,9 @@ interface ApiClient {
     @GET("list/tutors")
     suspend fun getAllTutors(): Response<DefaultResponse>
 
+    @GET("list/tutor/{id}")
+    suspend fun getTutorById(@Path("id") id: Int): Response<DefaultResponse>
+
     @GET("list/reports/player/{id}")
     suspend fun getReportsFromPlayerId(@Path("id") id:Int):Response<ListReportsResponse>
 
@@ -34,4 +37,6 @@ interface ApiClient {
 
     @GET("list/player/{id}")
     suspend fun getPlayersById(@Path("id")id: Int): Response<ListPlayersResponse>
+
+
 }

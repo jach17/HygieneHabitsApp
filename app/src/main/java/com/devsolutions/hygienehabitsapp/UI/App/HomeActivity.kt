@@ -15,6 +15,7 @@ import androidx.lifecycle.viewModelScope
 import com.devsolutions.hygienehabitsapp.Core.Component
 import com.devsolutions.hygienehabitsapp.Core.SharedApp.Companion.prefs
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
+import com.devsolutions.hygienehabitsapp.Data.Model.Entities.TutorModel
 import com.devsolutions.hygienehabitsapp.Domain.JugadorUseCase
 import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.UI.App.Adapter.ViewPagerAdapter
@@ -158,6 +159,7 @@ class HomeActivityViewModel : ViewModel() {
     val playerSelected = MutableLiveData<JugadorModel>()
     val showBtnChangePlayer = MutableLiveData<Boolean>()
 
+
     fun showBtnPlayer(){
         showBtnChangePlayer.postValue(true)
     }
@@ -191,6 +193,8 @@ class HomeActivityViewModel : ViewModel() {
     fun getIdPlayer(): Int {
         return idPlayerSelected.value ?: Component.EMPTY_ID
     }
+
+
 
 
 }
