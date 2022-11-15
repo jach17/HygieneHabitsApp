@@ -1,13 +1,10 @@
 package com.devsolutions.hygienehabitsapp.Data.Repository
 
-import com.devsolutions.hygienehabitsapp.Core.SharedApp.Companion.prefs
+import com.devsolutions.hygienehabitsapp.Core.Component
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AddUserDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AuthUserDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.TutorModel
-import com.devsolutions.hygienehabitsapp.Data.Model.Responses.AddResponse
 import com.devsolutions.hygienehabitsapp.Data.Service.TutorService
-import org.json.JSONObject
-import retrofit2.Response
 
 class TutorRepository {
     private val api = TutorService()
@@ -15,34 +12,33 @@ class TutorRepository {
     suspend fun getAllTutors():List<TutorModel>{
         val res = api.getAllTutors()
         var tutorsList = arrayListOf<TutorModel>()
-        if(res.body()?.result=="1"){
+        if(res.body()?.result==Component.RESULT_OK){
             tutorsList = res.body()?.message?.response!! as ArrayList<TutorModel>
         }
-        println(tutorsList)
         return tutorsList
     }
 
     suspend fun authUser(user: String, password: String): Boolean {
-
-        val body = AuthUserDto(user, password)
-        val res = api.authUser(body)
-        val isRegistred = res.body()?.message?.response?.get(0)
-
-        return isRegistred?.isRegistred!!
-
+        val res = api.authUser(AuthUserDto(user, password))
+        val result = res.body()?.result
+        var isRegister=false
+        if(result==Component.RESULT_OK){
+            isRegister = res.body()?.message?.response?.get(0)!!.isRegistred
+        }
+        return isRegister
     }
 
     suspend fun crearCuenta(username: String, age: String, password: String): Int {
         //AutomatizeTokenGeneration
-        val body = AddUserDto(username, password, age, "123abc")
-        val response = api.addUser(body)
-        println("Response: ${response?.body()}")
-        return response.body()?.message?.response?.get(0)?.insertedId!!
+        val res = api.addUser(AddUserDto(username, password, age, "123abc"))
+        val result = res.body()?.result
+        var insertedId=0
+        if(result==Component.RESULT_OK) {
+            insertedId = res.body()?.message?.response?.get(0)!!.insertedId
+        }
+        return insertedId
     }
 
-    suspend fun getTutorsById(user: String, password: String): Int {
-        return 1
-    }
 
 
 }

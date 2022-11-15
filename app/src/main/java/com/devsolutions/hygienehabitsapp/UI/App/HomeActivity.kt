@@ -7,12 +7,12 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.annotation.MenuRes
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.devsolutions.hygienehabitsapp.Core.Component
 import com.devsolutions.hygienehabitsapp.Core.SharedApp.Companion.prefs
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
 import com.devsolutions.hygienehabitsapp.Domain.JugadorUseCase
@@ -34,18 +34,19 @@ class HomeActivity() : AppCompatActivity() {
     private val splash = SplashFragment()
     private lateinit var selectJugadoresFragment: JugadoresFragment
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityHomeBinding.inflate(layoutInflater)
         homeActivityViewModel = HomeActivityViewModel()
         selectJugadoresFragment = JugadoresFragment(homeActivityViewModel)
-        setContentView(binding.root)
+
         splash.show(supportFragmentManager, "SPLASH")
 
         initView(homeActivityViewModel.getIdPlayer())
         initObservables()
         initListeners()
+        setContentView(binding.root)
     }
 
     private fun initMenu(view: View) {
@@ -55,12 +56,7 @@ class HomeActivity() : AppCompatActivity() {
     private fun showMenu(v: View, @MenuRes menuRes: Int) {
         val popup = PopupMenu(applicationContext, v)
         popup.menuInflater.inflate(menuRes, popup.menu)
-
         popup.setOnMenuItemClickListener(::manageItemClick)
-        popup.setOnDismissListener {
-            // Respond to popup being dismissed.
-        }
-        // Show the popup menu.
         popup.show()
     }
 
@@ -75,13 +71,15 @@ class HomeActivity() : AppCompatActivity() {
             else -> false
         }
     }
+
     private fun navigateToActivity(context: Context, destine: Class<*>) {
         val intent = Intent(context, destine)
         startActivity(intent)
     }
+
     private fun initListeners() {
         binding.btnMostrarJugador.setOnClickListener {
-            homeActivityViewModel.setIdPlayer(0)
+            homeActivityViewModel.setIdPlayer(Component.EMPTY_ID)
         }
         binding.btnShowMenu.setOnClickListener { initMenu(it) }
     }
@@ -89,7 +87,12 @@ class HomeActivity() : AppCompatActivity() {
     private fun initObservables() {
 
         homeActivityViewModel.playerSelected.observe(this, Observer {
-            binding.tvPlayerSelectedName.text = it.namePlayer
+            if(it!=null){
+                binding.tvPlayerSelectedName.text = it.namePlayer
+            }else{
+                //Show dialog info
+                Component.showMessage(applicationContext, "Ocurrió un error al seleccionar el jugador")
+            }
         })
 
         homeActivityViewModel.idPlayerSelected.observe(this, Observer { idPlayerSelected ->
@@ -98,12 +101,12 @@ class HomeActivity() : AppCompatActivity() {
         })
     }
 
-
     private fun initView(idPlayer: Int) {
-        if (idPlayer == 0) {
+
+        if (idPlayer == Component.EMPTY_ID) {
             showJugadoresList()
         } else {
-            showTabs(idPlayer)
+            showTabs()
             homeActivityViewModel.getPlayerById(idPlayer)
         }
     }
@@ -112,26 +115,26 @@ class HomeActivity() : AppCompatActivity() {
         selectJugadoresFragment.show(supportFragmentManager, "SELECT JUGADORES")
     }
 
-    private fun showTabs(idPlayer: Int) {
+    private fun showTabs() {
         selectJugadoresFragment.dismiss()
-        initTabs(idPlayer)
+        initTabs()
     }
 
-    private fun initTabs(idPlayer: Int) {
+    private fun initTabs() {
 
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(ListarNivelesFragment(homeActivityViewModel), "Niveles")
-        adapter.addFragment(ListarSesionesFragment(idPlayer), "Sesiones")
-        adapter.addFragment(MostrarMiInfromacionFragment(idPlayer), "Mi informacion")
+        adapter.addFragment(ListarNivelesFragment(homeActivityViewModel))
+        adapter.addFragment(ListarSesionesFragment(homeActivityViewModel))
+        adapter.addFragment(MostrarMiInfromacionFragment(homeActivityViewModel))
         val viewer = binding.viewPager
         viewer.adapter = adapter
 
         val tabs = binding.tabs
         tabs.setupWithViewPager(viewer)
 
-        tabs.getTabAt(0)!!.text = "Niveles"
-        tabs.getTabAt(1)!!.text = "Sesiones"
-        tabs.getTabAt(2)!!.text = "Mi información"
+        tabs.getTabAt(0)!!.text = applicationContext.getString(R.string.reportes)
+        tabs.getTabAt(1)!!.text = applicationContext.getString(R.string.sessions)
+        tabs.getTabAt(2)!!.text = applicationContext.getString(R.string.miinfo)
 
     }
 }
@@ -144,9 +147,8 @@ class HomeActivityViewModel : ViewModel() {
 
     fun getPlayerById(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            val player = jugadorUseCase.getPlayersById(id)[0]
+            val player = jugadorUseCase.getPlayersById(id)
             playerSelected.postValue(player)
-
         }
     }
 
@@ -164,7 +166,7 @@ class HomeActivityViewModel : ViewModel() {
     }
 
     fun getIdPlayer(): Int {
-        return idPlayerSelected.value ?: 0
+        return idPlayerSelected.value ?: Component.EMPTY_ID
     }
 
 

@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.devsolutions.hygienehabitsapp.R
+import com.devsolutions.hygienehabitsapp.UI.App.HomeActivityViewModel
 
-class MostrarMiInfromacionFragment(val idPlayer: Int) : Fragment() {
+class MostrarMiInfromacionFragment(val idPlayer: HomeActivityViewModel) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

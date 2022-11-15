@@ -13,7 +13,7 @@ class JugadorUseCase {
         return repository.getPlayersFromTutorId(id)
     }
 
-    suspend fun getPlayersById(id: Int): ArrayList<JugadorModel> {
-        return repository.getPlayersById(id)
+    suspend fun getPlayersById(id: Int): JugadorModel? {
+        return repository.getPlayerById(id)
     }
 }

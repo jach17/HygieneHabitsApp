@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.devsolutions.hygienehabitsapp.R
+import com.devsolutions.hygienehabitsapp.UI.App.HomeActivityViewModel
 
-class ListarSesionesFragment(val idPlayer: Int) : Fragment() {
+class ListarSesionesFragment(val idPlayer: HomeActivityViewModel) : Fragment() {
 
 
     override fun onCreateView(

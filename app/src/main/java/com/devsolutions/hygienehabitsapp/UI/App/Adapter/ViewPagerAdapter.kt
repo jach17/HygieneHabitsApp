@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 
 class ViewPagerAdapter(supportFragmentManager: FragmentManager):FragmentPagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     private var mFragmentList = ArrayList<Fragment>()
-    private var mFragmentTitleList = ArrayList<String>()
+
 
     override fun getCount(): Int {
         return mFragmentList.size
@@ -17,12 +17,7 @@ class ViewPagerAdapter(supportFragmentManager: FragmentManager):FragmentPagerAda
         return mFragmentList[position]
     }
 
-    fun addFragment(fragment:Fragment, title:String){
+    fun addFragment(fragment:Fragment){
         mFragmentList.add(fragment)
-        mFragmentTitleList.add(title)
-    }
-    fun cleanFragments(){
-        mFragmentList.clear()
-        mFragmentTitleList.clear()
     }
 }

@@ -20,7 +20,7 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:gravity="start"
-            android:text="@string/niveles"/>
+            android:text="@string/reportes"/>
 
         <TextView
             android:id="@+id/descriptionsName"
