@@ -5,18 +5,62 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import android.window.SplashScreen
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.devsolutions.hygienehabitsapp.Data.Model.Entities.ReporteModel
+import com.devsolutions.hygienehabitsapp.Data.Model.Entities.SessionModel
 import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.UI.App.HomeActivityViewModel
+import com.devsolutions.hygienehabitsapp.UI.App.Reportes.ListarReportesAdapter
+import com.devsolutions.hygienehabitsapp.UI.Splash.SplashFragment
+import com.devsolutions.hygienehabitsapp.databinding.FragmentListarSesionesBinding
 
-class ListarSesionesFragment(val idPlayer: HomeActivityViewModel) : Fragment() {
+class ListarSesionesFragment(val homeActivityViewModel: HomeActivityViewModel) : Fragment() {
 
+
+    private lateinit var _binding: FragmentListarSesionesBinding
+    private val binding get() = _binding
+    private lateinit var listarSessionesViewModel: SessionesViewModel
+    private val splash = SplashFragment()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_listar_sesiones, container, false)
+        _binding = FragmentListarSesionesBinding.inflate(layoutInflater, container, false)
+        listarSessionesViewModel = SessionesViewModel()
+
+
+        splash.show(parentFragmentManager, "SPLASH")
+        listarSessionesViewModel.getSessionsFromPlayerId(homeActivityViewModel.getIdPlayer())
+
+        initObservables()
+
+
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        homeActivityViewModel.showBtnPlayer()
+    }
+
+    private fun initObservables() {
+        listarSessionesViewModel.sessionsList.observe(this.viewLifecycleOwner, Observer {
+            splash.dismiss()
+            if(it.isNotEmpty()){
+                initRecycler(it)
+            }else{
+                Toast.makeText(requireContext(), "Lista de sesiones vacia", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun initRecycler(arrayList: ArrayList<SessionModel>) {
+        binding.rvListarSessions.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.rvListarSessions.adapter = ListarSessionsAdapter(arrayList, R.layout.item_session_card)
     }
 
 }

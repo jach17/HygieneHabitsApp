@@ -3,6 +3,7 @@ package com.devsolutions.hygienehabitsapp.Data.Service
 import com.devsolutions.hygienehabitsapp.Core.RetrofitHelper
 import com.devsolutions.hygienehabitsapp.Data.Model.Responses.ListPlayersResponse
 import com.devsolutions.hygienehabitsapp.Data.Model.Responses.ListReportsResponse
+import com.devsolutions.hygienehabitsapp.Data.Model.Responses.ListSessionsResponse
 import com.devsolutions.hygienehabitsapp.Data.Network.ApiClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -17,6 +18,14 @@ class JugadorService {
             response
         }
     }
+
+    suspend fun getSessionsFromPlayerId(id: Int): Response<ListSessionsResponse> {
+        return withContext(Dispatchers.IO){
+            val response = api.getSessionsFromPlayerId(id)
+            response
+        }
+    }
+
 
     suspend fun getPlayersByTutorId(id:Int):Response<ListPlayersResponse>{
         return withContext(Dispatchers.IO){

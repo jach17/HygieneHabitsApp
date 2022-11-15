@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.App.Niveles.ListarNivelesFragment">
+    tools:context=".UI.App.Reportes.ListarReportesFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,10 +13,10 @@
         android:background="@drawable/background_recycler"
         >
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvListarNiveles"
+            android:id="@+id/rvListarReportes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_nivel_card"
+            tools:listitem="@layout/item_report_card"
             tools:itemCount="5"
             />
     </RelativeLayout>

@@ -20,7 +20,7 @@ import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.UI.App.Adapter.ViewPagerAdapter
 import com.devsolutions.hygienehabitsapp.UI.App.Jugadores.JugadoresFragment
 import com.devsolutions.hygienehabitsapp.UI.App.MiInformacion.MostrarMiInfromacionFragment
-import com.devsolutions.hygienehabitsapp.UI.App.Niveles.ListarNivelesFragment
+import com.devsolutions.hygienehabitsapp.UI.App.Reportes.ListarReportesFragment
 import com.devsolutions.hygienehabitsapp.UI.App.Sesiones.ListarSesionesFragment
 import com.devsolutions.hygienehabitsapp.UI.Login.View.MainActivity
 import com.devsolutions.hygienehabitsapp.UI.Splash.SplashFragment
@@ -86,6 +86,18 @@ class HomeActivity() : AppCompatActivity() {
 
     private fun initObservables() {
 
+        homeActivityViewModel.showBtnChangePlayer.observe(this, Observer{
+            if(it){
+                binding.tvPlayerSelected.apply {
+                    visibility = View.VISIBLE
+                }
+            }else{
+                binding.tvPlayerSelected.apply {
+                    visibility = View.GONE
+                }
+            }
+        })
+
         homeActivityViewModel.playerSelected.observe(this, Observer {
             if(it!=null){
                 binding.tvPlayerSelectedName.text = it.namePlayer
@@ -123,7 +135,7 @@ class HomeActivity() : AppCompatActivity() {
     private fun initTabs() {
 
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(ListarNivelesFragment(homeActivityViewModel))
+        adapter.addFragment(ListarReportesFragment(homeActivityViewModel))
         adapter.addFragment(ListarSesionesFragment(homeActivityViewModel))
         adapter.addFragment(MostrarMiInfromacionFragment(homeActivityViewModel))
         val viewer = binding.viewPager
@@ -144,6 +156,17 @@ class HomeActivityViewModel : ViewModel() {
     val playersByTutorId = MutableLiveData<ArrayList<JugadorModel>>()
     val jugadorUseCase = JugadorUseCase()
     val playerSelected = MutableLiveData<JugadorModel>()
+    val showBtnChangePlayer = MutableLiveData<Boolean>()
+
+    fun showBtnPlayer(){
+        showBtnChangePlayer.postValue(true)
+    }
+
+    fun hideBtnPlayer(){
+        showBtnChangePlayer.postValue(false)
+    }
+
+
 
     fun getPlayerById(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {

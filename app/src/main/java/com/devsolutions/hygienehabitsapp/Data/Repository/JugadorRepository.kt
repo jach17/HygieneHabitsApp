@@ -3,6 +3,7 @@ package com.devsolutions.hygienehabitsapp.Data.Repository
 import com.devsolutions.hygienehabitsapp.Core.Component
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.ReporteModel
+import com.devsolutions.hygienehabitsapp.Data.Model.Entities.SessionModel
 import com.devsolutions.hygienehabitsapp.Data.Service.JugadorService
 
 class JugadorRepository {
@@ -17,6 +18,18 @@ class JugadorRepository {
         }
         return list
     }
+
+
+    suspend fun getSessionsFromPlayerId(id: Int): ArrayList<SessionModel> {
+        val res = api.getSessionsFromPlayerId(id)
+        val result = res.body()?.result
+        var list = arrayListOf<SessionModel>()
+        if(result== Component.RESULT_OK) {
+            list = res.body()?.message?.response!!
+        }
+        return list
+    }
+
 
     suspend fun getPlayersFromTutorId(id:Int): ArrayList<JugadorModel> {
         val res = api.getPlayersByTutorId(id)

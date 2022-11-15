@@ -1,4 +1,4 @@
-package com.devsolutions.hygienehabitsapp.UI.App.Niveles
+package com.devsolutions.hygienehabitsapp.UI.App.Reportes
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.ReporteModel
 import com.devsolutions.hygienehabitsapp.R
 
-class ListarNivelesAdapter(val reportList: ArrayList<ReporteModel>, val layout:Int) : RecyclerView.Adapter<ListarNivelesAdapter.ViewHolder>() {
+class ListarReportesAdapter(val reportList: ArrayList<ReporteModel>, val layout:Int) : RecyclerView.Adapter<ListarReportesAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textLevel = itemView.findViewById<TextView>(R.id.descriptionsName)

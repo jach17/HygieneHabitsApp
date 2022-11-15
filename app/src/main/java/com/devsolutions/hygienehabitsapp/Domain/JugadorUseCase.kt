@@ -2,6 +2,7 @@ package com.devsolutions.hygienehabitsapp.Domain
 
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.ReporteModel
+import com.devsolutions.hygienehabitsapp.Data.Model.Entities.SessionModel
 import com.devsolutions.hygienehabitsapp.Data.Repository.JugadorRepository
 
 class JugadorUseCase {
@@ -15,5 +16,8 @@ class JugadorUseCase {
 
     suspend fun getPlayersById(id: Int): JugadorModel? {
         return repository.getPlayerById(id)
+    }
+    suspend fun getSessionsFromPlayerId(id: Int):ArrayList<SessionModel>{
+        return  repository.getSessionsFromPlayerId(id)
     }
 }

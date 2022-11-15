@@ -1,4 +1,4 @@
-package com.devsolutions.hygienehabitsapp.UI.App.Niveles
+package com.devsolutions.hygienehabitsapp.UI.App.Reportes
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,21 +12,33 @@ import com.devsolutions.hygienehabitsapp.Data.Model.Entities.ReporteModel
 import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.UI.App.HomeActivityViewModel
 import com.devsolutions.hygienehabitsapp.UI.Splash.SplashFragment
-import com.devsolutions.hygienehabitsapp.databinding.FragmentListarNivelesBinding
+import com.devsolutions.hygienehabitsapp.databinding.FragmentListarReportesBinding
 
-class ListarNivelesFragment(val homeViewModel:HomeActivityViewModel) : Fragment() {
-    private lateinit var _binding: FragmentListarNivelesBinding
+class ListarReportesFragment(val homeActivityViewModel:HomeActivityViewModel) : Fragment() {
+    private lateinit var _binding: FragmentListarReportesBinding
     private val binding get() = _binding
-    private lateinit var viewModelNiveles:NivelesViewModel
+    private lateinit var viewModelNiveles:ReportesViewModel
     private val splash = SplashFragment()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentListarNivelesBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentListarReportesBinding.inflate(layoutInflater, container, false)
+        viewModelNiveles = ReportesViewModel()
+
+
         splash.show(parentFragmentManager, "SPLASH")
-        viewModelNiveles = NivelesViewModel()
-        viewModelNiveles.getReportsFromPlayerId(homeViewModel.getIdPlayer())
+        viewModelNiveles.getReportsFromPlayerId(homeActivityViewModel.getIdPlayer())
+
+        initObservables()
+        return binding.root
+    }
+    override fun onResume() {
+        super.onResume()
+        homeActivityViewModel.showBtnPlayer()
+    }
+
+    private fun initObservables() {
         viewModelNiveles.listReports.observe(this.viewLifecycleOwner, Observer {
             splash.dismiss()
             if(it.isNotEmpty()){
@@ -35,14 +47,12 @@ class ListarNivelesFragment(val homeViewModel:HomeActivityViewModel) : Fragment(
                 Toast.makeText(requireContext(), "Lista de reportes vacia", Toast.LENGTH_SHORT).show()
             }
         })
-        return binding.root
     }
 
 
     private fun initRecycler(arrayList: ArrayList<ReporteModel>) {
-        binding.rvListarNiveles.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.rvListarNiveles.adapter = ListarNivelesAdapter(arrayList, R.layout.item_nivel_card)
-
+        binding.rvListarReportes.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.rvListarReportes.adapter = ListarReportesAdapter(arrayList, R.layout.item_report_card)
     }
 
 

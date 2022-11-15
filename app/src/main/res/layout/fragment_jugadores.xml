@@ -29,7 +29,7 @@
             android:layout_below="@+id/tvTitleJugadores"
             android:visibility="gone"
             tools:itemCount="2"
-            tools:listitem="@layout/item_nivel_card" />
+            tools:listitem="@layout/item_report_card" />
 
         <TextView
             android:id="@+id/tvJugadoresEmpty"

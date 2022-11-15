@@ -1,4 +1,4 @@
-package com.devsolutions.hygienehabitsapp.UI.App.Niveles
+package com.devsolutions.hygienehabitsapp.UI.App.Reportes
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +8,7 @@ import com.devsolutions.hygienehabitsapp.Domain.JugadorUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NivelesViewModel:ViewModel() {
+class ReportesViewModel:ViewModel() {
     val jugadorUseCase = JugadorUseCase()
     val listReports = MutableLiveData<ArrayList<ReporteModel>>()
 

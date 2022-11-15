@@ -17,6 +17,9 @@ interface ApiClient {
     @GET("list/reports/player/{id}")
     suspend fun getReportsFromPlayerId(@Path("id") id:Int):Response<ListReportsResponse>
 
+    @GET("list/sesions/player/{id}")
+    suspend fun getSessionsFromPlayerId(@Path("id") id:Int):Response<ListSessionsResponse>
+
     @POST("auth/tutor")
     suspend fun authUser(@Body authUserDto: AuthUserDto): Response<AuthResponse>
 
