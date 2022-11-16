@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_white"
     tools:context=".UI.App.MiInformacion.MostrarMiInfromacionFragment">
 
     <RelativeLayout
@@ -73,7 +72,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/btnCambiarContraseña"
+                android:id="@+id/btnCambiarPasswword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_white"

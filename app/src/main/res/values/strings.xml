@@ -28,4 +28,5 @@
     <string name="logout">Cerrar sesión</string>
     <string name="habits_home">Habits Home</string>
     <string name="session_date">Fecha de la sesión</string>
+    <string name="passwordHint">******</string>
 </resources>

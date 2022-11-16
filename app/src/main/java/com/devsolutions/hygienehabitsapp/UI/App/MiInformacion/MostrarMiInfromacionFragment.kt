@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
-import com.devsolutions.hygienehabitsapp.Core.Component
 import com.devsolutions.hygienehabitsapp.Core.SharedApp.Companion.prefs
 import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.UI.App.HomeActivityViewModel
@@ -29,10 +29,18 @@ class MostrarMiInfromacionFragment(val homeActivityViewModel: HomeActivityViewMo
         splash.show(parentFragmentManager, "SPLASH")
 
         miinfoViewModel.getTutorInfoById(prefs.tutorId!!)
-        initView()
         initObservables()
+        initListeners()
 
         return binding.root
+    }
+
+    private fun initListeners() {
+        binding.btnCambiarPasswword.setOnClickListener{loadFragment(CambiarPasswordFragment(homeActivityViewModel))}
+    }
+
+    private fun loadFragment(fragmentDestiny: DialogFragment) {
+        fragmentDestiny.show(parentFragmentManager, "CHANGE_PASSWORD")
     }
 
     private fun initObservables() {
@@ -43,9 +51,6 @@ class MostrarMiInfromacionFragment(val homeActivityViewModel: HomeActivityViewMo
         })
     }
 
-    private fun initView() {
-
-    }
 
     override fun onResume() {
         super.onResume()
