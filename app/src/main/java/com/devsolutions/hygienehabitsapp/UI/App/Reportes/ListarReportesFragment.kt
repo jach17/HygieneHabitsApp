@@ -52,7 +52,7 @@ class ListarReportesFragment(val homeActivityViewModel:HomeActivityViewModel) : 
 
     private fun initRecycler(arrayList: ArrayList<ReporteModel>) {
         binding.rvListarReportes.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.rvListarReportes.adapter = ListarReportesAdapter(arrayList, R.layout.item_report_card)
+        binding.rvListarReportes.adapter = ListarReportesAdapter(arrayList, R.layout.item_report_card, parentFragmentManager)
     }
 
 
