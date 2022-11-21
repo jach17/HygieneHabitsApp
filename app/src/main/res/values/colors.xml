@@ -11,8 +11,7 @@
 
     <color name="colorDark">#171133</color>
     <color name="colorSemidark">#581E44</color>
-   <!--  <color name="colorNeutro">#C5485A</color> -->
-    <color name="colorNeutro">#453E3E</color>
+    <color name="colorNeutro">#C5485A</color>
     <color name="colorSemiligth">#D4BE99</color>
     <color name="colorLigth">#E0FFCC</color>
 
