@@ -53,22 +53,32 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginTop="16dp"
                 android:orientation="vertical">
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:text="Progreso del juego" />
                 <com.echo.holographlibrary.PieGraph
                     android:id="@+id/grafica"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:src="@drawable/logo_homehabits"
                     android:contentDescription="logo" />
-
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/progressPc"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:text="Progreso del juego" />
+                    android:textStyle="bold|italic"
+                    tools:text="68%" />
+
 
             </LinearLayout>
 
@@ -81,67 +91,75 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Maxima puntuación del nivel"
                     android:textColor="@color/white"
+                    android:textAlignment="textEnd"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="5.0/5.0"
                     android:textColor="@color/white"
+                    android:textAlignment="textEnd"
                     android:textSize="16sp"
                     android:textStyle="italic" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Puntuación conseguida en la partida"
                     android:textColor="@color/white"
+                    android:textAlignment="textEnd"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="4.0/5.0"
                     android:textColor="@color/white"
+                    android:textAlignment="textEnd"
                     android:textSize="16sp"
                     android:textStyle="italic" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tiempo jugado"
                     android:textColor="@color/white"
+                    android:textAlignment="textEnd"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="2 hrs"
                     android:textColor="@color/white"
+                    android:textAlignment="textEnd"
                     android:textSize="16sp"
                     android:textStyle="italic" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Ultimo juego"
                     android:textColor="@color/white"
+                    android:textAlignment="textEnd"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="21 de octubre de 2022"
                     android:textColor="@color/white"
                     android:textSize="16sp"
+                    android:textAlignment="textEnd"
                     android:textStyle="italic" />
 
             </LinearLayout>

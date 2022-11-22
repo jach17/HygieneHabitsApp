@@ -23,7 +23,7 @@ class JugadorRepository {
          */
         val arrayList = arrayListOf<ReporteModel>()
         arrayList.add(
-            ReporteModel("1", "ASDF", "DATEsTART", "DateEnd", "12","tituloLevel")
+            ReporteModel("1", "ASDF", "DATEsTART", "DateEnd", "3","tituloLevel")
         )
 
         return arrayList
