@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import com.devsolutions.hygienehabitsapp.Core.Component
 import com.devsolutions.hygienehabitsapp.Core.SharedApp.Companion.prefs
 import com.devsolutions.hygienehabitsapp.UI.App.HomeActivity
 import com.devsolutions.hygienehabitsapp.UI.Login.ViewModel.MainViewModel
@@ -37,7 +38,11 @@ class MainActivity : AppCompatActivity() {
             if(it){
                 prefs.isLogged = true
                 navigateToActivity(this, HomeActivity::class.java)
+            }else{
+                Component.showMessage(applicationContext, "User not registered")
             }
+            /* FOR LOCAL WORKING*/
+            navigateToActivity(this, HomeActivity::class.java)
         })
     }
 

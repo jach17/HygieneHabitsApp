@@ -20,7 +20,7 @@ class TutorRepository {
 
     suspend fun authUser(user: String, password: String): Boolean {
         val res = api.authUser(AuthUserDto(user, password))
-        val result = res.body()?.result
+        val result = res?.body()?.result
         var isRegister=false
         if(result==Component.RESULT_OK){
             isRegister = res.body()?.message?.response?.get(0)!!.isRegistred

@@ -23,12 +23,22 @@ class TutorService {
         }
     }
 
-    suspend fun authUser(body:AuthUserDto): Response<AuthResponse> {
+    suspend fun authUser(body:AuthUserDto): Response<AuthResponse>? {
         return withContext(Dispatchers.IO){
-            val response = api.authUser(body)
-            val id = api.getTutorId(body).body()?.message?.response
-            prefs.tutorId=id?.get(0)?.idTutor
-            response
+            var response:Response<AuthResponse>?
+            try{
+                response = api.authUser(body)
+                val id = api.getTutorId(body).body()?.message?.response
+                prefs.tutorId=id?.get(0)?.idTutor
+                response
+            }catch(e:Exception){
+                response= null
+                //For local working
+                prefs.tutorId=1
+                response
+            }
+
+
         }
     }
     suspend fun addUser(body: AddUserDto): Response<AddResponse> {

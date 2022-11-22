@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
+import com.devsolutions.hygienehabitsapp.Core.Component
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.ReporteModel
 import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.UI.App.HomeActivityViewModel
@@ -32,8 +33,18 @@ class DetailReportFragment(val reporteModel: ReporteModel) : DialogFragment() {
         _binding = FragmentDetailReportBinding.inflate(layoutInflater, container, false)
 
         initView()
+        initListeners()
 
         return binding.root
+    }
+
+    private fun initListeners() {
+        binding.btnHideDetails.setOnClickListener { hideDetails() }
+    }
+
+    private fun hideDetails() {
+        Component.showMessage(requireContext(), "Done")
+        this.dismiss()
     }
 
     fun graficar(list:ArrayList<String>){
