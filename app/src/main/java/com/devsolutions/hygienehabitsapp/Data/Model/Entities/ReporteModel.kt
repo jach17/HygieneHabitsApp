@@ -8,5 +8,7 @@ data class ReporteModel(
     @SerializedName("dateStartLevel") val dateStartLevel: String,
     @SerializedName("dateEndLevel") val dateEndLevel: String ,
     @SerializedName("currentScoreLevel") val currentScoreLevel: String ,
-    @SerializedName("descriptionTitle") val descriptionTitle: String
+    @SerializedName("descriptionTitle") val descriptionTitle: String,
+    //Aun no lo agrego a la respuesta del backend
+    @SerializedName("maxScorePossible") val maxScorePossible:String
 )

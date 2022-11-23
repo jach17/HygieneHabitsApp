@@ -23,6 +23,7 @@ class ListarSessionsAdapter(val sessionsList: ArrayList<SessionModel>,val layout
             tvPlayedTime.setText(sessionModel.dateEnd)
             btnShowMore.setOnClickListener{
                 Component.showMessage(it.context, "Clicked on session: ${sessionModel.idSesion}")
+                //Show fragment for list reports by session
             }
         }
 

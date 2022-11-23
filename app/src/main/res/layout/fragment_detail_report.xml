@@ -100,9 +100,10 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tvMaxScore"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="5.0/5.0"
+                    tools:text="5.0/5.0"
                     android:textColor="@color/white"
                     android:textAlignment="textEnd"
                     android:textSize="16sp"
@@ -118,9 +119,10 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tvCurrentScore"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="4.0/5.0"
+                    tools:text="4.0/5.0"
                     android:textColor="@color/white"
                     android:textAlignment="textEnd"
                     android:textSize="16sp"
@@ -136,6 +138,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tvPlayingTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="2 hrs"
@@ -154,9 +157,10 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tvSessionDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="21 de octubre de 2022"
+                    tools:text="21 de octubre de 2022"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textAlignment="textEnd"

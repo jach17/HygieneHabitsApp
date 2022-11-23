@@ -1,6 +1,6 @@
 package com.devsolutions.hygienehabitsapp.UI.App.DetallesReportes
 
-import android.graphics.Color
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,14 +8,14 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import com.devsolutions.hygienehabitsapp.Core.Component
+import com.devsolutions.hygienehabitsapp.Data.Model.Dto.ReportInfoDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.ReporteModel
 import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.databinding.FragmentDetailReportBinding
 import com.echo.holographlibrary.PieGraph
 import com.echo.holographlibrary.PieSlice
-import kotlin.math.roundToInt
 
-class DetailReportFragment(val reporteModel: ReporteModel) : DialogFragment() {
+class DetailReportFragment(val reportInfo: ReportInfoDto) : DialogFragment() {
 
     private lateinit var _binding: FragmentDetailReportBinding
     private val binding get() = _binding
@@ -59,24 +59,26 @@ class DetailReportFragment(val reporteModel: ReporteModel) : DialogFragment() {
     }
 
 
-
+    @SuppressLint("SetTextI18n")
     private fun initView() {
 
+
+        binding.tvLevelNumber.text = reportInfo.nameLevelPlayed
+        binding.tvCurrentScore.text = reportInfo.currentScore
+        binding.tvMaxScore.text= reportInfo.maxScorePosible
+        binding.tvPlayingTime.text = reportInfo.playingTime
+        binding.tvSessionDate.text = reportInfo.sessionDate
+
+        binding.progressPc.text = "${reportInfo.progress} %"
+
         pieGrafica = binding.grafica
-
-
-        var progr = 0f
-        progr = calculateProgr(reporteModel)
-        val total = 100f - progr
-        binding.progressPc.text = "$progr %"
-        graficar(progr, total)
+        graficar(reportInfo.progress, getTotal(reportInfo.progress))
     }
 
-    private fun calculateProgr(reporteModel: ReporteModel): Float {
-        val total = 5f // MAXIMA PUNTUACION
-        val current = reporteModel.currentScoreLevel.toFloat() //CURRENT SCORE
-        return (current * 100f) / total
+    private fun getTotal(progr: Float): Float {
+        return 100f - progr
     }
+
 
 
     override fun onResume() {
