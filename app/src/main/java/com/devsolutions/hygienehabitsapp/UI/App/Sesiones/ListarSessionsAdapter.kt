@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.devsolutions.hygienehabitsapp.Core.Component
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.SessionModel
@@ -24,6 +25,7 @@ class ListarSessionsAdapter(val sessionsList: ArrayList<SessionModel>,val layout
             btnShowMore.setOnClickListener{
                 Component.showMessage(it.context, "Clicked on session: ${sessionModel.idSesion}")
                 //Show fragment for list reports by session
+
             }
         }
 
