@@ -24,7 +24,31 @@ class JugadorRepository {
         if(result== Component.RESULT_OK) {
             list = res.body()?.message?.response!!
         }
-        return list
+
+        val listReportDto = arrayListOf<ReportInfoDto>()
+
+
+        for(report in list){
+
+
+            val playingTime = getPlayingTime(report.dateStartLevel, report.dateEndLevel)
+            val progress = getProgress(report.currentScoreLevel, report.maxScorePossible)
+                listReportDto.add(
+                ReportInfoDto(
+                report.namePlayer,
+                report.descriptionTitle,
+                report.dateStartLevel,
+                    playingTime,
+                    report.currentScoreLevel,
+                    report.maxScorePossible,
+                    progress
+                )
+            )
+        }
+
+        return listReportDto
+
+
         /*
         val arrayList = arrayListOf<ReportInfoDto>()
         arrayList.add(
@@ -56,6 +80,14 @@ class JugadorRepository {
          */
 
 
+    }
+
+    private fun getProgress(currentScoreLevel: String, maxScorePossible: String): Float {
+        return 3.5f
+    }
+
+    private fun getPlayingTime(dateStartLevel: String, dateEndLevel: String): String {
+        return "3 Hrs"
     }
 
 

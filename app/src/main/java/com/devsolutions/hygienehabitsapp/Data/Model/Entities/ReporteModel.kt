@@ -10,5 +10,5 @@ data class ReporteModel(
     @SerializedName("currentScoreLevel") val currentScoreLevel: String ,
     @SerializedName("descriptionTitle") val descriptionTitle: String,
     //Aun no lo agrego a la respuesta del backend
-    @SerializedName("maxScorePossible") val maxScorePossible:String
+    @SerializedName("tutorFeedback") val maxScorePossible:String
 )
