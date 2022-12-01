@@ -18,8 +18,8 @@ class TutorUseCase {
     }
 
     suspend fun getTutorById(tutorId: Int): TutorModel {
-        //return repository.getTutorById(tutorId)
-        return TutorModel("1", "Tutor","123", "34", "123abc")
+        return repository.getTutorById(tutorId)
+        //return TutorModel("1", "Tutor","123", "34", "123abc")
     }
 
 

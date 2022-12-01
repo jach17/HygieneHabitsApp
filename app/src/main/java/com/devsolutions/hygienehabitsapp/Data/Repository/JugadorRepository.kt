@@ -16,7 +16,7 @@ class JugadorRepository {
     private val api = JugadorService()
 
     suspend fun getReportsFromPlayerId(id: Int): ArrayList<ReportInfoDto> {
-        /*
+
         val res = api.getReportsFromPlayerId(id)
 
         val result = res.body()?.result
@@ -25,8 +25,7 @@ class JugadorRepository {
             list = res.body()?.message?.response!!
         }
         return list
-
-         */
+        /*
         val arrayList = arrayListOf<ReportInfoDto>()
         arrayList.add(
             ReportInfoDto(
@@ -54,12 +53,14 @@ class JugadorRepository {
 
         return arrayList
 
+         */
+
 
     }
 
 
     suspend fun getSessionsFromPlayerId(id: Int): ArrayList<SessionModel> {
-        /*val res = api.getSessionsFromPlayerId(id)
+        val res = api.getSessionsFromPlayerId(id)
         val result = res.body()?.result
         var list = arrayListOf<SessionModel>()
         if(result== Component.RESULT_OK) {
@@ -67,17 +68,19 @@ class JugadorRepository {
         }
         return list
 
-         */
+
+        /*
         val arrayList = arrayListOf<SessionModel>()
         arrayList.add(SessionModel(1,"dateStart", "dateEnd", 1))
 
         return arrayList
+        */
 
     }
 
 
     suspend fun getPlayersFromTutorId(id:Int): ArrayList<JugadorModel> {
-        /*
+
         val res = api.getPlayersByTutorId(id)
         val result = res.body()?.result
         var list = arrayListOf<JugadorModel>()
@@ -86,15 +89,16 @@ class JugadorRepository {
         }
         return list
 
-         */
-        /*For local working*/
+        /*For local working
         val arrayList = arrayListOf<JugadorModel>()
         arrayList.add(JugadorModel(1,"Test1","Test1", "Test1", 1,"Test1", 1,2,3,4,5 ))
         return arrayList
+
+         */
     }
 
     suspend fun getPlayerById(id: Int): JugadorModel? {
-        /*val res = api.getPlayersById(id)
+        val res = api.getPlayersById(id)
         val result = res.body()?.result
         var player:JugadorModel?=null
         if(result== Component.RESULT_OK) {
@@ -103,8 +107,8 @@ class JugadorRepository {
 
         return player
 
-         */
-        return JugadorModel(1,"Test1","Test1", "Test1", 1,"Test1", 1,2,3,4,5 )
+
+       // return JugadorModel(1,"Test1","Test1", "Test1", 1,"Test1", 1,2,3,4,5 )
     }
 
 
