@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:padding="16dp"
         android:background="@drawable/background_neutro"
@@ -18,6 +18,20 @@
             android:layout_height="match_parent"
             tools:listitem="@layout/item_report_card"
             tools:itemCount="5"
+
+            android:visibility="gone"
+            />
+        <TextView
+            android:id="@+id/tvEmptyListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lista de reportes vacía"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"
+
+            android:visibility="gone"
             />
     </RelativeLayout>
 

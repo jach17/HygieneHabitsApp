@@ -10,9 +10,4 @@ class JugadoresViewModel:ViewModel() {
 
     private val jugadorUseCase = JugadorUseCase()
 
-    fun getReportsFromPlayerId(id:Int){
-        viewModelScope.launch(Dispatchers.IO) {
-            jugadorUseCase.getReportsFromPlayerId(id)
-        }
-    }
 }

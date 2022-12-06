@@ -14,10 +14,10 @@ import com.devsolutions.hygienehabitsapp.UI.App.HomeActivityViewModel
 import com.devsolutions.hygienehabitsapp.UI.Splash.SplashFragment
 import com.devsolutions.hygienehabitsapp.databinding.FragmentListarReportesBinding
 
-class ListarReportesFragment(val homeActivityViewModel:HomeActivityViewModel) : Fragment() {
+class ListarReportesFragment(val homeActivityViewModel: HomeActivityViewModel) : Fragment() {
     private lateinit var _binding: FragmentListarReportesBinding
     private val binding get() = _binding
-    private lateinit var viewModelNiveles:ReportesViewModel
+    private lateinit var viewModelNiveles: ReportesViewModel
     private val splash = SplashFragment()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +33,7 @@ class ListarReportesFragment(val homeActivityViewModel:HomeActivityViewModel) : 
         initObservables()
         return binding.root
     }
+
     override fun onResume() {
         super.onResume()
         homeActivityViewModel.showBtnPlayer()
@@ -41,18 +42,36 @@ class ListarReportesFragment(val homeActivityViewModel:HomeActivityViewModel) : 
     private fun initObservables() {
         viewModelNiveles.listReports.observe(this.viewLifecycleOwner, Observer {
             splash.dismiss()
-            if(it.isNotEmpty()){
+            if (it.isNotEmpty()) {
                 initRecycler(it)
-            }else{
-                Toast.makeText(requireContext(), "Lista de reportes vacia", Toast.LENGTH_SHORT).show()
+            } else {
+                initEmptyView()
             }
         })
     }
 
+    private fun initEmptyView() {
+        binding.rvListarReportes.apply {
+            visibility = View.GONE
+        }
+        binding.tvEmptyListView.apply {
+            visibility = View.VISIBLE
+        }
+    }
+
 
     private fun initRecycler(reportsDto: ArrayList<FullReportDto>) {
-        binding.rvListarReportes.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.rvListarReportes.adapter = ListarReportesAdapter(reportsDto, R.layout.item_report_card, parentFragmentManager)
+
+        binding.tvEmptyListView.apply {
+            visibility = View.GONE
+        }
+        binding.rvListarReportes.apply {
+            visibility = View.VISIBLE
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            adapter =
+                ListarReportesAdapter(reportsDto, R.layout.item_report_card, parentFragmentManager)
+        }
     }
 
 

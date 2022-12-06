@@ -14,34 +14,35 @@ class JugadorRepository {
     private val api = JugadorService()
 
     suspend fun getReportsFromPlayerId(id: Int): ArrayList<FullReportDto> {
-
-        val res = api.getFullReportsFromPlayerId(id)
-
-        val result = res.body()?.result
-        var list = arrayListOf<FullReportModel>()
-        if (result == Component.RESULT_OK) {
-            list = res.body()?.message?.response!!
-        }
-
         val listReportDto = arrayListOf<FullReportDto>()
 
-
-        for (report in list) {
-            val playingTime = getPlayingTime(report.dateStartLevel, report.dateEndLevel)
-            val progress = getProgress(report.currentScoreLevel, report.maxScore)
-            listReportDto.add(
-                FullReportDto(
-                    report.idPlayer,
-                    report.descriptionTitle,
-                    report.namePlayer,
-                    playingTime,
-                    report.currentScoreLevel,
-                    report.maxScore,
-                    progress,
-                    report.dateStart,
-                    report.tutorFeedback
+        try {
+            val res = api.getFullReportsFromPlayerId(id)
+            val result = res.body()?.result
+            var list = arrayListOf<FullReportModel>()
+            if (result == Component.RESULT_OK) {
+                list = res.body()?.message?.response!!
+            }
+            for (report in list) {
+                val playingTime = getPlayingTime(report.dateStartLevel, report.dateEndLevel)
+                val progress = getProgress(report.currentScoreLevel, report.maxScore)
+                listReportDto.add(
+                    FullReportDto(
+                        report.idPlayer,
+                        report.descriptionTitle,
+                        report.namePlayer,
+                        playingTime,
+                        report.currentScoreLevel,
+                        report.maxScore,
+                        progress,
+                        report.dateStart,
+                        report.tutorFeedback
+                    )
                 )
-            )
+            }
+
+        } catch (e: Exception) {
+            System.out.println("Error por aca jeje: ${e.message}")
         }
         return listReportDto
     }
