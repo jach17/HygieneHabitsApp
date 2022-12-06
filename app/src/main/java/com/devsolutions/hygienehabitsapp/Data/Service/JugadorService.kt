@@ -1,6 +1,7 @@
 package com.devsolutions.hygienehabitsapp.Data.Service
 
 import com.devsolutions.hygienehabitsapp.Core.RetrofitHelper
+import com.devsolutions.hygienehabitsapp.Data.Model.Responses.ListFullReportsResponse
 import com.devsolutions.hygienehabitsapp.Data.Model.Responses.ListPlayersResponse
 import com.devsolutions.hygienehabitsapp.Data.Model.Responses.ListReportsResponse
 import com.devsolutions.hygienehabitsapp.Data.Model.Responses.ListSessionsResponse
@@ -26,6 +27,12 @@ class JugadorService {
         }
     }
 
+    suspend fun getFullReportsFromPlayerId(id:Int):Response<ListFullReportsResponse>{
+        return withContext(Dispatchers.IO){
+            val response = api.getFullReportsFromPlayerId(id)
+            response
+        }
+    }
 
     suspend fun getPlayersByTutorId(id:Int):Response<ListPlayersResponse>{
         return withContext(Dispatchers.IO){

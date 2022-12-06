@@ -7,13 +7,11 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.devsolutions.hygienehabitsapp.Data.Model.Dto.ReportInfoDto
-import com.devsolutions.hygienehabitsapp.Data.Model.Entities.ReporteModel
+import com.devsolutions.hygienehabitsapp.Data.Model.Dto.FullReportDto
 import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.UI.App.DetallesReportes.DetailReportFragment
-import com.devsolutions.hygienehabitsapp.UI.App.HomeActivityViewModel
 
-class ListarReportesAdapter(val reportList: ArrayList<ReportInfoDto>, val layout:Int, val fragmentManager:FragmentManager) : RecyclerView.Adapter<ListarReportesAdapter.ViewHolder>() {
+class ListarReportesAdapter(val reportList: ArrayList<FullReportDto>, val layout:Int, val fragmentManager:FragmentManager) : RecyclerView.Adapter<ListarReportesAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textLevel = itemView.findViewById<TextView>(R.id.descriptionsName)
@@ -22,10 +20,10 @@ class ListarReportesAdapter(val reportList: ArrayList<ReportInfoDto>, val layout
         val textPlayingTime = itemView.findViewById<TextView>(R.id.nivelPlayingTime)
         val btnDetails = itemView.findViewById<CardView>(R.id.btnDetailReport)
 
-        fun bind(reporteModel: ReportInfoDto, fragmentManager:FragmentManager) {
-            textLevel.text = reporteModel.nameLevelPlayed
+        fun bind(reporteModel: FullReportDto, fragmentManager:FragmentManager) {
+            textLevel.text = reporteModel.descriptionTitle
             textProgress.text = reporteModel.progress.toString()
-            textMaxScore.text = reporteModel.maxScorePosible
+            textMaxScore.text = reporteModel.maxScore
             textPlayingTime.text = reporteModel.playingTime
             btnDetails.setOnClickListener {
                 val detailsReports = DetailReportFragment(reporteModel)

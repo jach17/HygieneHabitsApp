@@ -1,14 +1,11 @@
 package com.devsolutions.hygienehabitsapp.UI.App.Reportes
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.devsolutions.hygienehabitsapp.Core.Component
-import com.devsolutions.hygienehabitsapp.Data.Model.Dto.ReportInfoDto
-import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.UI.App.HomeActivityViewModel
 import com.devsolutions.hygienehabitsapp.databinding.FragmentListarReportesBySessionDialogBinding
 

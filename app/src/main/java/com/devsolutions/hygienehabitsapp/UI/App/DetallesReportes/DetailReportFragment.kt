@@ -8,14 +8,13 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import com.devsolutions.hygienehabitsapp.Core.Component
-import com.devsolutions.hygienehabitsapp.Data.Model.Dto.ReportInfoDto
-import com.devsolutions.hygienehabitsapp.Data.Model.Entities.ReporteModel
+import com.devsolutions.hygienehabitsapp.Data.Model.Dto.FullReportDto
 import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.databinding.FragmentDetailReportBinding
 import com.echo.holographlibrary.PieGraph
 import com.echo.holographlibrary.PieSlice
 
-class DetailReportFragment(val reportInfo: ReportInfoDto) : DialogFragment() {
+class DetailReportFragment(val reportInfo: FullReportDto) : DialogFragment() {
 
     private lateinit var _binding: FragmentDetailReportBinding
     private val binding get() = _binding
@@ -61,13 +60,11 @@ class DetailReportFragment(val reportInfo: ReportInfoDto) : DialogFragment() {
 
     @SuppressLint("SetTextI18n")
     private fun initView() {
-
-
-        binding.tvLevelNumber.text = reportInfo.nameLevelPlayed
-        binding.tvCurrentScore.text = reportInfo.currentScore
-        binding.tvMaxScore.text= reportInfo.maxScorePosible
+        binding.tvLevelNumber.text = reportInfo.descriptionTitle
+        binding.tvCurrentScore.text = reportInfo.currentScoreLevel
+        binding.tvMaxScore.text= reportInfo.maxScore
         binding.tvPlayingTime.text = reportInfo.playingTime
-        binding.tvSessionDate.text = reportInfo.sessionDate
+        binding.tvSessionDate.text = reportInfo.dateStart
 
         binding.progressPc.text = "${reportInfo.progress} %"
 

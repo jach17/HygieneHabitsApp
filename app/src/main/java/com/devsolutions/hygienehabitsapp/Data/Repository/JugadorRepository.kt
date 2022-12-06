@@ -1,93 +1,57 @@
 package com.devsolutions.hygienehabitsapp.Data.Repository
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.devsolutions.hygienehabitsapp.Core.Component
-import com.devsolutions.hygienehabitsapp.Data.Model.Dto.ReportInfoDto
+import com.devsolutions.hygienehabitsapp.Data.Model.Dto.FullReportDto
+import com.devsolutions.hygienehabitsapp.Data.Model.Entities.FullReportModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.ReporteModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.SessionModel
 import com.devsolutions.hygienehabitsapp.Data.Service.JugadorService
-import java.time.LocalDate
 import java.util.*
 import kotlin.collections.ArrayList
 
 class JugadorRepository {
     private val api = JugadorService()
 
-    suspend fun getReportsFromPlayerId(id: Int): ArrayList<ReportInfoDto> {
+    suspend fun getReportsFromPlayerId(id: Int): ArrayList<FullReportDto> {
 
-        val res = api.getReportsFromPlayerId(id)
+        val res = api.getFullReportsFromPlayerId(id)
 
         val result = res.body()?.result
-        var list = arrayListOf<ReporteModel>()
-        if(result== Component.RESULT_OK) {
+        var list = arrayListOf<FullReportModel>()
+        if (result == Component.RESULT_OK) {
             list = res.body()?.message?.response!!
         }
 
-        val listReportDto = arrayListOf<ReportInfoDto>()
+        val listReportDto = arrayListOf<FullReportDto>()
 
 
-        for(report in list){
-
-
+        for (report in list) {
             val playingTime = getPlayingTime(report.dateStartLevel, report.dateEndLevel)
-            val progress = getProgress(report.currentScoreLevel, report.maxScorePossible)
-                listReportDto.add(
-                ReportInfoDto(
-                report.namePlayer,
-                report.descriptionTitle,
-                report.dateStartLevel,
+            val progress = getProgress(report.currentScoreLevel, report.maxScore)
+            listReportDto.add(
+                FullReportDto(
+                    report.idPlayer,
+                    report.descriptionTitle,
+                    report.namePlayer,
                     playingTime,
                     report.currentScoreLevel,
-                    report.maxScorePossible,
-                    progress
+                    report.maxScore,
+                    progress,
+                    report.dateStart,
+                    report.tutorFeedback
                 )
             )
         }
-
         return listReportDto
-
-
-        /*
-        val arrayList = arrayListOf<ReportInfoDto>()
-        arrayList.add(
-            ReportInfoDto(
-                "jony",
-                "Limpiar la habitación",
-                "11-Diciembre-2022",
-                "1 hrs",
-                "10",
-                "15",
-                75f,
-            )
-        )
-
-        arrayList.add(
-            ReportInfoDto(
-                "jony",
-                "Lavarse los dientes",
-                "11-Diciembre-2022",
-                "2 hrs",
-                "15",
-                "15",
-                99f,
-            )
-        )
-
-        return arrayList
-
-         */
-
-
     }
 
     private fun getProgress(currentScoreLevel: String, maxScorePossible: String): Float {
-        return 3.5f
+        return (currentScoreLevel.toFloat() * 100f) / maxScorePossible.toFloat()
     }
 
     private fun getPlayingTime(dateStartLevel: String, dateEndLevel: String): String {
-        return "3 Hrs"
+        return "3 Hrs hd"
     }
 
 
@@ -95,7 +59,7 @@ class JugadorRepository {
         val res = api.getSessionsFromPlayerId(id)
         val result = res.body()?.result
         var list = arrayListOf<SessionModel>()
-        if(result== Component.RESULT_OK) {
+        if (result == Component.RESULT_OK) {
             list = res.body()?.message?.response!!
         }
         return list
@@ -111,12 +75,12 @@ class JugadorRepository {
     }
 
 
-    suspend fun getPlayersFromTutorId(id:Int): ArrayList<JugadorModel> {
+    suspend fun getPlayersFromTutorId(id: Int): ArrayList<JugadorModel> {
 
         val res = api.getPlayersByTutorId(id)
         val result = res.body()?.result
         var list = arrayListOf<JugadorModel>()
-        if(result== Component.RESULT_OK) {
+        if (result == Component.RESULT_OK) {
             list = res.body()?.message?.response!!
         }
         return list
@@ -132,18 +96,18 @@ class JugadorRepository {
     suspend fun getPlayerById(id: Int): JugadorModel? {
         val res = api.getPlayersById(id)
         val result = res.body()?.result
-        var player:JugadorModel?=null
-        if(result== Component.RESULT_OK) {
+        var player: JugadorModel? = null
+        if (result == Component.RESULT_OK) {
             player = res.body()?.message?.response!![0]
         }
 
         return player
 
 
-       // return JugadorModel(1,"Test1","Test1", "Test1", 1,"Test1", 1,2,3,4,5 )
+        // return JugadorModel(1,"Test1","Test1", "Test1", 1,"Test1", 1,2,3,4,5 )
     }
 
-
+/*
     suspend fun getFullReportsFromSessionId(sessionId: Int): ArrayList<ReportInfoDto> {
         /*Call to service */
 
@@ -157,15 +121,26 @@ class JugadorRepository {
         }
         */
         val listOfReportsResponse = arrayListOf<ReporteModel>()
-        listOfReportsResponse.add(ReporteModel("1", "JonathanPlayer", "11-05-2022 15:20:22", "11-05-2022 15:25:22", "3","Nivel 1", "15"))
+        listOfReportsResponse.add(
+            ReporteModel(
+                "1",
+                "JonathanPlayer",
+                "11-05-2022 15:20:22",
+                "11-05-2022 15:25:22",
+                "3",
+                "Nivel 1",
+                "15"
+            )
+        )
 
         val listOfFullReports = arrayListOf<ReportInfoDto>()
 
-        for(report in listOfReportsResponse){
+        for (report in listOfReportsResponse) {
             val sessionDate = report.dateStartLevel.split(" ")
             //For getting playing time get difference between dateStart and dateEnd
             val playingTime = "3 horas"
-            val progressLevel = (report.currentScoreLevel.toFloat() * 100f)/report.maxScorePossible.toFloat()
+            val progressLevel =
+                (report.currentScoreLevel.toFloat() * 100f) / report.maxScorePossible.toFloat()
             val reportDto = ReportInfoDto(
                 report.namePlayer,
                 report.descriptionTitle,
@@ -181,4 +156,6 @@ class JugadorRepository {
         return listOfFullReports
 
     }
+
+ */
 }

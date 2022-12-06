@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.devsolutions.hygienehabitsapp.Data.Model.Dto.ReportInfoDto
-import com.devsolutions.hygienehabitsapp.Data.Model.Entities.ReporteModel
+import com.devsolutions.hygienehabitsapp.Data.Model.Dto.FullReportDto
 import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.UI.App.HomeActivityViewModel
 import com.devsolutions.hygienehabitsapp.UI.Splash.SplashFragment
@@ -51,7 +50,7 @@ class ListarReportesFragment(val homeActivityViewModel:HomeActivityViewModel) : 
     }
 
 
-    private fun initRecycler(reportsDto: ArrayList<ReportInfoDto>) {
+    private fun initRecycler(reportsDto: ArrayList<FullReportDto>) {
         binding.rvListarReportes.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvListarReportes.adapter = ListarReportesAdapter(reportsDto, R.layout.item_report_card, parentFragmentManager)
     }
