@@ -1,5 +1,6 @@
 package com.devsolutions.hygienehabitsapp.Data.Network
 
+import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AddFeedbackDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AddUserDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AuthUserDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.InsertedModel
@@ -25,6 +26,9 @@ interface ApiClient {
 
     @GET("list/sesions/player/{id}")
     suspend fun getSessionsFromPlayerId(@Path("id") id:Int):Response<ListSessionsResponse>
+
+    @POST("add/feedback/report/{id}")
+    suspend fun addTutorFeedbackOnReport(@Path("id") id:Int, @Body addFeedbackDto: AddFeedbackDto):Response <AddFeedbackResponse>
 
     @POST("auth/tutor")
     suspend fun authUser(@Body authUserDto: AuthUserDto): Response<AuthResponse>

@@ -13,6 +13,9 @@ class JugadorUseCase {
         return arrayListOf<FullReportDto>()
     }
 
+    suspend fun addTutorFeedbackOnReport(reportId:Int, feedback:String): Int {
+        return repository.addTutorFeedbackOnReport(reportId, feedback)
+    }
     suspend fun getReportsFromPlayerId(id:Int): ArrayList<FullReportDto> {
         return repository.getReportsFromPlayerId(id)
     }

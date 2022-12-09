@@ -1,10 +1,9 @@
 package com.devsolutions.hygienehabitsapp.Data.Service
 
 import com.devsolutions.hygienehabitsapp.Core.RetrofitHelper
-import com.devsolutions.hygienehabitsapp.Data.Model.Responses.ListFullReportsResponse
-import com.devsolutions.hygienehabitsapp.Data.Model.Responses.ListPlayersResponse
-import com.devsolutions.hygienehabitsapp.Data.Model.Responses.ListReportsResponse
-import com.devsolutions.hygienehabitsapp.Data.Model.Responses.ListSessionsResponse
+import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AddFeedbackDto
+import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AddUserDto
+import com.devsolutions.hygienehabitsapp.Data.Model.Responses.*
 import com.devsolutions.hygienehabitsapp.Data.Network.ApiClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -30,6 +29,12 @@ class JugadorService {
     suspend fun getFullReportsFromPlayerId(id:Int):Response<ListFullReportsResponse>{
         return withContext(Dispatchers.IO){
             val response = api.getFullReportsFromPlayerId(id)
+            response
+        }
+    }
+    suspend fun addTutorFeedback(reportId:Int, body: AddFeedbackDto): Response<AddFeedbackResponse> {
+        return withContext(Dispatchers.IO){
+            val response = api.addTutorFeedbackOnReport(reportId, body)
             response
         }
     }

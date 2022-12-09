@@ -1,6 +1,7 @@
 package com.devsolutions.hygienehabitsapp.Data.Repository
 
 import com.devsolutions.hygienehabitsapp.Core.Component
+import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AddFeedbackDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.FullReportDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.FullReportModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
@@ -12,6 +13,22 @@ import kotlin.collections.ArrayList
 
 class JugadorRepository {
     private val api = JugadorService()
+
+    suspend fun addTutorFeedbackOnReport(reportId: Int, feedback: String): Int {
+        var feedbackInserted = 0
+        try {
+            val feedbackDto = AddFeedbackDto(feedback)
+            val res = api.addTutorFeedback(reportId, feedbackDto)
+            val result = res.body()?.result
+            if(result == Component.RESULT_OK){
+                feedbackInserted = res.body()?.message?.response?.get(0)?.insertedId!!
+            }
+        } catch (e: Exception) {
+            feedbackInserted =0
+        }
+        return feedbackInserted
+    }
+
 
     suspend fun getReportsFromPlayerId(id: Int): ArrayList<FullReportDto> {
         val listReportDto = arrayListOf<FullReportDto>()
@@ -29,6 +46,7 @@ class JugadorRepository {
                 listReportDto.add(
                     FullReportDto(
                         report.idPlayer,
+                        report.idReport,
                         report.descriptionTitle,
                         report.namePlayer,
                         playingTime,

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/colorDark"
     tools:context=".UI.App.DetallesReportes.DetailReportFragment">
 
@@ -24,51 +24,54 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="LEVEL 1" />
+            tools:text="LEVEL 1" />
 
         <TextView
             android:id="@+id/tvDescriptionLevel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:justificationMode="inter_word"
-            android:maxLines="10"
+            android:maxLines="3"
+            android:text="@string/lorem_level_tool"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvLevelNumber"
-            android:text="@string/lorem_level_tool" />
+            app:layout_constraintTop_toBottomOf="@+id/tvLevelNumber" />
 
         <LinearLayout
             android:id="@+id/infoContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:baselineAligned="false"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvDescriptionLevel"
-            android:baselineAligned="false">
+            app:layout_constraintTop_toBottomOf="@id/tvDescriptionLevel">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginTop="16dp"
+                android:layout_weight="1"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Progreso del juego"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:text="Progreso del juego" />
+                    android:textStyle="bold" />
+
                 <com.echo.holographlibrary.PieGraph
                     android:id="@+id/grafica"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:src="@drawable/logo_homehabits"
-                    android:contentDescription="logo" />
+                    android:contentDescription="logo"
+                    android:src="@drawable/logo_homehabits" />
+
                 <TextView
                     android:id="@+id/progressPc"
                     android:layout_width="match_parent"
@@ -94,8 +97,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Maxima puntuación del nivel"
-                    android:textColor="@color/white"
                     android:textAlignment="textEnd"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -103,18 +106,18 @@
                     android:id="@+id/tvMaxScore"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="5.0/5.0"
-                    android:textColor="@color/white"
                     android:textAlignment="textEnd"
+                    android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:textStyle="italic" />
+                    android:textStyle="italic"
+                    tools:text="5.0/5.0" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Puntuación conseguida en la partida"
-                    android:textColor="@color/white"
                     android:textAlignment="textEnd"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -122,18 +125,18 @@
                     android:id="@+id/tvCurrentScore"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="4.0/5.0"
-                    android:textColor="@color/white"
                     android:textAlignment="textEnd"
+                    android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:textStyle="italic" />
+                    android:textStyle="italic"
+                    tools:text="4.0/5.0" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tiempo jugado"
-                    android:textColor="@color/white"
                     android:textAlignment="textEnd"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -142,8 +145,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="2 hrs"
-                    android:textColor="@color/white"
                     android:textAlignment="textEnd"
+                    android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="italic" />
 
@@ -151,8 +154,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Ultimo juego"
-                    android:textColor="@color/white"
                     android:textAlignment="textEnd"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -160,22 +163,37 @@
                     android:id="@+id/tvSessionDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="21 de octubre de 2022"
+                    android:textAlignment="textEnd"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:textAlignment="textEnd"
-                    android:textStyle="italic" />
+                    android:textStyle="italic"
+                    tools:text="21 de octubre de 2022" />
 
             </LinearLayout>
+
         </LinearLayout>
+
+        <EditText
+            android:id="@+id/etAddComment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="16dp"
+            android:padding="10dp"
+            android:hint="Agregar comentario"
+            android:textColorHint="@color/white"
+            android:textAlignment="textStart"
+            android:textSize="18sp"
+            android:textStyle="bold|italic"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/infoContainer" />
 
         <TextView
             android:id="@+id/btnHideDetails"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/infoContainer"
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="16dp"
             android:background="@drawable/background_white"
@@ -183,7 +201,11 @@
             android:text="Listo"
             android:textAlignment="center"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etAddComment"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

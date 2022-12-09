@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class FullReportModel(
     @SerializedName("idPlayer") val idPlayer: String,
+    @SerializedName("idReport") val idReport: String,
     @SerializedName("descriptionTitle") val descriptionTitle: String,
     @SerializedName("namePlayer") val namePlayer: String,
     @SerializedName("dateStartLevel") val dateStartLevel: String,

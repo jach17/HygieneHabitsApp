@@ -1,5 +1,6 @@
 package com.devsolutions.hygienehabitsapp.UI.App.Reportes
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.FullReportDto
 import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.UI.App.DetallesReportes.DetailReportFragment
+import com.devsolutions.hygienehabitsapp.UI.App.HomeActivityViewModel
 
-class ListarReportesAdapter(val reportList: ArrayList<FullReportDto>, val layout:Int, val fragmentManager:FragmentManager) : RecyclerView.Adapter<ListarReportesAdapter.ViewHolder>() {
+class ListarReportesAdapter(val reportList: ArrayList<FullReportDto>, val homeActivityViewModel: HomeActivityViewModel, val layout:Int, val fragmentManager:FragmentManager) : RecyclerView.Adapter<ListarReportesAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textLevel = itemView.findViewById<TextView>(R.id.descriptionsName)
@@ -20,13 +22,14 @@ class ListarReportesAdapter(val reportList: ArrayList<FullReportDto>, val layout
         val textPlayingTime = itemView.findViewById<TextView>(R.id.nivelPlayingTime)
         val btnDetails = itemView.findViewById<CardView>(R.id.btnDetailReport)
 
-        fun bind(reporteModel: FullReportDto, fragmentManager:FragmentManager) {
+        @SuppressLint("SetTextI18n")
+        fun bind(reporteModel: FullReportDto, fragmentManager:FragmentManager, homeActivityViewModel: HomeActivityViewModel) {
             textLevel.text = reporteModel.descriptionTitle
-            textProgress.text = reporteModel.progress.toString()
+            textProgress.text = "${reporteModel.progress} %"
             textMaxScore.text = reporteModel.maxScore
             textPlayingTime.text = reporteModel.playingTime
             btnDetails.setOnClickListener {
-                val detailsReports = DetailReportFragment(reporteModel)
+                val detailsReports = DetailReportFragment(reporteModel, homeActivityViewModel)
                 detailsReports.show(fragmentManager, "dialog_full_reports")
             }
         }
@@ -38,7 +41,7 @@ class ListarReportesAdapter(val reportList: ArrayList<FullReportDto>, val layout
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(reportList[position], fragmentManager)
+        holder.bind(reportList[position], fragmentManager, homeActivityViewModel)
     }
 
     override fun getItemCount(): Int {

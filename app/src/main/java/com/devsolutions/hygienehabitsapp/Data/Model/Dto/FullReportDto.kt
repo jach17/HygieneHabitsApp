@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class FullReportDto(
     val idPlayer: String,
+    val idReport:String,
     val descriptionTitle: String,
     val namePlayer: String,
     val playingTime:String,

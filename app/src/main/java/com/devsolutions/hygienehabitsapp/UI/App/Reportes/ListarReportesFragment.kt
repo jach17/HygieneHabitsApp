@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.devsolutions.hygienehabitsapp.Core.Component
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.FullReportDto
 import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.UI.App.HomeActivityViewModel
@@ -60,6 +61,8 @@ class ListarReportesFragment(val homeActivityViewModel: HomeActivityViewModel) :
     }
 
 
+
+
     private fun initRecycler(reportsDto: ArrayList<FullReportDto>) {
 
         binding.tvEmptyListView.apply {
@@ -70,7 +73,7 @@ class ListarReportesFragment(val homeActivityViewModel: HomeActivityViewModel) :
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter =
-                ListarReportesAdapter(reportsDto, R.layout.item_report_card, parentFragmentManager)
+                ListarReportesAdapter(reportsDto, homeActivityViewModel, R.layout.item_report_card, parentFragmentManager)
         }
     }
 
