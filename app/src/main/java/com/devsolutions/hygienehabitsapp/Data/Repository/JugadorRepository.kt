@@ -1,5 +1,9 @@
 package com.devsolutions.hygienehabitsapp.Data.Repository
 
+import android.annotation.SuppressLint
+import android.os.Build
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.devsolutions.hygienehabitsapp.Core.Component
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AddFeedbackDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.FullReportDto
@@ -8,6 +12,9 @@ import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.ReporteModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.SessionModel
 import com.devsolutions.hygienehabitsapp.Data.Service.JugadorService
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -20,11 +27,11 @@ class JugadorRepository {
             val feedbackDto = AddFeedbackDto(feedback)
             val res = api.addTutorFeedback(reportId, feedbackDto)
             val result = res.body()?.result
-            if(result == Component.RESULT_OK){
+            if (result == Component.RESULT_OK) {
                 feedbackInserted = res.body()?.message?.response?.get(0)?.insertedId!!
             }
         } catch (e: Exception) {
-            feedbackInserted =0
+            feedbackInserted = 0
         }
         return feedbackInserted
     }
@@ -42,6 +49,7 @@ class JugadorRepository {
             }
             for (report in list) {
                 val playingTime = getPlayingTime(report.dateStartLevel, report.dateEndLevel)
+
                 val progress = getProgress(report.currentScoreLevel, report.maxScore)
                 listReportDto.add(
                     FullReportDto(
@@ -58,9 +66,8 @@ class JugadorRepository {
                     )
                 )
             }
-
         } catch (e: Exception) {
-            System.out.println("Error por aca jeje: ${e.message}")
+            println("Error on repository line 63: ${e.message}")
         }
         return listReportDto
     }
@@ -69,8 +76,11 @@ class JugadorRepository {
         return (currentScoreLevel.toFloat() * 100f) / maxScorePossible.toFloat()
     }
 
+
+    @SuppressLint("SimpleDateFormat")
     private fun getPlayingTime(dateStartLevel: String, dateEndLevel: String): String {
-        return "3 Hrs hd"
+        //FROMAT DATE dd-mm-aaaa hh-mm-ss a
+        return "Calculate playing time"
     }
 
 

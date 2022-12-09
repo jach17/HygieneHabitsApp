@@ -46,9 +46,12 @@ class DetailReportFragment(
 
     private fun initObservables() {
         detailReportViewModel.result.observe(this.viewLifecycleOwner, Observer {
-
-            Component.showMessage(requireContext(), "It value: $it")
-
+            if (it != 0) {
+                Component.showMessage(requireContext(), "Sending feedback")
+                homeActivityViewModel.setIdPlayer(homeActivityViewModel.getIdPlayer())
+            } else {
+                Component.showMessage(requireContext(), "Something went wrong")
+            }
             splash.dismiss()
             this.dismiss()
         })
@@ -72,27 +75,40 @@ class DetailReportFragment(
     }
 
     fun graficar(progressSlice: Float, restoSlice: Float) {
-        try {
-            //Component.showMessage(requireContext(), "Value de progress: ${progressSlice}\nValue de resto: ${restoSlice}")
 
+        if(progressSlice!=100f) {
+            setLevelUncompletedView()
             val sliceProgress = PieSlice()
             sliceProgress.color = activity?.resources?.getColor(R.color.colorNeutro)!!
             sliceProgress.value = progressSlice
             pieGrafica.addSlice(sliceProgress)
 
-            if (restoSlice > 0f) {
-                val sliceResto = PieSlice()
-                sliceResto.color = activity?.resources?.getColor(R.color.colorLigth)!!
-                sliceResto.value = restoSlice
-                pieGrafica.addSlice(sliceResto)
-            }
-
-        } catch (e: Exception) {
-            Component.showMessage(requireContext(), "Error jeje: ${e.message}")
-
+            val sliceResto = PieSlice()
+            sliceResto.color = activity?.resources?.getColor(R.color.colorLigth)!!
+            sliceResto.value = restoSlice
+            pieGrafica.addSlice(sliceResto)
+        }else{
+            setLevelCompletedView()
         }
 
+    }
 
+    private fun setLevelCompletedView() {
+        binding.grafica.apply {
+            visibility = View.GONE
+        }
+        binding.ivLevelCompleted.apply {
+            visibility = View.VISIBLE
+        }
+    }
+
+    private fun setLevelUncompletedView(){
+        binding.grafica.apply {
+            visibility = View.VISIBLE
+        }
+        binding.ivLevelCompleted.apply {
+            visibility = View.GONE
+        }
     }
 
 
