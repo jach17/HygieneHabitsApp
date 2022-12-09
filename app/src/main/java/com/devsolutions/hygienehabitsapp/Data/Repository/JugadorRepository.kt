@@ -77,10 +77,38 @@ class JugadorRepository {
     }
 
 
-    @SuppressLint("SimpleDateFormat")
+
     private fun getPlayingTime(dateStartLevel: String, dateEndLevel: String): String {
         //FROMAT DATE dd-mm-aaaa hh-mm-ss a
-        return "Calculate playing time"
+        /****
+         * sd -> Start date
+         * ed -> End date
+         * dd -> day
+         * MM -> month
+         * yyyy -> year
+         * hh -> hour
+         * mm -> minute
+         * ss -> second
+         * a -> am/pm
+          */
+        val sd = dateStartLevel.split(" ")
+        val ddMMyyyy = sd[0]
+        val yyyy:String = invertDateFormartFromddMMyyyy(ddMMyyyy)[0]
+        val MM:String = invertDateFormartFromddMMyyyy(ddMMyyyy)[1]
+        val dd:String = invertDateFormartFromddMMyyyy(ddMMyyyy)[2]
+
+
+
+        val hhmmssa = sd[1]
+
+        return "$yyyy-$MM-$dd"
+    }
+
+    private fun invertDateFormartFromddMMyyyy(ddMMyyyy: String): List<String> {
+        val date = ddMMyyyy.split("-")
+        val dateFormated=date.reversed()
+
+        return dateFormated
     }
 
 
