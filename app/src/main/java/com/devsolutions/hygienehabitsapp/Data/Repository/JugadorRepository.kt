@@ -60,7 +60,7 @@ class JugadorRepository {
                         report.currentScoreLevel,
                         report.maxScore,
                         progress,
-                        report.dateStart,
+                        getFormatDate(report.dateStart),
                         report.tutorFeedback
                     )
                 )
@@ -75,111 +75,27 @@ class JugadorRepository {
         return (currentScoreLevel.toFloat() * 100f) / maxScorePossible.toFloat()
     }
 
+    private fun getFormatDate(date:String):String{
+        return date.substring(0,10)
+    }
+
 
     private fun getPlayingTime(dateStartLevel: String, dateEndLevel: String): String {
         var out = ""
         try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            out = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 //FROMAT DATE dd-mm-aaaa hh-mm-ss a
                 val format_date = "dd-MM-yyyy HH:mm:ss"
                 val start_date_test = LocalDateTime.parse(dateStartLevel.substring(0,19), DateTimeFormatter.ofPattern(format_date))
                 val end_date_test = LocalDateTime.parse(dateEndLevel.substring(0,19), DateTimeFormatter.ofPattern(format_date))
-
-                out = "${Duration.between(start_date_test, end_date_test).seconds} minutos"
-
-/*
-                /****
-                 * sd -> Start date
-                 * ed -> End date
-                 * dd -> day
-                 * MM -> month
-                 * yyyy -> year
-                 * hh -> hour
-                 * mm -> minute
-                 * ss -> second
-                 * a -> am/pm
-                 */
-                val sd = dateStartLevel.split(" ")
-                val ed = dateEndLevel.split(" ")
-                val sd_ddMMyyyy = sd[Component.GET_DATE]
-                val ed_ddMMyyyy = ed[Component.GET_DATE]
-
-                val sd_yyyy: String = getDateFormartFromddMMyyyy(sd_ddMMyyyy)[Component.YEAR]
-                val sd_MM: String = getDateFormartFromddMMyyyy(sd_ddMMyyyy)[Component.MONTH]
-                val sd_dd: String = getDateFormartFromddMMyyyy(sd_ddMMyyyy)[Component.DAY]
-
-                val ed_yyyy: String = getDateFormartFromddMMyyyy(ed_ddMMyyyy)[Component.YEAR]
-                val ed_MM: String = getDateFormartFromddMMyyyy(ed_ddMMyyyy)[Component.MONTH]
-                val ed_dd: String = getDateFormartFromddMMyyyy(ed_ddMMyyyy)[Component.DAY]
-
-
-                val DATE_START_FROMATED = LocalDate.parse(
-                    "$sd_yyyy-$sd_MM-$sd_dd",
-                    DateTimeFormatter.ISO_LOCAL_DATE
-                )
-
-                val DATE_END_FROMATED = LocalDate.parse(
-                    "$ed_yyyy-$ed_MM-$ed_dd",
-                    DateTimeFormatter.ISO_LOCAL_DATE
-                )
-
-
-                val sd_hhmmss = sd[Component.GET_TIME]
-                val ed_hhmmss = ed[Component.GET_TIME]
-
-                val formatter = DateTimeFormatter.ofPattern("HH:mm:ss")
-
-                val TIME_START_FORMATED = LocalDateTime.parse(
-                    sd_hhmmss,
-                    formatter
-                )
-                val TIME_END_FORMATED = LocalDateTime.parse(
-                    ed_hhmmss,
-                    formatter
-                )
-
-
-
-                out = getDifferenceBetweenTwoDates(
-                    DATE_START_FROMATED,
-                    TIME_START_FORMATED,
-                    DATE_END_FROMATED,
-                    TIME_END_FORMATED
-                )
-*/
-
+                "${Duration.between(start_date_test, end_date_test).seconds}"
             } else {
-                out = "Por la API"
+                "VERSION NOT COMPATIBLE"
             }
         } catch (e: Exception) {
             out = e.message!!
         }
         return out
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun getDifferenceBetweenTwoDates(
-        dateStartFromated: LocalDate?,
-        timeStartFormated:LocalDateTime?,
-        dateEndFromated: LocalDate?,
-        timeEndFormated:LocalDateTime?
-    ): String {
-        val period = Period.between(dateStartFromated, dateEndFromated)
-        val diff_date = period.days
-        val duration = Duration.between(timeStartFormated, timeEndFormated)
-        val diff_time = abs(duration.toMinutes())
-
-        return "Duración de $diff_date dias y $diff_time minutos"
-
-    }
-
-    //GET DIFFERENCE
-
-
-    private fun getDateFormartFromddMMyyyy(ddMMyyyy: String): List<String> {
-        val date = ddMMyyyy.split("-")
-
-        return date.reversed()
     }
 
 
@@ -191,15 +107,6 @@ class JugadorRepository {
             list = res.body()?.message?.response!!
         }
         return list
-
-
-        /*
-        val arrayList = arrayListOf<SessionModel>()
-        arrayList.add(SessionModel(1,"dateStart", "dateEnd", 1))
-
-        return arrayList
-        */
-
     }
 
 
@@ -212,13 +119,6 @@ class JugadorRepository {
             list = res.body()?.message?.response!!
         }
         return list
-
-        /*For local working
-        val arrayList = arrayListOf<JugadorModel>()
-        arrayList.add(JugadorModel(1,"Test1","Test1", "Test1", 1,"Test1", 1,2,3,4,5 ))
-        return arrayList
-
-         */
     }
 
     suspend fun getPlayerById(id: Int): JugadorModel? {
@@ -230,9 +130,6 @@ class JugadorRepository {
         }
 
         return player
-
-
-        // return JugadorModel(1,"Test1","Test1", "Test1", 1,"Test1", 1,2,3,4,5 )
     }
 
 /*

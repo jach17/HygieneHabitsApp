@@ -13,16 +13,16 @@
     <string name="crear">Crear cuenta</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="cargando">Cargando...</string>
+    <string name="cargando">Cargando…</string>
     <string name="reportes">Reportes</string>
     <string name="sessions">Sesiones</string>
     <string name="miinfo">Mi información</string>
     <string name="level1">Personal hygiene</string>
-    <string name="maxsocre">Max score</string>
+    <string name="maxsocre">Maxima puntuación</string>
     <string name="maxscoretest">4.5/5.0</string>
-    <string name="playingtime">Playing time</string>
+    <string name="playingtime">Tiempo de juego</string>
     <string name="playingTimeDescription">2 hrs</string>
-    <string name="progress">Progress</string>
+    <string name="progress">Progreso</string>
     <string name="progressTest">68%</string>
     <string name="namePlayer">Nombre</string>
     <string name="logout">Cerrar sesión</string>

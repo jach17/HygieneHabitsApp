@@ -26,8 +26,8 @@ class ListarReportesAdapter(val reportList: ArrayList<FullReportDto>, val homeAc
         fun bind(reporteModel: FullReportDto, fragmentManager:FragmentManager, homeActivityViewModel: HomeActivityViewModel) {
             textLevel.text = reporteModel.descriptionTitle
             textProgress.text = "${reporteModel.progress} %"
-            textMaxScore.text = reporteModel.maxScore
-            textPlayingTime.text = reporteModel.playingTime
+            textMaxScore.text = "${reporteModel.maxScore} pts"
+            textPlayingTime.text = "${reporteModel.playingTime} segundos"
             btnDetails.setOnClickListener {
                 val detailsReports = DetailReportFragment(reporteModel, homeActivityViewModel)
                 detailsReports.show(fragmentManager, "dialog_full_reports")

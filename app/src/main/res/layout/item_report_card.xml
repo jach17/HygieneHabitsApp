@@ -14,14 +14,15 @@
         android:layout_height="match_parent"
         android:layout_marginEnd="64dp"
         android:padding="22dp">
+
         <TextView
             android:id="@+id/titleNivel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textStyle="bold"
             android:gravity="start"
-            android:text="@string/reportes"/>
+            android:text="@string/reportes"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/descriptionsName"
@@ -41,23 +42,25 @@
             android:textStyle="bold"
             android:layout_below="@+id/descriptionsName"
             android:text="@string/maxsocre"/>
+
         <TextView
             android:id="@+id/descriptionsAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textStyle="italic"
-            android:layout_marginStart="8dp"
             android:layout_below="@+id/titleMaxScoere"
-            android:text="@string/maxscoretest"/>
+            android:layout_marginStart="8dp"
+            android:text="@string/maxscoretest"
+            android:textColor="@color/white"
+            android:textStyle="italic" />
+
         <TextView
             android:id="@+id/titleProgress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:text="@string/progress"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            android:text="@string/progress"/>
+            android:textStyle="bold" />
         <TextView
             android:id="@+id/nivelProgress"
             android:layout_width="wrap_content"
