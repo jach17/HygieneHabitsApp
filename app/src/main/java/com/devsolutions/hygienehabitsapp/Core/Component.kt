@@ -15,6 +15,14 @@ class Component {
 
         const val EMPTY_ID=0
         const val RESULT_OK="1"
+
+        const val GET_DATE = 0
+        const val GET_TIME = 1
+
+
+        const val YEAR=0
+        const val MONTH=1
+        const val DAY=2
     }
 
 

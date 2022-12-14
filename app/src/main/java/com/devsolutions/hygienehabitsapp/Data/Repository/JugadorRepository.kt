@@ -1,22 +1,21 @@
 package com.devsolutions.hygienehabitsapp.Data.Repository
 
-import android.annotation.SuppressLint
 import android.os.Build
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.devsolutions.hygienehabitsapp.Core.Component
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AddFeedbackDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.FullReportDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.FullReportModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
-import com.devsolutions.hygienehabitsapp.Data.Model.Entities.ReporteModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.SessionModel
 import com.devsolutions.hygienehabitsapp.Data.Service.JugadorService
-import java.text.SimpleDateFormat
+import java.time.Duration
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.Period
 import java.time.format.DateTimeFormatter
-import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.abs
 
 class JugadorRepository {
     private val api = JugadorService()
@@ -77,38 +76,110 @@ class JugadorRepository {
     }
 
 
-
     private fun getPlayingTime(dateStartLevel: String, dateEndLevel: String): String {
-        //FROMAT DATE dd-mm-aaaa hh-mm-ss a
-        /****
-         * sd -> Start date
-         * ed -> End date
-         * dd -> day
-         * MM -> month
-         * yyyy -> year
-         * hh -> hour
-         * mm -> minute
-         * ss -> second
-         * a -> am/pm
-          */
-        val sd = dateStartLevel.split(" ")
-        val ddMMyyyy = sd[0]
-        val yyyy:String = invertDateFormartFromddMMyyyy(ddMMyyyy)[0]
-        val MM:String = invertDateFormartFromddMMyyyy(ddMMyyyy)[1]
-        val dd:String = invertDateFormartFromddMMyyyy(ddMMyyyy)[2]
+        var out = ""
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                //FROMAT DATE dd-mm-aaaa hh-mm-ss a
+                val format_date = "dd-MM-yyyy HH:mm:ss"
+                val start_date_test = LocalDateTime.parse(dateStartLevel.substring(0,19), DateTimeFormatter.ofPattern(format_date))
+                val end_date_test = LocalDateTime.parse(dateEndLevel.substring(0,19), DateTimeFormatter.ofPattern(format_date))
+
+                out = "${Duration.between(start_date_test, end_date_test).seconds} minutos"
+
+/*
+                /****
+                 * sd -> Start date
+                 * ed -> End date
+                 * dd -> day
+                 * MM -> month
+                 * yyyy -> year
+                 * hh -> hour
+                 * mm -> minute
+                 * ss -> second
+                 * a -> am/pm
+                 */
+                val sd = dateStartLevel.split(" ")
+                val ed = dateEndLevel.split(" ")
+                val sd_ddMMyyyy = sd[Component.GET_DATE]
+                val ed_ddMMyyyy = ed[Component.GET_DATE]
+
+                val sd_yyyy: String = getDateFormartFromddMMyyyy(sd_ddMMyyyy)[Component.YEAR]
+                val sd_MM: String = getDateFormartFromddMMyyyy(sd_ddMMyyyy)[Component.MONTH]
+                val sd_dd: String = getDateFormartFromddMMyyyy(sd_ddMMyyyy)[Component.DAY]
+
+                val ed_yyyy: String = getDateFormartFromddMMyyyy(ed_ddMMyyyy)[Component.YEAR]
+                val ed_MM: String = getDateFormartFromddMMyyyy(ed_ddMMyyyy)[Component.MONTH]
+                val ed_dd: String = getDateFormartFromddMMyyyy(ed_ddMMyyyy)[Component.DAY]
+
+
+                val DATE_START_FROMATED = LocalDate.parse(
+                    "$sd_yyyy-$sd_MM-$sd_dd",
+                    DateTimeFormatter.ISO_LOCAL_DATE
+                )
+
+                val DATE_END_FROMATED = LocalDate.parse(
+                    "$ed_yyyy-$ed_MM-$ed_dd",
+                    DateTimeFormatter.ISO_LOCAL_DATE
+                )
+
+
+                val sd_hhmmss = sd[Component.GET_TIME]
+                val ed_hhmmss = ed[Component.GET_TIME]
+
+                val formatter = DateTimeFormatter.ofPattern("HH:mm:ss")
+
+                val TIME_START_FORMATED = LocalDateTime.parse(
+                    sd_hhmmss,
+                    formatter
+                )
+                val TIME_END_FORMATED = LocalDateTime.parse(
+                    ed_hhmmss,
+                    formatter
+                )
 
 
 
-        val hhmmssa = sd[1]
+                out = getDifferenceBetweenTwoDates(
+                    DATE_START_FROMATED,
+                    TIME_START_FORMATED,
+                    DATE_END_FROMATED,
+                    TIME_END_FORMATED
+                )
+*/
 
-        return "$yyyy-$MM-$dd"
+            } else {
+                out = "Por la API"
+            }
+        } catch (e: Exception) {
+            out = e.message!!
+        }
+        return out
     }
 
-    private fun invertDateFormartFromddMMyyyy(ddMMyyyy: String): List<String> {
-        val date = ddMMyyyy.split("-")
-        val dateFormated=date.reversed()
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getDifferenceBetweenTwoDates(
+        dateStartFromated: LocalDate?,
+        timeStartFormated:LocalDateTime?,
+        dateEndFromated: LocalDate?,
+        timeEndFormated:LocalDateTime?
+    ): String {
+        val period = Period.between(dateStartFromated, dateEndFromated)
+        val diff_date = period.days
+        val duration = Duration.between(timeStartFormated, timeEndFormated)
+        val diff_time = abs(duration.toMinutes())
 
-        return dateFormated
+        return "Duración de $diff_date dias y $diff_time minutos"
+
+    }
+
+    //GET DIFFERENCE
+
+
+    private fun getDateFormartFromddMMyyyy(ddMMyyyy: String): List<String> {
+        val date = ddMMyyyy.split("-")
+
+        return date.reversed()
     }
 
 
