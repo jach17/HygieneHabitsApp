@@ -96,13 +96,20 @@ class JugadorRepository {
     }
 
     suspend fun getSessionsFromPlayerId(id: Int): ArrayList<SessionModel> {
-        val res = api.getSessionsFromPlayerId(id)
-        val result = res.body()?.result
-        var list = arrayListOf<SessionModel>()
-        if (result == Component.RESULT_OK) {
-            list = res.body()?.message?.response!!
+        var listSessions = arrayListOf<SessionModel>()
+        try{
+            val res = api.getSessionsFromPlayerId(id)
+            val result = res.body()?.result
+            var list = arrayListOf<SessionModel>()
+            if (result == Component.RESULT_OK) {
+                list = res.body()?.message?.response!!
+            }
+            listSessions = list
+
+        }catch(e:Exception){
+            println("Error on jugadorRepo, line 109")
         }
-        return list
+        return listSessions
     }
 
     suspend fun getPlayersFromTutorId(id: Int): ArrayList<JugadorModel> {

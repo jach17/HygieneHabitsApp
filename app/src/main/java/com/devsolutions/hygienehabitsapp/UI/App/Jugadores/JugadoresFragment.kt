@@ -60,6 +60,7 @@ class JugadoresFragment(val homeActivityViewModel: HomeActivityViewModel) : Dial
         binding.btnOkAndClose.apply {
             visibility = View.VISIBLE
             setOnClickListener {
+                Component.showMessage(requireContext(), "Cierra la aplicación, registra un usuario en el juego con el token y podrás verificar su progreso desde ésta aplicación")
                 requireActivity().finish()
             }
         }

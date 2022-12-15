@@ -192,8 +192,4 @@ class HomeActivityViewModel : ViewModel() {
     fun getIdPlayer(): Int {
         return idPlayerSelected.value ?: Component.EMPTY_ID
     }
-
-
-
-
 }

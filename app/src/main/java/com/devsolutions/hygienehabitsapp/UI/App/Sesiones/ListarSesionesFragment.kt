@@ -9,6 +9,7 @@ import android.widget.Toast
 import android.window.SplashScreen
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.devsolutions.hygienehabitsapp.Core.Component
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.ReporteModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.SessionModel
 import com.devsolutions.hygienehabitsapp.R
@@ -50,17 +51,33 @@ class ListarSesionesFragment(val homeActivityViewModel: HomeActivityViewModel) :
     private fun initObservables() {
         listarSessionesViewModel.sessionsList.observe(this.viewLifecycleOwner, Observer {
             splash.dismiss()
-            if(it.isNotEmpty()){
+
+            if(it[0].idSesion!=0){
                 initRecycler(it)
             }else{
-                Toast.makeText(requireContext(), "Lista de sesiones vacia", Toast.LENGTH_SHORT).show()
+                showEmptyView()
             }
         })
     }
 
+    private fun showEmptyView() {
+        binding.tvEmptyListView.apply {
+            visibility = View.VISIBLE
+        }
+        binding.rvListarSessions.apply {
+            visibility = View.GONE
+        }
+    }
+
     private fun initRecycler(arrayList: ArrayList<SessionModel>) {
-        binding.rvListarSessions.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.rvListarSessions.adapter = ListarSessionsAdapter(arrayList, R.layout.item_session_card)
+        binding.tvEmptyListView.apply {
+            visibility = View.GONE
+        }
+        binding.rvListarSessions.apply {
+            visibility = View.VISIBLE
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            adapter = ListarSessionsAdapter(arrayList, R.layout.item_session_card)
+        }
     }
 
 }
