@@ -85,7 +85,7 @@ class JugadorRepository {
         try {
             out = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 //FROMAT DATE dd-mm-aaaa hh-mm-ss a
-                val format_date = "dd-MM-yyyy HH:mm:ss"
+                val format_date = "MM-dd-yyyy HH:mm:ss"
                 val start_date_test = LocalDateTime.parse(dateStartLevel.substring(0,19), DateTimeFormatter.ofPattern(format_date))
                 val end_date_test = LocalDateTime.parse(dateEndLevel.substring(0,19), DateTimeFormatter.ofPattern(format_date))
                 "${Duration.between(start_date_test, end_date_test).seconds}"
@@ -111,7 +111,6 @@ class JugadorRepository {
 
 
     suspend fun getPlayersFromTutorId(id: Int): ArrayList<JugadorModel> {
-
         val res = api.getPlayersByTutorId(id)
         val result = res.body()?.result
         var list = arrayListOf<JugadorModel>()
@@ -128,7 +127,6 @@ class JugadorRepository {
         if (result == Component.RESULT_OK) {
             player = res.body()?.message?.response!![0]
         }
-
         return player
     }
 

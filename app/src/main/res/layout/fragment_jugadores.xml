@@ -38,10 +38,20 @@
             android:layout_below="@+id/tvTitleJugadores"
             android:layout_centerInParent="true"
             android:layout_margin="32dp"
-            android:text="Actualmente no estás supervisando a ningun jugador"
+            android:text="@string/nonplayer_registred"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="24sp"
-            android:visibility="gone" />
+            />
+        <TextView
+            android:id="@+id/tvShowToken"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvJugadoresEmpty"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            tools:text="1122221121"
+            />
     </RelativeLayout>
 </FrameLayout>

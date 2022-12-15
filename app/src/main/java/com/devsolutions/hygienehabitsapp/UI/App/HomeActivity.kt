@@ -15,10 +15,9 @@ import androidx.lifecycle.viewModelScope
 import com.devsolutions.hygienehabitsapp.Core.Component
 import com.devsolutions.hygienehabitsapp.Core.SharedApp.Companion.prefs
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
-import com.devsolutions.hygienehabitsapp.Data.Model.Entities.TutorModel
 import com.devsolutions.hygienehabitsapp.Domain.JugadorUseCase
 import com.devsolutions.hygienehabitsapp.R
-import com.devsolutions.hygienehabitsapp.UI.App.Adapter.ViewPagerAdapter
+import com.devsolutions.hygienehabitsapp.UI.App.ViewAdapter.ViewPagerAdapter
 import com.devsolutions.hygienehabitsapp.UI.App.Jugadores.JugadoresFragment
 import com.devsolutions.hygienehabitsapp.UI.App.MiInformacion.MostrarMiInfromacionFragment
 import com.devsolutions.hygienehabitsapp.UI.App.Reportes.ListarReportesFragment

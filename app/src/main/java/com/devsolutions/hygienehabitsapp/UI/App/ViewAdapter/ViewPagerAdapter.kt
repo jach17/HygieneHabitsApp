@@ -1,4 +1,4 @@
-package com.devsolutions.hygienehabitsapp.UI.App.Adapter
+package com.devsolutions.hygienehabitsapp.UI.App.ViewAdapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

@@ -52,6 +52,10 @@ class JugadoresFragment(val homeActivityViewModel: HomeActivityViewModel) : Dial
         binding.tvJugadoresEmpty.apply {
             visibility = View.VISIBLE
         }
+        binding.tvShowToken.apply {
+            visibility = View.VISIBLE
+            setText(prefs.tutorToken)
+        }
     }
 
     private fun showFullRecyclerView() {
@@ -60,6 +64,9 @@ class JugadoresFragment(val homeActivityViewModel: HomeActivityViewModel) : Dial
             visibility = View.VISIBLE
         }
         binding.tvJugadoresEmpty.apply {
+            visibility = View.GONE
+        }
+        binding.tvShowToken.apply {
             visibility = View.GONE
         }
     }
