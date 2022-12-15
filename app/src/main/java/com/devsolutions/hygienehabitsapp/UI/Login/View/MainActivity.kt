@@ -34,10 +34,10 @@ class MainActivity : AppCompatActivity() {
     private fun initObservables() {
         mainViewModel.isLogged.observe(this, Observer {
             splash.dismiss()
-            Component.showMessage(applicationContext, "Resp: ${it}")
             if(it){
                 prefs.isLogged = true
                 navigateToActivity(this, HomeActivity::class.java)
+                this.finish()
             }else{
                 Component.showMessage(applicationContext, "User not registered")
             }
