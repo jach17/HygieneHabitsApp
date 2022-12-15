@@ -67,6 +67,20 @@
                     android:textSize="15sp"
                     android:textStyle="italic"
                     tools:text="42 años" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/token"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvTutorToken"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textStyle="italic"
+                    tools:text="123abc" />
 
 
             </LinearLayout>

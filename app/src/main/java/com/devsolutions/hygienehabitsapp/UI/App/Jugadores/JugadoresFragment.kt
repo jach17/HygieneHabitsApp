@@ -14,6 +14,7 @@ import com.devsolutions.hygienehabitsapp.Core.Component
 import com.devsolutions.hygienehabitsapp.Core.SharedApp.Companion.prefs
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
 import com.devsolutions.hygienehabitsapp.R
+import com.devsolutions.hygienehabitsapp.UI.App.HomeActivity
 import com.devsolutions.hygienehabitsapp.UI.App.HomeActivityViewModel
 import com.devsolutions.hygienehabitsapp.UI.Splash.SplashFragment
 import com.devsolutions.hygienehabitsapp.databinding.FragmentJugadoresBinding
@@ -37,9 +38,7 @@ class JugadoresFragment(val homeActivityViewModel: HomeActivityViewModel) : Dial
     private fun initObservables() {
         homeActivityViewModel.playersByTutorId.observe(this.viewLifecycleOwner, Observer {
             if (!it[0].namePlayer.isNullOrEmpty()) {
-                Component.showMessage(requireContext(), "Size list: ${it.size}, element: ${it[0].namePlayer}")
                 initRecycler(it)
-
             } else {
                 showEmptyRecyclerView()
             }
@@ -56,7 +55,13 @@ class JugadoresFragment(val homeActivityViewModel: HomeActivityViewModel) : Dial
         }
         binding.tvShowToken.apply {
             visibility = View.VISIBLE
-            setText(prefs.tutorToken)
+            text = prefs.tutorToken
+        }
+        binding.btnOkAndClose.apply {
+            visibility = View.VISIBLE
+            setOnClickListener {
+                requireActivity().finish()
+            }
         }
     }
 
@@ -70,6 +75,9 @@ class JugadoresFragment(val homeActivityViewModel: HomeActivityViewModel) : Dial
         }
         binding.tvShowToken.apply {
             visibility = View.GONE
+        }
+        binding.btnOkAndClose.apply {
+            visibility =View.GONE
         }
     }
 

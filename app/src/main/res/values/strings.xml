@@ -30,5 +30,7 @@
     <string name="session_date">Fecha de la sesión</string>
     <string name="passwordHint">******</string>
     <string name="lorem_level_tool">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen.</string>
-    <string name="nonplayer_registred">Actualmente no estás supervisando a ningun jugador\nUtiliza este token para registrar un nuevo jugador</string>
+    <string name="nonplayer_registred">Actualmente no estás supervisando a ningun jugador\nUtiliza este token al registrar un nuevo usuario en el juego</string>
+    <string name="token">Token</string>
+    <string name="aceptar">Aceptar</string>
 </resources>

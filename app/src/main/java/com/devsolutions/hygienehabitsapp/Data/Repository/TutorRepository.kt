@@ -5,6 +5,8 @@ import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AddUserDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AuthUserDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.TutorModel
 import com.devsolutions.hygienehabitsapp.Data.Service.TutorService
+import java.util.*
+import kotlin.collections.ArrayList
 
 class TutorRepository {
     private val api = TutorService()
@@ -30,13 +32,26 @@ class TutorRepository {
 
     suspend fun crearCuenta(username: String, age: String, password: String): Int {
         //AutomatizeTokenGeneration
-        val res = api.addUser(AddUserDto(username, password, age, "123abc"))
+        val token:String = getTokenTutor(username)
+        val res = api.addUser(AddUserDto(username, password, age, token))
         val result = res.body()?.result
         var insertedId=0
         if(result==Component.RESULT_OK) {
             insertedId = res.body()?.message?.response?.get(0)!!.insertedId
         }
         return insertedId
+    }
+
+    private fun getTokenTutor(name: String): String {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val hour = calendar.get(Calendar.HOUR)
+        val minute = calendar.get(Calendar.MINUTE)
+        val second = calendar.get(Calendar.SECOND)
+
+        return "$name$day$month$year$hour$minute$second"
     }
 
     suspend fun getTutorById(tutorId: Int): TutorModel {

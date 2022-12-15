@@ -36,7 +36,13 @@ class MostrarMiInfromacionFragment(val homeActivityViewModel: HomeActivityViewMo
     }
 
     private fun initListeners() {
-        binding.btnCambiarPasswword.setOnClickListener{loadFragment(CambiarPasswordFragment(homeActivityViewModel))}
+        binding.btnCambiarPasswword.setOnClickListener {
+            loadFragment(
+                CambiarPasswordFragment(
+                    homeActivityViewModel
+                )
+            )
+        }
     }
 
     private fun loadFragment(fragmentDestiny: DialogFragment) {
@@ -48,6 +54,7 @@ class MostrarMiInfromacionFragment(val homeActivityViewModel: HomeActivityViewMo
             splash.dismiss()
             binding.tvNameTutor.text = it.nameTutor
             binding.tvAgeTutor.text = it.ageTutor
+            binding.tvTutorToken.text = it.authTokenTutor
         })
     }
 

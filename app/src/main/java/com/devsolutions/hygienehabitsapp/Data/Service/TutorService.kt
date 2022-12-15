@@ -7,7 +7,6 @@ import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AuthUserDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Responses.AddResponse
 import com.devsolutions.hygienehabitsapp.Data.Model.Responses.AuthResponse
 import com.devsolutions.hygienehabitsapp.Data.Model.Responses.DefaultResponse
-import com.devsolutions.hygienehabitsapp.Data.Model.Responses.ListReportsResponse
 import com.devsolutions.hygienehabitsapp.Data.Network.ApiClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -28,14 +27,16 @@ class TutorService {
             var response:Response<AuthResponse>?
             try{
                 response = api.authUser(body)
-                val id = api.getTutorId(body).body()?.message?.response
-                prefs.tutorId=id?.get(0)?.idTutor
-                //prefs.tutorToken=id?.get(1)?.authTokenTutor
+                val response_info = api.getTutorId(body).body()?.message?.response
+                prefs.tutorId=response_info?.get(0)?.idTutor
+                prefs.tutorToken=response_info?.get(0)?.authTokenTutor
+                println("Sale por acá")
                 response
             }catch(e:Exception){
                 response= null
                 //For local working
                 prefs.tutorId=1
+                println("Sale pero de este lado men, con error: ${e.message}")
                 response
             }
 
