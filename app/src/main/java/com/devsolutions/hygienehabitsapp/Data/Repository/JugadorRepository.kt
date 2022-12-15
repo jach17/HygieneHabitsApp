@@ -35,10 +35,8 @@ class JugadorRepository {
         return feedbackInserted
     }
 
-
     suspend fun getReportsFromPlayerId(id: Int): ArrayList<FullReportDto> {
         val listReportDto = arrayListOf<FullReportDto>()
-
         try {
             val res = api.getFullReportsFromPlayerId(id)
             val result = res.body()?.result
@@ -79,7 +77,6 @@ class JugadorRepository {
         return date.substring(0,10)
     }
 
-
     private fun getPlayingTime(dateStartLevel: String, dateEndLevel: String): String {
         var out = ""
         try {
@@ -98,7 +95,6 @@ class JugadorRepository {
         return out
     }
 
-
     suspend fun getSessionsFromPlayerId(id: Int): ArrayList<SessionModel> {
         val res = api.getSessionsFromPlayerId(id)
         val result = res.body()?.result
@@ -109,13 +105,14 @@ class JugadorRepository {
         return list
     }
 
-
     suspend fun getPlayersFromTutorId(id: Int): ArrayList<JugadorModel> {
         val res = api.getPlayersByTutorId(id)
         val result = res.body()?.result
         var list = arrayListOf<JugadorModel>()
         if (result == Component.RESULT_OK) {
             list = res.body()?.message?.response!!
+        }else{
+            list.clear()
         }
         return list
     }

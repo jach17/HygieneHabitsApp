@@ -36,8 +36,10 @@ class JugadoresFragment(val homeActivityViewModel: HomeActivityViewModel) : Dial
 
     private fun initObservables() {
         homeActivityViewModel.playersByTutorId.observe(this.viewLifecycleOwner, Observer {
-            if (it.isNotEmpty()) {
+            if (!it[0].namePlayer.isNullOrEmpty()) {
+                Component.showMessage(requireContext(), "Size list: ${it.size}, element: ${it[0].namePlayer}")
                 initRecycler(it)
+
             } else {
                 showEmptyRecyclerView()
             }
