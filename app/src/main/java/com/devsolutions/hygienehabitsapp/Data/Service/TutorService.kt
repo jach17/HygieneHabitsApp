@@ -30,6 +30,7 @@ class TutorService {
                 response = api.authUser(body)
                 val id = api.getTutorId(body).body()?.message?.response
                 prefs.tutorId=id?.get(0)?.idTutor
+                //prefs.tutorToken=id?.get(1)?.authTokenTutor
                 response
             }catch(e:Exception){
                 response= null
