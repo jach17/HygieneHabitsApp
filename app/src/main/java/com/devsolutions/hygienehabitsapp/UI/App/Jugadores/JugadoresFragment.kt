@@ -1,5 +1,8 @@
 package com.devsolutions.hygienehabitsapp.UI.App.Jugadores
 
+import android.R.attr.label
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -8,7 +11,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,11 +19,11 @@ import com.devsolutions.hygienehabitsapp.Core.Component
 import com.devsolutions.hygienehabitsapp.Core.SharedApp.Companion.prefs
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
 import com.devsolutions.hygienehabitsapp.R
-import com.devsolutions.hygienehabitsapp.UI.App.HomeActivity
 import com.devsolutions.hygienehabitsapp.UI.App.HomeActivityViewModel
 import com.devsolutions.hygienehabitsapp.UI.Login.View.MainActivity
 import com.devsolutions.hygienehabitsapp.UI.Splash.SplashFragment
 import com.devsolutions.hygienehabitsapp.databinding.FragmentJugadoresBinding
+
 
 class JugadoresFragment(val homeActivityViewModel: HomeActivityViewModel) : DialogFragment() {
     private lateinit var _binding: FragmentJugadoresBinding
@@ -63,7 +66,7 @@ class JugadoresFragment(val homeActivityViewModel: HomeActivityViewModel) : Dial
         binding.btnOkAndClose.apply {
             visibility = View.VISIBLE
             setOnClickListener {
-                Component.showMessage(requireContext(), "Registra un jugador y revisa aquí su progreso")
+                copiarTokenOnClipboard(prefs.tutorToken!!)
                 requireActivity().finish()
             }
         }
@@ -77,6 +80,17 @@ class JugadoresFragment(val homeActivityViewModel: HomeActivityViewModel) : Dial
                 requireActivity().finish()
             }
         }
+    }
+
+    private fun copiarTokenOnClipboard(tutorToken: String) {
+        val clipboard = getSystemService(
+            requireContext(),
+            ClipboardManager::class.java
+        )
+        val clip = ClipData.newPlainText(label.toString(), tutorToken)
+        clipboard?.setPrimaryClip(clip)
+        Component.showMessage(requireContext(), "Token: $tutorToken copiado en el portapapeles")
+
     }
 
     private fun showFullRecyclerView() {
