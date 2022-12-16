@@ -77,6 +77,8 @@ class JugadorRepository {
         var time = ""
         if (dateList[1].length == 7) {
             time = "0${dateList[1]}"
+        }else{
+            time=dateList[1]
         }
 
 
