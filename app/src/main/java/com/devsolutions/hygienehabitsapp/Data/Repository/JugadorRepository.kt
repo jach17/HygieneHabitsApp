@@ -45,7 +45,10 @@ class JugadorRepository {
                 list = res.body()?.message?.response!!
             }
             for (report in list) {
-                val playingTime = getPlayingTime(report.dateStartLevel, report.dateEndLevel)
+                val playingTime = getPlayingTime(
+                    getCorrectFormatForDate(report.dateStartLevel),
+                    getCorrectFormatForDate(report.dateEndLevel)
+                )
 
                 val progress = getProgress(report.currentScoreLevel, report.maxScore)
                 listReportDto.add(
@@ -58,7 +61,7 @@ class JugadorRepository {
                         report.currentScoreLevel,
                         report.maxScore,
                         progress,
-                        getFormatDate(report.dateStart),
+                        getCorrectFormatForDate(report.dateStart),
                         report.tutorFeedback
                     )
                 )
@@ -69,12 +72,20 @@ class JugadorRepository {
         return listReportDto
     }
 
-    private fun getProgress(currentScoreLevel: String, maxScorePossible: String): Float {
-        return (currentScoreLevel.toFloat() * 100f) / maxScorePossible.toFloat()
+    private fun getCorrectFormatForDate(date: String): String {
+        val dateList = date.split(" ")
+        var time = ""
+        if (dateList[1].length == 7) {
+            time = "0${dateList[1]}"
+        }
+
+
+        return "${dateList[0]} $time"
     }
 
-    private fun getFormatDate(date:String):String{
-        return date.substring(0,10)
+
+    private fun getProgress(currentScoreLevel: String, maxScorePossible: String): Float {
+        return (currentScoreLevel.toFloat() * 100f) / maxScorePossible.toFloat()
     }
 
     private fun getPlayingTime(dateStartLevel: String, dateEndLevel: String): String {
@@ -83,8 +94,14 @@ class JugadorRepository {
             out = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 //FROMAT DATE dd-mm-aaaa hh-mm-ss a
                 val format_date = "MM-dd-yyyy HH:mm:ss"
-                val start_date_test = LocalDateTime.parse(dateStartLevel.substring(0,19), DateTimeFormatter.ofPattern(format_date))
-                val end_date_test = LocalDateTime.parse(dateEndLevel.substring(0,19), DateTimeFormatter.ofPattern(format_date))
+                val start_date_test = LocalDateTime.parse(
+                    dateStartLevel.substring(0, 19),
+                    DateTimeFormatter.ofPattern(format_date)
+                )
+                val end_date_test = LocalDateTime.parse(
+                    dateEndLevel.substring(0, 19),
+                    DateTimeFormatter.ofPattern(format_date)
+                )
                 "${Duration.between(start_date_test, end_date_test).seconds}"
             } else {
                 "VERSION NOT COMPATIBLE"
@@ -97,7 +114,7 @@ class JugadorRepository {
 
     suspend fun getSessionsFromPlayerId(id: Int): ArrayList<SessionModel> {
         var listSessions = arrayListOf<SessionModel>()
-        try{
+        try {
             val res = api.getSessionsFromPlayerId(id)
             val result = res.body()?.result
             var list = arrayListOf<SessionModel>()
@@ -106,7 +123,7 @@ class JugadorRepository {
             }
             listSessions = list
 
-        }catch(e:Exception){
+        } catch (e: Exception) {
             println("Error on jugadorRepo, line 109")
         }
         return listSessions
@@ -118,7 +135,7 @@ class JugadorRepository {
         var list = arrayListOf<JugadorModel>()
         if (result == Component.RESULT_OK) {
             list = res.body()?.message?.response!!
-        }else{
+        } else {
             list.clear()
         }
         return list

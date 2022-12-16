@@ -33,4 +33,6 @@
     <string name="nonplayer_registred">Actualmente no estás supervisando a ningun jugador\nUtiliza este token al registrar un nuevo usuario en el juego</string>
     <string name="token">Token</string>
     <string name="aceptar">Aceptar</string>
+    <string name="agregar_comentario">Agregar comentario</string>
+    <string name="listo">Listo</string>
 </resources>

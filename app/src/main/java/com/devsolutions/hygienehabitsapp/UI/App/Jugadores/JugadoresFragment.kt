@@ -1,5 +1,7 @@
 package com.devsolutions.hygienehabitsapp.UI.App.Jugadores
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -16,6 +18,7 @@ import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
 import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.UI.App.HomeActivity
 import com.devsolutions.hygienehabitsapp.UI.App.HomeActivityViewModel
+import com.devsolutions.hygienehabitsapp.UI.Login.View.MainActivity
 import com.devsolutions.hygienehabitsapp.UI.Splash.SplashFragment
 import com.devsolutions.hygienehabitsapp.databinding.FragmentJugadoresBinding
 
@@ -60,7 +63,17 @@ class JugadoresFragment(val homeActivityViewModel: HomeActivityViewModel) : Dial
         binding.btnOkAndClose.apply {
             visibility = View.VISIBLE
             setOnClickListener {
-                Component.showMessage(requireContext(), "Cierra la aplicación, registra un usuario en el juego con el token y podrás verificar su progreso desde ésta aplicación")
+                Component.showMessage(requireContext(), "Registra un jugador y revisa aquí su progreso")
+                requireActivity().finish()
+            }
+        }
+        binding.btnLogout.apply {
+            visibility = View.VISIBLE
+            setOnClickListener {
+                prefs.isLogged = false
+                prefs.tutorToken=""
+                prefs.tutorId=0
+                navigateToActivity(requireContext(), MainActivity::class.java)
                 requireActivity().finish()
             }
         }
@@ -80,6 +93,13 @@ class JugadoresFragment(val homeActivityViewModel: HomeActivityViewModel) : Dial
         binding.btnOkAndClose.apply {
             visibility =View.GONE
         }
+        binding.btnLogout.apply {
+            visibility = View.GONE
+        }
+    }
+    private fun navigateToActivity(context: Context, destine: Class<*>) {
+        val intent = Intent(context, destine)
+        startActivity(intent)
     }
 
     private fun initRecycler(arrayList: ArrayList<JugadorModel>) {

@@ -191,15 +191,18 @@
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="16dp"
             android:padding="10dp"
-            android:hint="Agregar comentario"
+            android:hint="@string/agregar_comentario"
             android:textColorHint="@color/colorDark"
             android:textAlignment="textStart"
             android:textSize="18sp"
             android:textStyle="bold|italic"
+            android:maxLines="3"
             android:inputType="text"
             app:layout_constraintEnd_toStartOf="@id/btnHideDetails"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/infoContainer" />
+            app:layout_constraintTop_toBottomOf="@id/infoContainer"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
 
         <TextView
             android:id="@+id/btnHideDetails"
@@ -210,13 +213,14 @@
             android:background="@drawable/background_blue"
             android:textColor="@color/colorLigth"
             android:padding="10dp"
-            android:text="Listo"
+            android:text="@string/listo"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/infoContainer"
             app:layout_constraintStart_toEndOf="@id/etAddComment"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

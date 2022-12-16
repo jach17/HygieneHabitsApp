@@ -64,6 +64,8 @@ class HomeActivity() : AppCompatActivity() {
         return when (menuItem.itemId) {
             R.id.menu_logout -> {
                 prefs.isLogged = false
+                prefs.tutorToken=""
+                prefs.tutorId=0
                 navigateToActivity(this, MainActivity::class.java)
                 finish()
                 true
