@@ -2,14 +2,14 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="8dp"
     android:background="@color/colorNeutro"
     tools:context=".UI.App.Jugadores.JugadoresFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="8dp">
 
         <TextView
@@ -25,7 +25,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvListarJugadores"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/tvTitleJugadores"
             android:visibility="gone"
             tools:itemCount="2"
@@ -37,12 +37,15 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvTitleJugadores"
             android:layout_centerInParent="true"
-            android:layout_margin="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
             android:text="@string/nonplayer_registred"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="24sp"
-            />
+            android:visibility="gone"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/tvShowToken"
@@ -51,6 +54,7 @@
             android:layout_below="@id/tvJugadoresEmpty"
             android:textAlignment="center"
             android:textColor="@color/white"
+            android:visibility="gone"
             android:textSize="24sp"
             tools:text="1122221121" />
 
@@ -66,6 +70,7 @@
             android:drawableStart="@drawable/ic_clipboard"
             android:layout_marginBottom="16dp"
             android:background="@color/white"
+            android:visibility="gone"
             android:padding="16dp"
             android:text="@string/aceptar"
             android:textAlignment="center"
@@ -83,6 +88,7 @@
             android:layout_marginBottom="16dp"
             android:drawableStart="@drawable/ic_logout"
             android:background="@color/colorDark"
+            android:visibility="gone"
             android:padding="16dp"
             android:text="@string/logout"
             android:textAlignment="center"

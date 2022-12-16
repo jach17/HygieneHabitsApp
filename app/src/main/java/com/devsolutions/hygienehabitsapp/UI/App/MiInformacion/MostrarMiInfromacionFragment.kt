@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
+import com.devsolutions.hygienehabitsapp.Core.Component
 import com.devsolutions.hygienehabitsapp.Core.SharedApp.Companion.prefs
 import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.UI.App.HomeActivityViewModel
@@ -42,6 +43,9 @@ class MostrarMiInfromacionFragment(val homeActivityViewModel: HomeActivityViewMo
                     homeActivityViewModel
                 )
             )
+        }
+        binding.tvTutorToken.setOnClickListener {
+            Component.copiarTokenOnClipboard(requireContext(), prefs.tutorToken!!)
         }
     }
 

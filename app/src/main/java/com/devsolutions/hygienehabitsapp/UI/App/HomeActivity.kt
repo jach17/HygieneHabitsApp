@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.annotation.MenuRes
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -87,6 +88,8 @@ class HomeActivity() : AppCompatActivity() {
     }
 
     private fun initObservables() {
+
+
 
         homeActivityViewModel.showBtnChangePlayer.observe(this, Observer{
             if(it){

@@ -35,4 +35,5 @@
     <string name="aceptar">Aceptar y copiar token</string>
     <string name="agregar_comentario">Agregar comentario</string>
     <string name="listo">Listo</string>
+    <string name="selecionar_jugador">Selecionar jugador</string>
 </resources>

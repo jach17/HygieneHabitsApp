@@ -66,7 +66,8 @@ class JugadoresFragment(val homeActivityViewModel: HomeActivityViewModel) : Dial
         binding.btnOkAndClose.apply {
             visibility = View.VISIBLE
             setOnClickListener {
-                copiarTokenOnClipboard(prefs.tutorToken!!)
+                Component.copiarTokenOnClipboard(requireContext(), prefs.tutorToken!!)
+
                 requireActivity().finish()
             }
         }
@@ -82,16 +83,7 @@ class JugadoresFragment(val homeActivityViewModel: HomeActivityViewModel) : Dial
         }
     }
 
-    private fun copiarTokenOnClipboard(tutorToken: String) {
-        val clipboard = getSystemService(
-            requireContext(),
-            ClipboardManager::class.java
-        )
-        val clip = ClipData.newPlainText(label.toString(), tutorToken)
-        clipboard?.setPrimaryClip(clip)
-        Component.showMessage(requireContext(), "Token: $tutorToken copiado en el portapapeles")
 
-    }
 
     private fun showFullRecyclerView() {
         splash.dismiss()
