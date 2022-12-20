@@ -1,65 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardSession"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:backgroundTint="@color/colorDark"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="24dp"
-    android:layout_margin="8dp"
-    >
-    <RelativeLayout
+    android:layout_margin="16dp"
+    android:backgroundTint="@color/colorLigth"
+    app:cardCornerRadius="24dp">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginEnd="64dp"
-        android:padding="22dp">
-
-        <TextView
-            android:id="@+id/titleSessionDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="@string/session_date"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/descriptionsSessionDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/titleSessionDate"
-            android:layout_marginStart="8dp"
-            android:textColor="@color/white"
-            android:textStyle="italic"
-            tools:text="23-12-12" />
-
-        <TextView
-            android:id="@+id/titleSessionPlayingTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:layout_below="@+id/descriptionsSessionDate"
-            android:text="@string/playingtime"/>
-        <TextView
-            android:id="@+id/descriptionsSessionPlayingTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textStyle="italic"
-            android:layout_marginStart="8dp"
-            android:layout_below="@+id/titleSessionPlayingTime"
-            tools:text="2 hrs"/>
-
-    </RelativeLayout>
-    <ImageView
-        android:id="@+id/btnShowMoreSessions"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_arrow"
-        android:layout_margin="8dp"
-        android:layout_gravity="center_vertical|end"
-        />
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/containerSessionHeader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="22dp">
+
+            <TextView
+                android:id="@+id/titleSessionDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.75"
+                android:text="@string/session_date"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/descriptionsSessionDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textSize="22sp"
+                tools:text="23-Diciembre-12" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvReportsBySession"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:itemCount="6"
+            tools:listitem="@layout/item_report_by_session"
+
+            />
+    </LinearLayout>
+
 
 </androidx.cardview.widget.CardView>
