@@ -12,9 +12,9 @@ import retrofit2.Response
 class JugadorService {
     private val api = RetrofitHelper.getRetrofit().create(ApiClient::class.java)
 
-    suspend fun getReportsFromPlayerId(id: Int): Response<ListReportsResponse> {
+    suspend fun getFullReportsFromSessionId(id: Int): Response<ListFullReportsBySessionResponse> {
         return withContext(Dispatchers.IO){
-            val response = api.getReportsFromPlayerId(id)
+            val response = api.getFullReportsFromSessionId(id)
             response
         }
     }
@@ -45,6 +45,7 @@ class JugadorService {
             response
         }
     }
+
 
     suspend fun getPlayersById(id: Int): Response<ListPlayersResponse> {
         return withContext(Dispatchers.IO){

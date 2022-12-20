@@ -5,9 +5,7 @@ import androidx.annotation.RequiresApi
 import com.devsolutions.hygienehabitsapp.Core.Component
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AddFeedbackDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.FullReportDto
-import com.devsolutions.hygienehabitsapp.Data.Model.Entities.FullReportModel
-import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
-import com.devsolutions.hygienehabitsapp.Data.Model.Entities.SessionModel
+import com.devsolutions.hygienehabitsapp.Data.Model.Entities.*
 import com.devsolutions.hygienehabitsapp.Data.Service.JugadorService
 import java.time.Duration
 import java.time.LocalDate
@@ -153,55 +151,18 @@ class JugadorRepository {
         return player
     }
 
-/*
-    suspend fun getFullReportsFromSessionId(sessionId: Int): ArrayList<ReportInfoDto> {
-        /*Call to service */
 
-        /*For local working*/
-
-/*
-        private fun calculateProgr(reporteModel: ReporteModel): Float {
-            val total = 5f // MAXIMA PUNTUACION
-            val current = reporteModel.currentScoreLevel.toFloat() //CURRENT SCORE
-            return (current * 100f) / total
+    suspend fun getFullReportsFromSessionId(sessionId: Int): ArrayList<FullReportFromSessionModel> {
+        val res = api.getFullReportsFromSessionId(sessionId)
+        val result = res.body()?.result
+        var list = arrayListOf<FullReportFromSessionModel>()
+        if(result == Component.RESULT_OK){
+            list=res.body()?.message?.response!!
+        }else{
+            list.clear()
         }
-        */
-        val listOfReportsResponse = arrayListOf<ReporteModel>()
-        listOfReportsResponse.add(
-            ReporteModel(
-                "1",
-                "JonathanPlayer",
-                "11-05-2022 15:20:22",
-                "11-05-2022 15:25:22",
-                "3",
-                "Nivel 1",
-                "15"
-            )
-        )
-
-        val listOfFullReports = arrayListOf<ReportInfoDto>()
-
-        for (report in listOfReportsResponse) {
-            val sessionDate = report.dateStartLevel.split(" ")
-            //For getting playing time get difference between dateStart and dateEnd
-            val playingTime = "3 horas"
-            val progressLevel =
-                (report.currentScoreLevel.toFloat() * 100f) / report.maxScorePossible.toFloat()
-            val reportDto = ReportInfoDto(
-                report.namePlayer,
-                report.descriptionTitle,
-                sessionDate[0],
-                playingTime,
-                report.currentScoreLevel,
-                report.maxScorePossible,
-                progressLevel
-            )
-            listOfFullReports.add(reportDto)
-        }
-
-        return listOfFullReports
-
+        return list
     }
 
- */
+
 }

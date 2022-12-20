@@ -1,17 +1,13 @@
 package com.devsolutions.hygienehabitsapp.Domain
 
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.FullReportDto
+import com.devsolutions.hygienehabitsapp.Data.Model.Entities.FullReportFromSessionModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.SessionModel
 import com.devsolutions.hygienehabitsapp.Data.Repository.JugadorRepository
 
 class JugadorUseCase {
     private val repository = JugadorRepository()
-
-    suspend fun getFullReportsFromSessionId(sessionId:Int): ArrayList<FullReportDto> {
-        //return repository.getFullReportsFromSessionId(sessionId)
-        return arrayListOf<FullReportDto>()
-    }
 
     suspend fun addTutorFeedbackOnReport(reportId:Int, feedback:String): Int {
         return repository.addTutorFeedbackOnReport(reportId, feedback)
@@ -28,5 +24,8 @@ class JugadorUseCase {
     }
     suspend fun getSessionsFromPlayerId(id: Int):ArrayList<SessionModel>{
         return  repository.getSessionsFromPlayerId(id)
+    }
+    suspend fun getFullReportsFromSessionId(idSession:Int): ArrayList<FullReportFromSessionModel> {
+        return repository.getFullReportsFromSessionId(idSession)
     }
 }
