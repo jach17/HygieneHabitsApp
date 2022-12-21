@@ -1,5 +1,6 @@
 package com.devsolutions.hygienehabitsapp.UI.App.Sesiones
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +11,19 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devsolutions.hygienehabitsapp.Core.Component
+import com.devsolutions.hygienehabitsapp.Data.Model.Entities.FullReportFromSessionModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.SessionModel
 import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.UI.App.Reportes.ListarReportesAdapter
 
-class ListarSessionsAdapter(val sessionsList: ArrayList<SessionModel>, val layout: Int, val sessionesViewModel: SessionesViewModel) :
+class ListarSessionsAdapter(
+    val sessionsList: ArrayList<SessionModel>,
+    val layout: Int,
+    val sessionesViewModel: SessionesViewModel
+) :
     RecyclerView.Adapter<ListarSessionsAdapter.ViewHolder>() {
 
-    class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+    class ViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
         val tvSessionDate = v.findViewById<TextView>(R.id.descriptionsSessionDate)
         val btnShowMore = v.findViewById<CardView>(R.id.cardSession)
         val rvReportsFromSessionId = v.findViewById<RecyclerView>(R.id.rvReportsBySession)
@@ -25,12 +31,21 @@ class ListarSessionsAdapter(val sessionsList: ArrayList<SessionModel>, val layou
 
         fun bind(sessionModel: SessionModel, svm: SessionesViewModel) {
             svm.getReportsFromSessionId(sessionModel.idSesion)
-            tvSessionDate.text = sessionModel.dateStart
+            tvSessionDate.text = sessionModel.dateStart.split(" ")[0]
+
+            val lista = arrayListOf<FullReportFromSessionModel>()
+            lista.add(FullReportFromSessionModel(1, "descr", "dateStart", "dateEnd", "cs", "23", "date", "123"))
 
             rvReportsFromSessionId.apply {
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                adapter = ListarReportesBySessionAdapter(svm.getListReportsBySession(), R.layout.item_session_card)
+                layoutManager =
+                    LinearLayoutManager(v.context, LinearLayoutManager.VERTICAL, false)
+                adapter = ListarReportesBySessionAdapter(
+                    lista,
+                    R.layout.item_report_by_session
+                )
             }
+
+
 
             btnShowMore.setOnClickListener {
                 Component.showMessage(
@@ -40,6 +55,7 @@ class ListarSessionsAdapter(val sessionsList: ArrayList<SessionModel>, val layou
 
             }
         }
+
 
     }
 

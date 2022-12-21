@@ -37,6 +37,7 @@ class ListarSesionesFragment(val homeActivityViewModel: HomeActivityViewModel) :
         splash.show(parentFragmentManager, "SPLASH")
         listarSessionesViewModel.getSessionsFromPlayerId(homeActivityViewModel.getIdPlayer())
 
+
         initObservables()
 
 
@@ -70,13 +71,17 @@ class ListarSesionesFragment(val homeActivityViewModel: HomeActivityViewModel) :
     }
 
     private fun initRecycler(arrayList: ArrayList<SessionModel>) {
+        try{
         binding.tvEmptyListView.apply {
             visibility = View.GONE
         }
         binding.rvListarSessions.apply {
             visibility = View.VISIBLE
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            adapter = ListarSessionsAdapter(arrayList, R.layout.item_session_card)
+            adapter = ListarSessionsAdapter(arrayList, R.layout.item_session_card, listarSessionesViewModel)
+        }
+        }catch(e:Exception){
+            Component.showMessage(requireContext(), "Error en 84: ${e.message}")
         }
     }
 
