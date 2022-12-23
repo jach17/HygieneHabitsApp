@@ -10,6 +10,7 @@ import android.window.SplashScreen
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devsolutions.hygienehabitsapp.Core.Component
+import com.devsolutions.hygienehabitsapp.Data.Model.Dto.SessionWithReports
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.ReporteModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.SessionModel
 import com.devsolutions.hygienehabitsapp.R
@@ -70,7 +71,7 @@ class ListarSesionesFragment(val homeActivityViewModel: HomeActivityViewModel) :
         }
     }
 
-    private fun initRecycler(arrayList: ArrayList<SessionModel>) {
+    private fun initRecycler(arrayList: ArrayList<SessionWithReports>) {
         try{
         binding.tvEmptyListView.apply {
             visibility = View.GONE
@@ -78,7 +79,7 @@ class ListarSesionesFragment(val homeActivityViewModel: HomeActivityViewModel) :
         binding.rvListarSessions.apply {
             visibility = View.VISIBLE
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            adapter = ListarSessionsAdapter(arrayList, R.layout.item_session_card, listarSessionesViewModel)
+            adapter = ListarSessionsAdapter(arrayList, R.layout.item_session_card)
         }
         }catch(e:Exception){
             Component.showMessage(requireContext(), "Error en 84: ${e.message}")

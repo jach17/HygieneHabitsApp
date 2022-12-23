@@ -1,6 +1,7 @@
 package com.devsolutions.hygienehabitsapp.Domain
 
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.FullReportDto
+import com.devsolutions.hygienehabitsapp.Data.Model.Dto.SessionWithReports
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.FullReportFromSessionModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.SessionModel
@@ -22,7 +23,7 @@ class JugadorUseCase {
     suspend fun getPlayersById(id: Int): JugadorModel? {
         return repository.getPlayerById(id)
     }
-    suspend fun getSessionsFromPlayerId(id: Int):ArrayList<SessionModel>{
+    suspend fun getSessionsFromPlayerId(id: Int):ArrayList<SessionWithReports>{
         return  repository.getSessionsFromPlayerId(id)
     }
     suspend fun getFullReportsFromSessionId(idSession:Int): ArrayList<FullReportFromSessionModel> {

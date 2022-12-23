@@ -1,62 +1,25 @@
 package com.devsolutions.hygienehabitsapp.UI.App.Sesiones
 
-import android.util.Log
+import android.animation.LayoutTransition
+import android.transition.AutoTransition
+import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.cardview.widget.CardView
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.fragment.app.DialogFragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.devsolutions.hygienehabitsapp.Core.Component
-import com.devsolutions.hygienehabitsapp.Data.Model.Entities.FullReportFromSessionModel
-import com.devsolutions.hygienehabitsapp.Data.Model.Entities.SessionModel
-import com.devsolutions.hygienehabitsapp.R
-import com.devsolutions.hygienehabitsapp.UI.App.Reportes.ListarReportesAdapter
+import com.devsolutions.hygienehabitsapp.Data.Model.Dto.SessionWithReports
+import com.devsolutions.hygienehabitsapp.databinding.ItemSessionCardBinding
 
 class ListarSessionsAdapter(
-    val sessionsList: ArrayList<SessionModel>,
-    val layout: Int,
-    val sessionesViewModel: SessionesViewModel
+    val sessionsList: ArrayList<SessionWithReports>,
+    val layout: Int
 ) :
     RecyclerView.Adapter<ListarSessionsAdapter.ViewHolder>() {
 
-    class ViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
-        val tvSessionDate = v.findViewById<TextView>(R.id.descriptionsSessionDate)
-        val btnShowMore = v.findViewById<CardView>(R.id.cardSession)
-        val rvReportsFromSessionId = v.findViewById<RecyclerView>(R.id.rvReportsBySession)
-
-
-        fun bind(sessionModel: SessionModel, svm: SessionesViewModel) {
-            svm.getReportsFromSessionId(sessionModel.idSesion)
-            tvSessionDate.text = sessionModel.dateStart.split(" ")[0]
-
-            val lista = arrayListOf<FullReportFromSessionModel>()
-            lista.add(FullReportFromSessionModel(1, "descr", "dateStart", "dateEnd", "cs", "23", "date", "123"))
-
-            rvReportsFromSessionId.apply {
-                layoutManager =
-                    LinearLayoutManager(v.context, LinearLayoutManager.VERTICAL, false)
-                adapter = ListarReportesBySessionAdapter(
-                    lista,
-                    R.layout.item_report_by_session
-                )
-            }
-
-
-
-            btnShowMore.setOnClickListener {
-                Component.showMessage(
-                    it.context,
-                    "Card with id: ${sessionModel.idSesion} for calling reports"
-                )
-
-            }
-        }
-
-
+    class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+        val binding = ItemSessionCardBinding.bind(v)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -65,8 +28,29 @@ class ListarSessionsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(sessionsList[position], sessionesViewModel)
+        holder.binding.apply {
+            val item = sessionsList[position]
+            descriptionsSessionDate.text = item.dateStart.split(" ")[Component.GET_DATE]
+            val adapterReports = ListarReportesBySessionAdapter(item.reportsOfSession)
+            rvReportsBySession.adapter = adapterReports
+            layoutContainer.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+
+            cardSession.setOnClickListener {
+                expand(rvReportsBySession, layoutContainer, it)
+            }
+        }
     }
+
+    private fun expand(rvReports: RecyclerView, layout: LinearLayout, view: View) {
+        val visibleState = if (rvReports.visibility == View.GONE) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
+        TransitionManager.beginDelayedTransition(layout, AutoTransition())
+        rvReports.visibility = visibleState
+    }
+
 
     override fun getItemCount(): Int {
         return sessionsList.size

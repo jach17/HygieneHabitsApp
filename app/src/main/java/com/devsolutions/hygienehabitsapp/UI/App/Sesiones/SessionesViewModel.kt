@@ -3,6 +3,7 @@ package com.devsolutions.hygienehabitsapp.UI.App.Sesiones
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.devsolutions.hygienehabitsapp.Data.Model.Dto.SessionWithReports
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.FullReportFromSessionModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.SessionModel
 import com.devsolutions.hygienehabitsapp.Domain.JugadorUseCase
@@ -11,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class SessionesViewModel:ViewModel() {
     val jugadorUseCase=JugadorUseCase()
-    val sessionsList = MutableLiveData<ArrayList<SessionModel>>()
+    val sessionsList = MutableLiveData<ArrayList<SessionWithReports>>()
     val listReportsBySession = MutableLiveData<ArrayList<FullReportFromSessionModel>>()
 
 

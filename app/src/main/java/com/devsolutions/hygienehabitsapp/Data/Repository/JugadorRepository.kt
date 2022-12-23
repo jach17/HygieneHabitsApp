@@ -1,19 +1,18 @@
 package com.devsolutions.hygienehabitsapp.Data.Repository
 
 import android.os.Build
-import androidx.annotation.RequiresApi
 import com.devsolutions.hygienehabitsapp.Core.Component
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AddFeedbackDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.FullReportDto
-import com.devsolutions.hygienehabitsapp.Data.Model.Entities.*
+import com.devsolutions.hygienehabitsapp.Data.Model.Dto.SessionWithReports
+import com.devsolutions.hygienehabitsapp.Data.Model.Entities.FullReportFromSessionModel
+import com.devsolutions.hygienehabitsapp.Data.Model.Entities.FullReportModel
+import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
+import com.devsolutions.hygienehabitsapp.Data.Model.Entities.SessionModel
 import com.devsolutions.hygienehabitsapp.Data.Service.JugadorService
 import java.time.Duration
-import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.Period
 import java.time.format.DateTimeFormatter
-import kotlin.collections.ArrayList
-import kotlin.math.abs
 
 class JugadorRepository {
     private val api = JugadorService()
@@ -65,7 +64,7 @@ class JugadorRepository {
                 )
             }
         } catch (e: Exception) {
-            println("Error on repository line 63: ${e.message}")
+            println("Error on repository line 67: ${e.message}")
         }
         return listReportDto
     }
@@ -75,8 +74,8 @@ class JugadorRepository {
         var time = ""
         if (dateList[1].length == 7) {
             time = "0${dateList[1]}"
-        }else{
-            time=dateList[1]
+        } else {
+            time = dateList[1]
         }
 
 
@@ -112,8 +111,8 @@ class JugadorRepository {
         return out
     }
 
-    suspend fun getSessionsFromPlayerId(id: Int): ArrayList<SessionModel> {
-        var listSessions = arrayListOf<SessionModel>()
+    suspend fun getSessionsFromPlayerId(id: Int): ArrayList<SessionWithReports> {
+        val listSessions = arrayListOf<SessionWithReports>()
         try {
             val res = api.getSessionsFromPlayerId(id)
             val result = res.body()?.result
@@ -121,10 +120,40 @@ class JugadorRepository {
             if (result == Component.RESULT_OK) {
                 list = res.body()?.message?.response!!
             }
-            listSessions = list
+
+            list.forEach {
+                val reportsBySession = getFullReportsFromSessionId(it.idSesion)
+
+                listSessions.add(
+                    SessionWithReports(
+                        it.idSesion,
+                        it.dateStart,
+                        it.dateEnd,
+                        it.idPlayerOwner,
+                        reportsBySession
+                    )
+                )
+            }
+
 
         } catch (e: Exception) {
             println("Error on jugadorRepo, line 109")
+            listSessions.add(
+                SessionWithReports(
+                    1, "DATESTART", "DATEEND", 1, arrayListOf<FullReportFromSessionModel>(
+                        FullReportFromSessionModel(
+                            1,
+                            "descripcion",
+                            "datestart",
+                            "dateEnd",
+                            "23",
+                            "45",
+                            "datestart",
+                            "tutorfeedback"
+                        )
+                    )
+                )
+            )
         }
         return listSessions
     }
@@ -156,9 +185,9 @@ class JugadorRepository {
         val res = api.getFullReportsFromSessionId(sessionId)
         val result = res.body()?.result
         var list = arrayListOf<FullReportFromSessionModel>()
-        if(result == Component.RESULT_OK){
-            list=res.body()?.message?.response!!
-        }else{
+        if (result == Component.RESULT_OK) {
+            list = res.body()?.message?.response!!
+        } else {
             list.clear()
         }
         return list

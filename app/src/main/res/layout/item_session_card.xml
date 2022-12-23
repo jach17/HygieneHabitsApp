@@ -40,14 +40,22 @@
                 tools:text="23-Diciembre-12" />
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvReportsBySession"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:itemCount="6"
-            tools:listitem="@layout/item_report_by_session"
+       <LinearLayout
+           android:id="@+id/layoutContainer"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:animateLayoutChanges="true"
+           >
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/rvReportsBySession"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               tools:itemCount="6"
+               tools:listitem="@layout/item_report_by_session"
 
-            />
+               />
+       </LinearLayout>
     </LinearLayout>
 
 
