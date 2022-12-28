@@ -10,15 +10,6 @@ import java.util.*
 class TutorRepository {
     private val api = TutorService()
 
-    suspend fun getAllTutors(): List<TutorModel> {
-        val res = api.getAllTutors()
-        var tutorsList = arrayListOf<TutorModel>()
-        if (res.body()?.result == Component.RESULT_OK) {
-            tutorsList = res.body()?.message?.response!! as ArrayList<TutorModel>
-        }
-        return tutorsList
-    }
-
     suspend fun authUser(user: String, password: String): Boolean {
         var isRegister = false
         try {
@@ -28,19 +19,23 @@ class TutorRepository {
                 isRegister = res.body()?.message?.response?.get(0)!!.isRegistred
             }
         } catch (e: Exception) {
+            isRegister = false
             println("Error on tutor repo line 30")
         }
         return isRegister
     }
 
     suspend fun crearCuenta(username: String, age: String, password: String): Int {
-        //AutomatizeTokenGeneration
-        val token: String = getTokenTutor(username)
-        val res = api.addUser(AddUserDto(username, password, age, token))
-        val result = res.body()?.result
         var insertedId = 0
-        if (result == Component.RESULT_OK) {
-            insertedId = res.body()?.message?.response?.get(0)!!.insertedId
+        try {
+            val token: String = getTokenTutor(username)
+            val res = api.addUser(AddUserDto(username, password, age, token))
+            val result = res.body()?.result
+            if (result == Component.RESULT_OK) {
+                insertedId = res.body()?.message?.response?.get(0)!!.insertedId
+            }
+        } catch (e: Exception) {
+            println("Error on repo line 48. ${e.message}")
         }
         return insertedId
     }
@@ -57,13 +52,21 @@ class TutorRepository {
         return "$name$day$month$year$hour$minute$second"
     }
 
-    suspend fun getTutorById(tutorId: Int): TutorModel {
+    suspend fun getTutorById(tutorId: Int): TutorModel? {
+
+        var tutorSelected:TutorModel?
+        try{
         val res = api.getTutorById(tutorId)
         var tutorsList = arrayListOf<TutorModel>()
         if (res.body()?.result == Component.RESULT_OK) {
             tutorsList = res.body()?.message?.response!!
         }
-        return tutorsList[0]
+            tutorSelected =tutorsList[0]
+        }catch(e:Exception){
+            tutorSelected=null
+            println("Error on tutor repo. Line 74")
+        }
+        return tutorSelected
     }
 
 

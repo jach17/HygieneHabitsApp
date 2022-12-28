@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.UI.Login.View.MainActivity
 import com.devsolutions.hygienehabitsapp.UI.Signup.ViewModel.SignupViewModel
 import com.devsolutions.hygienehabitsapp.UI.Splash.SplashFragment
@@ -25,10 +26,9 @@ class SignupActivity : AppCompatActivity() {
         signupViewModel.idCreated.observe(this, Observer {
             splash.dismiss()
             if(it!=0){
-                Toast.makeText(this, "Cuenta creada", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.cuenta_creada), Toast.LENGTH_SHORT).show()
             }else{
-                //Manage the error message from response
-                Toast.makeText(this, "Ocurrió un error al crear la cuenta", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.error_crear_cuenta), Toast.LENGTH_SHORT).show()
             }
             navigateToActivity(this.applicationContext, MainActivity::class.java)
         })

@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class MiInformacionViewModel:ViewModel() {
     val tutorUseCase = TutorUseCase()
-    val tutorInfo = MutableLiveData<TutorModel>()
+    val tutorInfo = MutableLiveData<TutorModel?>()
 
     fun getTutorInfoById(tutorId: Int) {
         viewModelScope.launch(Dispatchers.IO) {

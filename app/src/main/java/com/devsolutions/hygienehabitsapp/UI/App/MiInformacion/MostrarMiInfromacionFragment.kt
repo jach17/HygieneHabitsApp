@@ -56,9 +56,13 @@ class MostrarMiInfromacionFragment(val homeActivityViewModel: HomeActivityViewMo
     private fun initObservables() {
         miinfoViewModel.tutorInfo.observe(this.viewLifecycleOwner, Observer {
             splash.dismiss()
-            binding.tvNameTutor.text = it.nameTutor
-            binding.tvAgeTutor.text = it.ageTutor
-            binding.tvTutorToken.text = it.authTokenTutor
+            if(it!=null){
+                binding.tvNameTutor.text = it.nameTutor
+                binding.tvAgeTutor.text = it.ageTutor
+                binding.tvTutorToken.text = it.authTokenTutor
+            }else{
+                //Error for null tutor
+            }
         })
     }
 

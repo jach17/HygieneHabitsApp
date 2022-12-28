@@ -36,4 +36,6 @@
     <string name="agregar_comentario">Agregar comentario</string>
     <string name="listo">Listo</string>
     <string name="selecionar_jugador">Selecionar jugador</string>
+    <string name="cuenta_creada">Cuenta creada</string>
+    <string name="error_crear_cuenta">Ocurrió un error al crear la cuenta</string>
 </resources>

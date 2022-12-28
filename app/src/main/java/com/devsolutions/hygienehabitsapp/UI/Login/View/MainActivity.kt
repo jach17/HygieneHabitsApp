@@ -41,8 +41,6 @@ class MainActivity : AppCompatActivity() {
             }else{
                 Component.showMessage(applicationContext, "User not registered")
             }
-            /* FOR LOCAL WORKING*/
-            navigateToActivity(this, HomeActivity::class.java)
         })
     }
 
