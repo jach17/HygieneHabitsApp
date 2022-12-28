@@ -72,13 +72,11 @@ class JugadorRepository {
     private fun getCorrectFormatForDate(date: String): String {
         val dateList = date.split(" ")
         var time = ""
-        if (dateList[1].length == 7) {
-            time = "0${dateList[1]}"
+        time = if (dateList[1].length == 7) {
+            "0${dateList[1]}"
         } else {
-            time = dateList[1]
+            dateList[1]
         }
-
-
         return "${dateList[0]} $time"
     }
 
@@ -123,7 +121,6 @@ class JugadorRepository {
 
             list.forEach {
                 val reportsBySession = getFullReportsFromSessionId(it.idSesion)
-
                 listSessions.add(
                     SessionWithReports(
                         it.idSesion,
@@ -134,64 +131,59 @@ class JugadorRepository {
                     )
                 )
             }
-
-
         } catch (e: Exception) {
             println("Error on jugadorRepo, line 109")
-            listSessions.add(
-                SessionWithReports(
-                    1, "DATESTART", "DATEEND", 1, arrayListOf<FullReportFromSessionModel>(
-                        FullReportFromSessionModel(
-                            1,
-                            "descripcion",
-                            "datestart",
-                            "dateEnd",
-                            "23",
-                            "45",
-                            "datestart",
-                            "tutorfeedback"
-                        )
-                    )
-                )
-            )
+            listSessions.clear()
         }
         return listSessions
     }
 
     suspend fun getPlayersFromTutorId(id: Int): ArrayList<JugadorModel> {
-        val res = api.getPlayersByTutorId(id)
-        val result = res.body()?.result
         var list = arrayListOf<JugadorModel>()
-        if (result == Component.RESULT_OK) {
-            list = res.body()?.message?.response!!
-        } else {
+        try {
+            val res = api.getPlayersByTutorId(id)
+            val result = res.body()?.result
+            if (result == Component.RESULT_OK) {
+                list = res.body()?.message?.response!!
+            } else {
+                list.clear()
+            }
+        } catch (e: Exception) {
+            println("Error on jugador repo line 152. E: ${e.message}")
             list.clear()
         }
         return list
     }
 
     suspend fun getPlayerById(id: Int): JugadorModel? {
-        val res = api.getPlayersById(id)
-        val result = res.body()?.result
         var player: JugadorModel? = null
-        if (result == Component.RESULT_OK) {
-            player = res.body()?.message?.response!![0]
+        try {
+            val res = api.getPlayersById(id)
+            val result = res.body()?.result
+            if (result == Component.RESULT_OK) {
+                player = res.body()?.message?.response!![0]
+            }
+        } catch (e: Exception) {
+            println("Error on jugador repo. Line 167 ${e.message}")
         }
         return player
     }
 
 
     suspend fun getFullReportsFromSessionId(sessionId: Int): ArrayList<FullReportFromSessionModel> {
-        val res = api.getFullReportsFromSessionId(sessionId)
-        val result = res.body()?.result
         var list = arrayListOf<FullReportFromSessionModel>()
-        if (result == Component.RESULT_OK) {
-            list = res.body()?.message?.response!!
-        } else {
+        try {
+            val res = api.getFullReportsFromSessionId(sessionId)
+            val result = res.body()?.result
+            if (result == Component.RESULT_OK) {
+                list = res.body()?.message?.response!!
+            } else {
+                list.clear()
+            }
+        } catch (e:Exception) {
+            println("Error on jugador repo. Line 184 ${e.message}")
             list.clear()
         }
         return list
     }
-
-
 }
