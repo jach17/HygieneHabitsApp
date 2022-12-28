@@ -2,13 +2,12 @@ package com.devsolutions.hygienehabitsapp.UI.App
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.annotation.MenuRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -18,11 +17,12 @@ import com.devsolutions.hygienehabitsapp.Core.SharedApp.Companion.prefs
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.JugadorModel
 import com.devsolutions.hygienehabitsapp.Domain.JugadorUseCase
 import com.devsolutions.hygienehabitsapp.R
-import com.devsolutions.hygienehabitsapp.UI.App.ViewAdapter.ViewPagerAdapter
 import com.devsolutions.hygienehabitsapp.UI.App.Jugadores.JugadoresFragment
 import com.devsolutions.hygienehabitsapp.UI.App.MiInformacion.MostrarMiInfromacionFragment
 import com.devsolutions.hygienehabitsapp.UI.App.Reportes.ListarReportesFragment
 import com.devsolutions.hygienehabitsapp.UI.App.Sesiones.ListarSesionesFragment
+import com.devsolutions.hygienehabitsapp.UI.App.ViewAdapter.ViewPagerAdapter
+import com.devsolutions.hygienehabitsapp.UI.Error.OnErrorFragment
 import com.devsolutions.hygienehabitsapp.UI.Login.View.MainActivity
 import com.devsolutions.hygienehabitsapp.UI.Splash.SplashFragment
 import com.devsolutions.hygienehabitsapp.databinding.ActivityHomeBinding
@@ -65,8 +65,8 @@ class HomeActivity() : AppCompatActivity() {
         return when (menuItem.itemId) {
             R.id.menu_logout -> {
                 prefs.isLogged = false
-                prefs.tutorToken=""
-                prefs.tutorId=0
+                prefs.tutorToken = ""
+                prefs.tutorId = 0
                 navigateToActivity(this, MainActivity::class.java)
                 finish()
                 true
@@ -90,13 +90,12 @@ class HomeActivity() : AppCompatActivity() {
     private fun initObservables() {
 
 
-
-        homeActivityViewModel.showBtnChangePlayer.observe(this, Observer{
-            if(it){
+        homeActivityViewModel.showBtnChangePlayer.observe(this, Observer {
+            if (it) {
                 binding.tvPlayerSelected.apply {
                     visibility = View.VISIBLE
                 }
-            }else{
+            } else {
                 binding.tvPlayerSelected.apply {
                     visibility = View.GONE
                 }
@@ -104,11 +103,11 @@ class HomeActivity() : AppCompatActivity() {
         })
 
         homeActivityViewModel.playerSelected.observe(this, Observer {
-            if(it!=null){
+            if (it != null) {
                 binding.tvPlayerSelectedName.text = it.namePlayer
-            }else{
-                //Show dialog info
-                Component.showMessage(applicationContext, "Ocurrió un error al seleccionar el jugador")
+            } else {
+                val error_screen = OnErrorFragment("Error al seleccionar un jugador")
+                error_screen.show(supportFragmentManager, "ERROR")
             }
         })
 
@@ -164,14 +163,13 @@ class HomeActivityViewModel : ViewModel() {
     val showBtnChangePlayer = MutableLiveData<Boolean>()
 
 
-    fun showBtnPlayer(){
+    fun showBtnPlayer() {
         showBtnChangePlayer.postValue(true)
     }
 
-    fun hideBtnPlayer(){
+    fun hideBtnPlayer() {
         showBtnChangePlayer.postValue(false)
     }
-
 
 
     fun getPlayerById(id: Int) {

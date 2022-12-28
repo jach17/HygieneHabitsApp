@@ -38,4 +38,8 @@
     <string name="selecionar_jugador">Selecionar jugador</string>
     <string name="cuenta_creada">Cuenta creada</string>
     <string name="error_crear_cuenta">Ocurrió un error al crear la cuenta</string>
+    <string name="error_on_login">Ocurrió un error al iniciar sesión</string>
+    <string name="splash">SPLASH</string>
+    <string name="alg_sali_mal">Un error a ocurrido</string>
+    <string name="esperando_informaci_n">Esperando información</string>
 </resources>

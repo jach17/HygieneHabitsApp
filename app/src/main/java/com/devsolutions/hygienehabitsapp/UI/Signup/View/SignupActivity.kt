@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.devsolutions.hygienehabitsapp.R
+import com.devsolutions.hygienehabitsapp.UI.Error.OnErrorFragment
 import com.devsolutions.hygienehabitsapp.UI.Login.View.MainActivity
 import com.devsolutions.hygienehabitsapp.UI.Signup.ViewModel.SignupViewModel
 import com.devsolutions.hygienehabitsapp.UI.Splash.SplashFragment
@@ -28,9 +29,9 @@ class SignupActivity : AppCompatActivity() {
             if(it!=0){
                 Toast.makeText(this, getString(R.string.cuenta_creada), Toast.LENGTH_SHORT).show()
             }else{
-                Toast.makeText(this, getString(R.string.error_crear_cuenta), Toast.LENGTH_SHORT).show()
+                val error_screen = OnErrorFragment(getString(R.string.error_crear_cuenta))
+                error_screen.show(supportFragmentManager, "ERROR")
             }
-            navigateToActivity(this.applicationContext, MainActivity::class.java)
         })
     }
 

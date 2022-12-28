@@ -1,21 +1,16 @@
 package com.devsolutions.hygienehabitsapp.UI.App.Sesiones
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import android.window.SplashScreen
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devsolutions.hygienehabitsapp.Core.Component
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.SessionWithReports
-import com.devsolutions.hygienehabitsapp.Data.Model.Entities.ReporteModel
-import com.devsolutions.hygienehabitsapp.Data.Model.Entities.SessionModel
 import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.UI.App.HomeActivityViewModel
-import com.devsolutions.hygienehabitsapp.UI.App.Reportes.ListarReportesAdapter
 import com.devsolutions.hygienehabitsapp.UI.Splash.SplashFragment
 import com.devsolutions.hygienehabitsapp.databinding.FragmentListarSesionesBinding
 
@@ -53,10 +48,9 @@ class ListarSesionesFragment(val homeActivityViewModel: HomeActivityViewModel) :
     private fun initObservables() {
         listarSessionesViewModel.sessionsList.observe(this.viewLifecycleOwner, Observer {
             splash.dismiss()
-
-            if(it[0].idSesion!=0){
+            if (it[0].idSesion != 0) {
                 initRecycler(it)
-            }else{
+            } else {
                 showEmptyView()
             }
         })
@@ -72,17 +66,18 @@ class ListarSesionesFragment(val homeActivityViewModel: HomeActivityViewModel) :
     }
 
     private fun initRecycler(arrayList: ArrayList<SessionWithReports>) {
-        try{
-        binding.tvEmptyListView.apply {
-            visibility = View.GONE
-        }
-        binding.rvListarSessions.apply {
-            visibility = View.VISIBLE
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            adapter = ListarSessionsAdapter(arrayList, R.layout.item_session_card)
-        }
-        }catch(e:Exception){
-            Component.showMessage(requireContext(), "Error en 84: ${e.message}")
+        try {
+            binding.tvEmptyListView.apply {
+                visibility = View.GONE
+            }
+            binding.rvListarSessions.apply {
+                visibility = View.VISIBLE
+                layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                adapter = ListarSessionsAdapter(arrayList, R.layout.item_session_card)
+            }
+        } catch (e: Exception) {
+            Component.showMessage(requireContext(), "Error en view list sessions fragment 84: ${e.message}")
         }
     }
 
