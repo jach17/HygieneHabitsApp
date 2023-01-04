@@ -125,7 +125,7 @@ class JugadorRepository {
                     SessionWithReports(
                         it.idSesion,
                         it.dateStart,
-                        it.dateEnd,
+                        it.dateStart,
                         it.idPlayerOwner,
                         reportsBySession
                     )

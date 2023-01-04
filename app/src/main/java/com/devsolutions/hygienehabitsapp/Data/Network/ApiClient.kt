@@ -23,7 +23,7 @@ interface ApiClient {
     @GET("list/fullreports/player/{id}")
     suspend fun getFullReportsFromPlayerId(@Path("id") id:Int):Response<ListFullReportsResponse>
 
-    @GET("list/fullreports/session/{id}")
+    @GET("list/fullreports/sessions/{id}")
     suspend fun getFullReportsFromSessionId(@Path("id") id:Int):Response<ListFullReportsBySessionResponse>
 
     @GET("list/sesions/player/{id}")

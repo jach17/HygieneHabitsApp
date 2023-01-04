@@ -1,5 +1,6 @@
 package com.devsolutions.hygienehabitsapp.UI.App.Sesiones
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,11 +24,12 @@ class ListarReportesBySessionAdapter(
         )
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.apply {
             val item = listReportsBySession[position]
             tvLevelPlayedOnSession.text = item.descriptionTitle
-            tvTimePlayedOnSession.text = item.currentScoreLevel
+            tvTimePlayedOnSession.text = "${item.currentScoreLevel} de ${item.maxScore}"
         }
     }
 

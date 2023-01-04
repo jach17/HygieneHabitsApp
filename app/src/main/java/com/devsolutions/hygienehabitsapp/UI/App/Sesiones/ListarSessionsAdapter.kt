@@ -10,20 +10,20 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.devsolutions.hygienehabitsapp.Core.Component
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.SessionWithReports
+import com.devsolutions.hygienehabitsapp.R
 import com.devsolutions.hygienehabitsapp.databinding.ItemSessionCardBinding
 
 class ListarSessionsAdapter(
-    val sessionsList: ArrayList<SessionWithReports>,
-    val layout: Int
+    val sessionsList: ArrayList<SessionWithReports>
 ) :
     RecyclerView.Adapter<ListarSessionsAdapter.ViewHolder>() {
 
-    class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+    inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val binding = ItemSessionCardBinding.bind(v)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_session_card, parent, false)
         return ViewHolder(view)
     }
 
@@ -47,6 +47,7 @@ class ListarSessionsAdapter(
         } else {
             View.GONE
         }
+
         TransitionManager.beginDelayedTransition(layout, AutoTransition())
         rvReports.visibility = visibleState
     }

@@ -49,6 +49,7 @@ class ListarSesionesFragment(val homeActivityViewModel: HomeActivityViewModel) :
         listarSessionesViewModel.sessionsList.observe(this.viewLifecycleOwner, Observer {
             splash.dismiss()
             if (it[0].idSesion != 0) {
+                Component.showMessage(requireContext(), "Size of reports: ${it[0].reportsOfSession.size}")
                 initRecycler(it)
             } else {
                 showEmptyView()
@@ -72,9 +73,7 @@ class ListarSesionesFragment(val homeActivityViewModel: HomeActivityViewModel) :
             }
             binding.rvListarSessions.apply {
                 visibility = View.VISIBLE
-                layoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-                adapter = ListarSessionsAdapter(arrayList, R.layout.item_session_card)
+                adapter = ListarSessionsAdapter(arrayList)
             }
         } catch (e: Exception) {
             Component.showMessage(requireContext(), "Error en view list sessions fragment 84: ${e.message}")
