@@ -28,7 +28,8 @@
                 android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                tools:text="23-Diciembre-12" />
+                tools:text="23-Diciembre-12"
+                app:drawableEndCompat="@drawable/ic_showmore" />
         </LinearLayout>
 
        <LinearLayout

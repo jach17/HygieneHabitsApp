@@ -37,6 +37,9 @@ class ListarSessionsAdapter(
 
             cardSession.setOnClickListener {
                 expand(rvReportsBySession, layoutContainer, it)
+                if(item.reportsOfSession.isEmpty()){
+                    Component.showMessage(it.context, "No hay reportes registrados para esta sesión")
+                }
             }
         }
     }

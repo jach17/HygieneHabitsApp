@@ -176,7 +176,12 @@ class JugadorRepository {
             val res = api.getFullReportsFromSessionId(sessionId)
             val result = res.body()?.result
             if (result == Component.RESULT_OK) {
-                list = res.body()?.message?.response!!
+                val listaCompleta = res.body()?.message?.response!!
+                listaCompleta.forEach {
+                    if(it.idReport!=0){
+                        list.add(it)
+                    }
+                }
             } else {
                 list.clear()
             }
