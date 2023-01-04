@@ -1,5 +1,6 @@
 package com.devsolutions.hygienehabitsapp.Data.Model.Responses
 
+import com.devsolutions.hygienehabitsapp.Data.Model.Responses.MessageSuccess.MessageSuccessAddUserResponse
 import com.google.gson.annotations.SerializedName
 
 data class AddResponse(

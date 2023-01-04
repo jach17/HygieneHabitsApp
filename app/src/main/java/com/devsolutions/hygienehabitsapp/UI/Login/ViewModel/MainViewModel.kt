@@ -1,9 +1,11 @@
 package com.devsolutions.hygienehabitsapp.UI.Login.ViewModel
 
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.devsolutions.hygienehabitsapp.Core.SharedApp.Companion.prefs
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.TutorModel
 import com.devsolutions.hygienehabitsapp.Domain.TutorUseCase
 import kotlinx.coroutines.Dispatchers
@@ -16,20 +18,16 @@ class MainViewModel : ViewModel() {
 
 
 
-    fun getAllTutors(){
-        viewModelScope.launch(Dispatchers.IO) {
-            tutorList.postValue(tutorUseCase.getAllTutor())
-        }
-    }
-
     fun authUser(user: String, password: String) {
         viewModelScope.launch (Dispatchers.IO){
             if(tutorUseCase.authUser(user, password)){
                 isLogged.postValue(true)
-
             }else{
                 isLogged.postValue(false)
             }
         }
     }
+
+
+
 }

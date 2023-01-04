@@ -10,13 +10,15 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/ic_launcher"
+        android:allowClearUserData="true"
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.HygieneHabitsApp"
+        android:name=".Core.SharedApp"
         tools:targetApi="31">
         <activity
-            android:name=".HomeActivity"
+            android:name=".UI.App.HomeActivity"
             android:exported="false" />
         <activity
             android:name=".UI.Signup.View.SignupActivity"

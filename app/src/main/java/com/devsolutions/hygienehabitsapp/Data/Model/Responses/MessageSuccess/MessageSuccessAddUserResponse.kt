@@ -1,4 +1,4 @@
-package com.devsolutions.hygienehabitsapp.Data.Model.Responses
+package com.devsolutions.hygienehabitsapp.Data.Model.Responses.MessageSuccess
 
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.InsertedModel
 import com.devsolutions.hygienehabitsapp.Data.Model.Entities.RegistredModel

@@ -13,5 +13,33 @@
     <string name="crear">Crear cuenta</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="cargando">Cargando...</string>
+    <string name="cargando">Cargando…</string>
+    <string name="reportes">Reportes</string>
+    <string name="sessions">Sesiones</string>
+    <string name="miinfo">Mi información</string>
+    <string name="level1">Personal hygiene</string>
+    <string name="maxsocre">Maxima puntuación</string>
+    <string name="maxscoretest">4.5/5.0</string>
+    <string name="playingtime">Tiempo de juego</string>
+    <string name="playingTimeDescription">2 hrs</string>
+    <string name="progress">Progreso</string>
+    <string name="progressTest">68%</string>
+    <string name="namePlayer">Nombre</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="habits_home">Habits Home</string>
+    <string name="session_date">Fecha de la sesión</string>
+    <string name="passwordHint">******</string>
+    <string name="lorem_level_tool">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen.</string>
+    <string name="nonplayer_registred">Actualmente no estás supervisando a ningun jugador\nUtiliza este token al registrar un nuevo usuario en el juego</string>
+    <string name="token">Token</string>
+    <string name="aceptar">Aceptar y copiar token</string>
+    <string name="agregar_comentario">Agregar comentario</string>
+    <string name="listo">Listo</string>
+    <string name="selecionar_jugador">Selecionar jugador</string>
+    <string name="cuenta_creada">Cuenta creada</string>
+    <string name="error_crear_cuenta">Ocurrió un error al crear la cuenta</string>
+    <string name="error_on_login">Ocurrió un error al iniciar sesión</string>
+    <string name="splash">SPLASH</string>
+    <string name="alg_sali_mal">Un error a ocurrido</string>
+    <string name="esperando_informaci_n">Esperando información</string>
 </resources>

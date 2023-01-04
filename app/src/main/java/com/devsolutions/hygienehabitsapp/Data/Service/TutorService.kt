@@ -1,19 +1,19 @@
 package com.devsolutions.hygienehabitsapp.Data.Service
 
 import com.devsolutions.hygienehabitsapp.Core.RetrofitHelper
+import com.devsolutions.hygienehabitsapp.Core.SharedApp.Companion.prefs
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AddUserDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Dto.AuthUserDto
 import com.devsolutions.hygienehabitsapp.Data.Model.Responses.AddResponse
 import com.devsolutions.hygienehabitsapp.Data.Model.Responses.AuthResponse
 import com.devsolutions.hygienehabitsapp.Data.Model.Responses.DefaultResponse
-import com.devsolutions.hygienehabitsapp.Data.Network.TutorApiClient
+import com.devsolutions.hygienehabitsapp.Data.Network.ApiClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.json.JSONObject
 import retrofit2.Response
 
 class TutorService {
-    private val api = RetrofitHelper.getRetrofit().create(TutorApiClient::class.java)
+    private val api = RetrofitHelper.getRetrofit().create(ApiClient::class.java)
 
     suspend fun getAllTutors():Response<DefaultResponse> {
         return withContext(Dispatchers.IO){
@@ -22,11 +22,25 @@ class TutorService {
         }
     }
 
-    suspend fun authUser(body:AuthUserDto): Response<AuthResponse> {
+    suspend fun authUser(body:AuthUserDto): Response<AuthResponse>? {
         return withContext(Dispatchers.IO){
+            var response:Response<AuthResponse>?
+            try{
+                response = api.authUser(body)
+                val response_info = api.getTutorId(body).body()?.message?.response
+                prefs.tutorId=response_info?.get(0)?.idTutor
+                prefs.tutorToken=response_info?.get(0)?.authTokenTutor
+                println("Sale por acá")
+                response
+            }catch(e:Exception){
+                response= null
+                //For local working
+                prefs.tutorId=1
+                println("Sale pero de este lado men, con error: ${e.message}")
+                response
+            }
 
-            val response = api.authUser(body)
-            response
+
         }
     }
     suspend fun addUser(body: AddUserDto): Response<AddResponse> {
@@ -36,4 +50,13 @@ class TutorService {
             response
         }
     }
+
+    suspend fun getTutorById(id:Int): Response<DefaultResponse> {
+        return withContext(Dispatchers.IO){
+            val response = api.getTutorById(id)
+            response
+        }
+    }
+
+
 }
