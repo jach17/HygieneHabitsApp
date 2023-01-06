@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/btnDetailReport"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:backgroundTint="@color/colorDark"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="24dp"
     android:layout_margin="8dp"
-    >
-    <RelativeLayout
+    android:backgroundTint="@color/colorDark"
+    app:cardCornerRadius="24dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginEnd="64dp"
@@ -22,6 +22,8 @@
             android:gravity="start"
             android:text="@string/reportes"
             android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:textStyle="bold" />
 
         <TextView
@@ -29,29 +31,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/titleNivel"
-            android:layout_marginStart="8dp"
             android:text="@string/level1"
             android:textColor="@color/white"
-            android:textStyle="italic" />
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleNivel" />
 
         <TextView
             android:id="@+id/titleMaxScoere"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/descriptionsName"
+            android:text="@string/maxsocre"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:layout_below="@+id/descriptionsName"
-            android:text="@string/maxsocre"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionsName" />
 
         <TextView
             android:id="@+id/descriptionsAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/titleMaxScoere"
-            android:layout_marginStart="8dp"
             android:text="@string/maxscoretest"
             android:textColor="@color/white"
-            android:textStyle="italic" />
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleMaxScoere" />
 
         <TextView
             android:id="@+id/titleProgress"
@@ -60,46 +66,53 @@
             android:layout_alignParentEnd="true"
             android:text="@string/progress"
             android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nivelPlayingTime" />
+
         <TextView
             android:id="@+id/nivelProgress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_alignParentEnd="true"
-            android:textStyle="italic"
-            android:layout_marginStart="8dp"
             android:layout_below="@+id/titleNivel"
-            android:text="@string/progressTest"/>
+            android:layout_alignParentEnd="true"
+            android:text="@string/progressTest"
+            android:textColor="@color/white"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleProgress" />
 
         <TextView
             android:id="@+id/titlePlayingTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/descriptionsName"
+            android:layout_alignParentEnd="true"
+            android:text="@string/playingtime"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/descriptionsName"
-            android:text="@string/playingtime"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/nivelPlayingTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_alignParentEnd="true"
-            android:textStyle="italic"
-            android:layout_marginStart="8dp"
             android:layout_below="@+id/titlePlayingTime"
-            android:text="@string/playingTimeDescription"/>
-    </RelativeLayout>
+            android:layout_alignParentEnd="true"
+            android:text="@string/playingTimeDescription"
+            android:textColor="@color/white"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titlePlayingTime" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_arrow"
-        android:layout_margin="8dp"
         android:layout_gravity="center_vertical|end"
-        />
-
+        android:layout_margin="8dp"
+        android:src="@drawable/ic_arrow" />
 
 
 </androidx.cardview.widget.CardView>
