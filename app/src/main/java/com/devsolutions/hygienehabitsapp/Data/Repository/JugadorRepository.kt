@@ -71,13 +71,20 @@ class JugadorRepository {
 
     private fun getCorrectFormatForDate(date: String): String {
         val dateList = date.split(" ")
+
+        var date =""
+        date = if(dateList[0].length ==9 ){
+            "0${dateList[0]}"
+        }else{
+            dateList[0]
+        }
         var time = ""
         time = if (dateList[1].length == 7) {
             "0${dateList[1]}"
         } else {
             dateList[1]
         }
-        return "${dateList[0]} $time"
+        return "$date $time"
     }
 
 
