@@ -72,10 +72,10 @@ class JugadorRepository {
     private fun getCorrectFormatForDate(date: String): String {
         val dateList = date.split(" ")
 
-        var date =""
-        date = if(dateList[0].length ==9 ){
+        var date = ""
+        date = if (dateList[0].length == 9) {
             "0${dateList[0]}"
-        }else{
+        } else {
             dateList[0]
         }
         var time = ""
@@ -128,11 +128,16 @@ class JugadorRepository {
 
             list.forEach {
                 val reportsBySession = getFullReportsFromSessionId(it.idSesion)
+                val dateEnd = if (it.dateEnd != "") {
+                    it.dateEnd
+                } else {
+                    "Esperando..."
+                }
                 listSessions.add(
                     SessionWithReports(
                         it.idSesion,
-                        it.dateStart,
-                        it.dateStart,
+                        convertDateToText(it.dateStart),
+                        dateEnd,
                         it.idPlayerOwner,
                         reportsBySession
                     )
@@ -143,6 +148,26 @@ class JugadorRepository {
             listSessions.clear()
         }
         return listSessions
+    }
+
+    private fun convertDateToText(d:String):String{
+        val date = d.split("-")
+        var month=""
+        when (date[0]){
+            "1"->month="Enero"
+            "2"->month="Febrero"
+            "3"->month="Marzo"
+            "4"->month="Abril"
+            "5"->month="Mayo"
+            "6"->month="Junio"
+            "7"->month="Julio"
+            "8"->month="Agosto"
+            "9"->month="Septiempre"
+            "10"->month="Octubre"
+            "11"->month="Noviembre"
+            "12"->month="Diciembre"
+        }
+        return "${date[1]}-$month-${date[2]}"
     }
 
     suspend fun getPlayersFromTutorId(id: Int): ArrayList<JugadorModel> {
@@ -185,14 +210,14 @@ class JugadorRepository {
             if (result == Component.RESULT_OK) {
                 val listaCompleta = res.body()?.message?.response!!
                 listaCompleta.forEach {
-                    if(it.idReport!=0){
+                    if (it.idReport != 0) {
                         list.add(it)
                     }
                 }
             } else {
                 list.clear()
             }
-        } catch (e:Exception) {
+        } catch (e: Exception) {
             println("Error on jugador repo. Line 184 ${e.message}")
             list.clear()
         }
