@@ -119,6 +119,7 @@ class DetailReportFragment(
         binding.tvMaxScore.text = reportInfo.maxScore
         binding.tvPlayingTime.text = reportInfo.playingTime
         binding.tvSessionDate.text = reportInfo.dateStart
+        binding.tvDescriptionLevel.text = (getLevelDescriptionsFromLevel(reportInfo.descriptionTitle)).toString()
         binding.etAddComment.apply {
             setText(reportInfo.tutorFeedback)
         }
@@ -127,6 +128,32 @@ class DetailReportFragment(
         pieGrafica = binding.grafica
         graficar(reportInfo.progress, getTotal(reportInfo.progress))
     }
+
+    private fun getLevelDescriptionsFromLevel(descriptionTitle: String) {
+        when(descriptionTitle){
+            "Nivel 1" -> {
+                "[Objetivo del nivel]"
+            }
+            "Nivel 2" ->{
+                "[Objetivo del nivel]"
+            }
+            "Nivel 3" ->{
+                "[Objetivo del nivel]"
+            }
+            "Nivel 4" ->{
+                "[Objetivo del nivel]"
+            }
+            "Nivel 5" ->{
+                "[Objetivo del nivel]"
+            }
+
+            else ->{
+                "Ha ocurrido un error, por favor, reinicie su aplicación. "
+            }
+
+        }
+    }
+
 
     private fun getTotal(progr: Float): Float {
         return 100f - progr
